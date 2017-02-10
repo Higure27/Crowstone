@@ -20,13 +20,18 @@ namespace UnityStandardAssets.Utility
 		[SerializeField]
 		private float heightDamping;
 
+        [SerializeField]
+        private float maxThreshold;
+        [SerializeField]
+        private float minThreshold;
+
 		// Use this for initialization
 		void Start() { }
         private void Update() {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0 && distance > 24) {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0 && distance > maxThreshold) {
                 distance -= 1f;
             }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0 && distance < 38) {
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0 && distance < minThreshold) {
                 distance += 1f;
             }
         }
