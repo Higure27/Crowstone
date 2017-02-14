@@ -46,9 +46,6 @@ public class ClickToMove : MonoBehaviour {
             navAgent.ResetPath();
         }
 
-        this.transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * 10.0f, 0, 0);
-        this.transform.Translate(0, 0, Input.GetAxis("Vertical") * Time.deltaTime * 10.0f);
-
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
