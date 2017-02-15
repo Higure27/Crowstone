@@ -88,10 +88,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
+    <Compile Include="Assets\Scripts\Conversation.cs" />
+    <Compile Include="Assets\Scripts\ConversationUI.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SwitchToConversationCamera.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Scripts\Conversation.txt" />
     <None Include="Assets\SkeletonData\animations.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />

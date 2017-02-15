@@ -9,6 +9,7 @@ public class ClickToMove : MonoBehaviour {
 
     public AnimationClip run;
     public AnimationClip idle;
+    public Camera mainCamera;
     public int rotationSpeed = 500;
 
     private Quaternion permRotation;
@@ -47,7 +48,7 @@ public class ClickToMove : MonoBehaviour {
         }
 
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         gameObject.transform.rotation = permRotation;
         if (Input.GetMouseButtonDown(0)) {
