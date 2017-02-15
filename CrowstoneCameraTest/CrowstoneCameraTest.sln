@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowstoneCameraTest.Plugins", "CrowstoneCameraTest.Plugins.csproj", "{A47AF14B-AC17-93F3-8DDC-D3610AEC41B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowstoneCameraTest.CSharp.Plugins", "CrowstoneCameraTest.CSharp.Plugins.csproj", "{9BFB2CA7-6FC9-D461-2F26-FBA46901CA78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowstoneCameraTest", "CrowstoneCameraTest.csproj", "{B1ACA115-8FF1-2A99-A3F2-393300EBDEF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowstoneCameraTest.CSharp", "CrowstoneCameraTest.CSharp.csproj", "{C13FDC47-A500-11B8-759E-FD45B535889A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowstoneCameraTest.Editor.Plugins", "CrowstoneCameraTest.Editor.Plugins.csproj", "{43F8C113-7594-48FB-9A9B-E4793ABA405C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrowstoneCameraTest.CSharp.Editor.Plugins", "CrowstoneCameraTest.CSharp.Editor.Plugins.csproj", "{B2939CFD-4744-1544-B1BD-559CD17B0DF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,18 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A47AF14B-AC17-93F3-8DDC-D3610AEC41B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A47AF14B-AC17-93F3-8DDC-D3610AEC41B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A47AF14B-AC17-93F3-8DDC-D3610AEC41B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A47AF14B-AC17-93F3-8DDC-D3610AEC41B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1ACA115-8FF1-2A99-A3F2-393300EBDEF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1ACA115-8FF1-2A99-A3F2-393300EBDEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1ACA115-8FF1-2A99-A3F2-393300EBDEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1ACA115-8FF1-2A99-A3F2-393300EBDEF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43F8C113-7594-48FB-9A9B-E4793ABA405C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43F8C113-7594-48FB-9A9B-E4793ABA405C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43F8C113-7594-48FB-9A9B-E4793ABA405C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43F8C113-7594-48FB-9A9B-E4793ABA405C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFB2CA7-6FC9-D461-2F26-FBA46901CA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFB2CA7-6FC9-D461-2F26-FBA46901CA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFB2CA7-6FC9-D461-2F26-FBA46901CA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFB2CA7-6FC9-D461-2F26-FBA46901CA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13FDC47-A500-11B8-759E-FD45B535889A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13FDC47-A500-11B8-759E-FD45B535889A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13FDC47-A500-11B8-759E-FD45B535889A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13FDC47-A500-11B8-759E-FD45B535889A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2939CFD-4744-1544-B1BD-559CD17B0DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2939CFD-4744-1544-B1BD-559CD17B0DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2939CFD-4744-1544-B1BD-559CD17B0DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2939CFD-4744-1544-B1BD-559CD17B0DF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

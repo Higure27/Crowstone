@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/BradleysCameraTest.unity
+- path: Assets/Scenes/PlaygroundTest.unity
   isLoaded: 1
   isActive: 1
