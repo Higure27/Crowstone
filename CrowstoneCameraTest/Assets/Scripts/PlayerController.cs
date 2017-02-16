@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public float yRotation;
@@ -8,7 +6,6 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Camera.main.enabled = true;
-        canMove = false;
     }
 
     // Update is called once per frame
