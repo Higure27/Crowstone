@@ -33,3 +33,17 @@ sysinfo.txt
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
+*.csproj
+*.sln
+CrowstoneCameraTest/Library/assetDatabase3
+*.dwlt
+CrowstoneCameraTest/Library/LastSceneManagerSetup.txt
+CrowstoneCameraTest/Library/metadata/00/00000000000000002000000000000000
+CrowstoneCameraTest/Library/metadata/00/00000000000000004000000000000000
+CrowstoneCameraTest/Library/metadata/00/00000000000000006000000000000000
+CrowstoneCameraTest/Library/metadata/00/00000000000000008000000000000000
+CrowstoneCameraTest/Library/metadata/00/00000000000000009000000000000000
+CrowstoneCameraTest/Library/metadata/00/00000000000000003000000000000000
+CrowstoneCameraTest/Library/metadata/
+CrowstoneCameraTest/Library/
+CrowstoneCameraTest/Temp/
