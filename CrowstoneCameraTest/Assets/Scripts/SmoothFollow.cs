@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace UnityStandardAssets.Utility
 {
@@ -31,13 +33,15 @@ namespace UnityStandardAssets.Utility
 		void Start() {
             distance = 90;
             initCameraZoom = false;
+            target.GetComponent<PlayerController>().canMove = false;
         }
         private void Update() {
             if (!initCameraZoom) {
                 if (distance > 65) {
-                    distance -= .2f;
+                    distance -= .1f;
                 }
                 else {
+                    target.GetComponent<PlayerController>().canMove = true;
                     initCameraZoom = true;
                 }
             }

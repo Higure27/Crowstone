@@ -1,0 +1,22 @@
+print "Starting maya loading and fbx conversion \n";
+	
+if (`file -q -exists "D:/Github/Crowstone/CrowstoneCameraTest/Assets/Jail 004.mb"`)
+{		
+	file -o "D:/Github/Crowstone/CrowstoneCameraTest/Assets/Jail 004.mb";
+	FBXExportEmbeddedTextures -v false;
+	// FBXExportHardEdges -v true;
+	FBXExportApplyConstantKeyReducer -v false;
+	FBXExportShowUI -v false;
+
+	print "Before fbx export\n";
+	FBXExport -f "D:/Github/Crowstone/CrowstoneCameraTest/Temp/ExportedFBXFile.fbx";
+	print "after fbx export\n";
+}
+else
+	print "Could not open Maya file.";
+
+sysFile -delete "D:/Github/Crowstone/CrowstoneCameraTest/Temp/CommandPipe";
+
+$donepipeKill = `fopen "D:/Github/Crowstone/CrowstoneCameraTest/Temp/SyncPipeKill" "w"`;
+fwrite $donepipeKill "Done";
+fclose $donepipeKill;
