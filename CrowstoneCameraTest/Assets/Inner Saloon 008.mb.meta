@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 635aaa82f743ced449ebb4c35c89e849
+timeCreated: 1487207460
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bar_Back
+    100002: Bar_Divider
+    100004: Bar_Door
+    100006: BarFront
+    100008: Billiard_Table_1
+    100010: Billiard_Table_2
+    100012: Building
+    100014: Char_Reference
+    100016: Door_Reference
+    100018: Door_Reference1
+    100020: Door_Reference2
+    100022: //RootNode
+    100024: pCube5
+    100026: pCube6
+    100028: pCube7
+    100030: pCube8
+    100032: Shelf_1
+    100034: Shelf_2
+    100036: Shelf_3
+    100038: Shelf_4
+    100040: Table_1
+    100042: Table_2
+    100044: Table_3
+    100046: transform10
+    100048: transform11
+    100050: transform12
+    100052: transform13
+    100054: transform5
+    100056: transform6
+    100058: transform9
+    100060: Wall_Reference
+    100062: Wall_Reference5
+    100064: Wall_Reference6
+    100066: Wall_Reference7
+    400000: Bar_Back
+    400002: Bar_Divider
+    400004: Bar_Door
+    400006: BarFront
+    400008: Billiard_Table_1
+    400010: Billiard_Table_2
+    400012: Building
+    400014: Char_Reference
+    400016: Door_Reference
+    400018: Door_Reference1
+    400020: Door_Reference2
+    400022: //RootNode
+    400024: pCube5
+    400026: pCube6
+    400028: pCube7
+    400030: pCube8
+    400032: Shelf_1
+    400034: Shelf_2
+    400036: Shelf_3
+    400038: Shelf_4
+    400040: Table_1
+    400042: Table_2
+    400044: Table_3
+    400046: transform10
+    400048: transform11
+    400050: transform12
+    400052: transform13
+    400054: transform5
+    400056: transform6
+    400058: transform9
+    400060: Wall_Reference
+    400062: Wall_Reference5
+    400064: Wall_Reference6
+    400066: Wall_Reference7
+    2300000: Bar_Back
+    2300002: Bar_Divider
+    2300004: Bar_Door
+    2300006: BarFront
+    2300008: Billiard_Table_1
+    2300010: Billiard_Table_2
+    2300012: Building
+    2300014: Char_Reference
+    2300016: Door_Reference
+    2300018: Shelf_1
+    2300020: Shelf_2
+    2300022: Shelf_3
+    2300024: Shelf_4
+    2300026: Table_1
+    2300028: Table_2
+    2300030: Table_3
+    2300032: Wall_Reference
+    2300034: Wall_Reference7
+    3300000: Bar_Back
+    3300002: Bar_Divider
+    3300004: Bar_Door
+    3300006: BarFront
+    3300008: Billiard_Table_1
+    3300010: Billiard_Table_2
+    3300012: Building
+    3300014: Char_Reference
+    3300016: Door_Reference
+    3300018: Shelf_1
+    3300020: Shelf_2
+    3300022: Shelf_3
+    3300024: Shelf_4
+    3300026: Table_1
+    3300028: Table_2
+    3300030: Table_3
+    3300032: Wall_Reference
+    3300034: Wall_Reference7
+    4300000: Wall_Reference
+    4300002: Building
+    4300004: Wall_Reference7
+    4300006: Char_Reference
+    4300008: Bar_Divider
+    4300010: Door_Reference
+    4300012: BarFront
+    4300014: Bar_Door
+    4300016: Billiard_Table_1
+    4300018: Billiard_Table_2
+    4300020: Table_1
+    4300022: Table_2
+    4300024: Table_3
+    4300026: Shelf_1
+    4300028: Shelf_2
+    4300030: Shelf_3
+    4300032: Shelf_4
+    4300034: Bar_Back
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

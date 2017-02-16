@@ -14,7 +14,7 @@ public class ClickToMove : MonoBehaviour {
 
     private Quaternion permRotation;
 
-    private bool isRotating;
+    //private bool isRotating;
     private Vector3 direction;
     private Quaternion lookRotation;
     private RaycastHit hit;
@@ -22,13 +22,13 @@ public class ClickToMove : MonoBehaviour {
 
     IEnumerator RotateAgent(Quaternion currentRotation, Quaternion targetRotation) {
 
-        isRotating = true; 
+        //isRotating = true; 
         while(currentRotation != targetRotation) {
             transform.rotation = Quaternion.RotateTowards(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
             currentRotation = transform.rotation;
             yield return 1;
         }
-        isRotating = false;
+        //isRotating = false;
         navAgent.SetDestination(hit.point);
     }
 
@@ -37,7 +37,7 @@ public class ClickToMove : MonoBehaviour {
     void Start () {
         permRotation = gameObject.transform.rotation;
         navAgent = GetComponent<NavMeshAgent>();
-        isRotating = false;
+        //isRotating = false;
 	}
 	
 	// Update is called once per frame

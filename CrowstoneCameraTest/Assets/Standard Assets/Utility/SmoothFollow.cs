@@ -25,9 +25,22 @@ namespace UnityStandardAssets.Utility
         [SerializeField]
         private float minThreshold;
 
+        private bool initCameraZoom;
+
 		// Use this for initialization
-		void Start() { }
+		void Start() {
+            distance = 90;
+            initCameraZoom = false;
+        }
         private void Update() {
+            if (!initCameraZoom) {
+                if (distance > 65) {
+                    distance -= .2f;
+                }
+                else {
+                    initCameraZoom = true;
+                }
+            }
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && distance > maxThreshold) {
                 distance -= 1f;
             }
