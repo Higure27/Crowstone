@@ -16,7 +16,7 @@ public class ClickToMove : MonoBehaviour {
 
     //private bool isRotating;
     private Vector3 direction;
-    private Quaternion lookRotation;
+    //private Quaternion lookRotation;
     private RaycastHit hit;
 
 
@@ -56,7 +56,7 @@ public class ClickToMove : MonoBehaviour {
                 if (navAgent.remainingDistance > 0)
                     navAgent.destination = gameObject.transform.localPosition;
                 direction = (hit.point - transform.position).normalized;
-                lookRotation = Quaternion.LookRotation(direction);
+                //lookRotation = Quaternion.LookRotation(direction);
 
                 //StartCoroutine(RotateAgent(transform.rotation, lookRotation));
                 navAgent.SetDestination(hit.point);
