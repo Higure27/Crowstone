@@ -23,6 +23,7 @@ public class PickUpItem : MonoBehaviour {
     private void Update() {
         if (pickedUpObject && navAgent.remainingDistance == 0) {
             DestroyObject(gameObject);
+            navAgent.ResetPath();
         }
     }
 
