@@ -1,0 +1,10 @@
+s~a~.~Hey sheriff, what can I do for you?~False
+t~a+b~Can I get a drink?~I don't think you can afford one right now.~False
+t~a+c~What do you know about John?~Depends, what do you want to know?~False
+t~a+i~I'm good, thanks...~Have a nice day, sherriff!~True
+t~c+d~What's he like?~He's a nice enough guy, isn't too bright though.~False
+t~c+e~Notice anything weird about him?~He Usually carries a book around with him, seems important. Anything else?~False
+c~d+c
+c~e+c
+c~b+a
+c~c+i

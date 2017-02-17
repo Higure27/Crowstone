@@ -1,0 +1,29 @@
+s~a~.~Hello!~False
+t~a+b~You're a dead motherfucker~Touche~True
+t~a+c~What are ya sellin'?~What are ya buyin'?~False
+t~a+d~I was wondering if you had any information on this suspect~Maybe, if you've got some coin...~False
+t~a+i~Goodbye!~Have a nice day, sherriff!~True
+t~c+e~Gimme a shot of your hardest~Long day, huh? Anything else?~False
+t~c+f~I need some ammo~I've sell you 10 for $1. Anything else?~False
+t~c+g~I need a pepperoni pizza, STAT~A fine feast, sherriff. Anything else for ya?~False
+t~c+h~Nevermind~Alright~False
+t~e+y~Yes~What are ya buyin'?~False
+c~f+y
+c~g+y
+c~y+e
+c~y+f
+c~y+g
+c~y+h
+t~e+n~No~Alrighty then.~False
+c~f+n
+c~g+n
+c~n+b
+c~n+c
+c~n+d
+c~n+i
+c~h+b
+c~h+c
+c~h+d
+c~h+i
+t~d+v~Yes~I'll show you to the back...~True
+t~d+r~No~I ain't know nothing.~False

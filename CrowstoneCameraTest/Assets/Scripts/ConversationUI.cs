@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ConversationUI : MonoBehaviour {
 
@@ -18,17 +19,18 @@ public class ConversationUI : MonoBehaviour {
         Dictionary<string, string> dialogueOptions = conversation.ListDialogueConnections(startingLabel);
         dialogueButtonList = new List<Button>(dialogueOptions.Count);
         ClearDialogueButtonList();
-        foreach(KeyValuePair<string,string> labelToDialogue in dialogueOptions)
+        Transform content = gameObject.GetComponentInChildren<ScrollRect>().gameObject.GetComponentInChildren<Mask>().gameObject.GetComponentInChildren<VerticalLayoutGroup>().gameObject.transform;
+        foreach (KeyValuePair<string,string> labelToDialogue in dialogueOptions)
         {
             var b = Instantiate(buttonPrefab);
-            //b.tag = labelToDialogue.Key;
             b.name = labelToDialogue.Key;
             Text text = b.gameObject.GetComponentInChildren<Text>();
             text.text = labelToDialogue.Value;
-            b.transform.parent = gameObject.transform;
+            b.transform.parent = content;
             Button button = b.GetComponent<Button>();
             button.onClick.AddListener(() => UpdateDialogueButtonList(b.name));
         }
+        transform.Find("DialogueHeader").GetComponent<Text>().text = conversation.GetDialogueB(startingLabel);
     }
 	
 	void Update () {
@@ -37,24 +39,46 @@ public class ConversationUI : MonoBehaviour {
 
     private void ClearDialogueButtonList()
     {
-        foreach (Transform child in transform)
+        Transform content = gameObject.GetComponentInChildren<ScrollRect>().gameObject.GetComponentInChildren<Mask>().gameObject.GetComponentInChildren<VerticalLayoutGroup>().gameObject.transform;
+        foreach (Transform child in content)
             Destroy(child.gameObject);
     }
 
     public void UpdateDialogueButtonList(string from)
     {
-        ClearDialogueButtonList();
-        Dictionary<string, string> dialogueOptions = conversation.ListDialogueConnections(from);
-        foreach (KeyValuePair<string, string> labelToDialogue in dialogueOptions)
+        if (!conversation.GetExitValue(from))
         {
-            var b = Instantiate(buttonPrefab);
-            //b.tag = labelToDialogue.Key;
-            b.name = labelToDialogue.Key;
-            Text text = b.gameObject.GetComponentInChildren<Text>();
-            text.text = labelToDialogue.Value;
-            b.transform.parent = gameObject.transform;
-            Button button = b.GetComponent<Button>();
-            button.onClick.AddListener(() => UpdateDialogueButtonList(b.name));
+            ClearDialogueButtonList();
+            Dictionary<string, string> dialogueOptions = conversation.ListDialogueConnections(from);
+            Transform content = gameObject.GetComponentInChildren<ScrollRect>().gameObject.GetComponentInChildren<Mask>().gameObject.GetComponentInChildren<VerticalLayoutGroup>().gameObject.transform;
+            foreach (KeyValuePair<string, string> labelToDialogue in dialogueOptions)
+            {
+                var b = Instantiate(buttonPrefab);
+                b.name = labelToDialogue.Key;
+                Text text = b.gameObject.GetComponentInChildren<Text>();
+                text.text = labelToDialogue.Value;
+                b.transform.parent = content;
+                Button button = b.GetComponent<Button>();
+                button.onClick.AddListener(() => UpdateDialogueButtonList(b.name));
+            }
+            transform.Find("DialogueHeader").GetComponent<Text>().text = conversation.GetDialogueB(from);
+        }
+        else
+        {
+            try
+            {
+                GetComponentInParent<SwitchToBartender>().SwitchCamera();
+                transform.parent.GetComponentInParent<BoxCollider>().enabled = true;
+                Destroy(transform.parent.gameObject);
+            }
+            catch (Exception e)
+            {
+                {
+                    GetComponentInParent<SwitchToGambler>().SwitchCamera();
+                    transform.parent.GetComponentInParent<BoxCollider>().enabled = true;
+                    Destroy(transform.parent.gameObject);
+                }
+            }
         }
     }
 }

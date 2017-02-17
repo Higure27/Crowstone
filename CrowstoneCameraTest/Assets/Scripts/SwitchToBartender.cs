@@ -12,6 +12,7 @@ public class SwitchToBartender : MonoBehaviour {
     private NavMeshAgent navAgent;
     private bool switchCamera;
     private Vector3 playerDest;
+    public Transform dialogue;
 
     // Use this for initialization
     void Start () {
@@ -25,14 +26,28 @@ public class SwitchToBartender : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (switchCamera && navAgent.remainingDistance == 0) {
-            conversationCamera.enabled = !conversationCamera.enabled;
+            SwitchCamera();
             switchCamera = false;
             navAgent.ResetPath();
+
+            //Dialogue Code
+            var d = Instantiate(dialogue);
+            ConversationUI dialogueUI = d.gameObject.GetComponentInChildren<ConversationUI>();
+            dialogueUI.fileInput = "Bartender.txt";
+            dialogueUI.startingLabel = "a";
+            d.transform.parent = this.transform;
         }
     }
 
-    private void OnMouseDown() {
+    private void OnMouseDown()
+    {
         switchCamera = true;
         navAgent.SetDestination(playerDest);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void SwitchCamera()
+    {
+        conversationCamera.enabled = !conversationCamera.enabled;
     }
 }

@@ -33,11 +33,11 @@ public class Conversation {
                 {
                     if (line[0].Equals("s"))
                     {
-                        AddStandaloneDialogue(line[1], line[2], line[3]);
+                        AddStandaloneDialogue(line[1], line[2], line[3], Convert.ToBoolean(line[4]));
                     }
                     else if (line[0].Equals("t"))
                     {
-                        AddDialogueTo(line[1][0] + "", line[1][2] + "", line[2], line[3]);
+                        AddDialogueTo(line[1][0] + "", line[1][2] + "", line[2], line[3], Convert.ToBoolean(line[4]));
                     }
                     else if (line[0].Equals("c"))
                     {
@@ -112,12 +112,12 @@ public class Conversation {
      * Adds a new DialogueNode to this conversation with no connections if another with the
      * same label does not already exist. Returns true if successful, false otherwise.
      **/
-    public bool AddStandaloneDialogue(string l, string a, string b)
+    public bool AddStandaloneDialogue(string l, string a, string b, bool exit)
     {
         DialogueNode n;
         if (!labelMap.TryGetValue(l, out n))
         {
-            n = new DialogueNode(l, a, b);
+            n = new DialogueNode(l, a, b, exit);
             labelMap.Add(l, n);
             adjacenceyList.Add(l, new LinkedList<string>());
             return true;
@@ -129,13 +129,13 @@ public class Conversation {
      * Adds a new DialogueNode to this coversation with label pl connected from l if such a connection
      * does not already exist. This connection is one way from l to pl. Returns true if successful, false otherwise.
      **/
-    public bool AddDialogueTo(string l, string pl, string a, string b)
+    public bool AddDialogueTo(string l, string pl, string a, string b, bool exit)
     {
         DialogueNode L;
         DialogueNode PL;
         if (labelMap.TryGetValue(l, out L) && !labelMap.TryGetValue(pl, out PL))
         {
-            PL = new DialogueNode(l, a, b);
+            PL = new DialogueNode(l, a, b, exit);
             labelMap.Add(pl, PL);
             adjacenceyList.Add(pl, new LinkedList<string>());
             adjacenceyList[l].AddLast(pl);
@@ -215,6 +215,16 @@ public class Conversation {
         }
         return result;
     }
+
+    public string GetDialogueB(string node)
+    {
+        return labelMap[node].dialogueB;
+    }
+
+    public bool GetExitValue(string node)
+    {
+        return labelMap[node].exit;
+    }
 }
 
 public class DialogueNode
@@ -223,16 +233,18 @@ public class DialogueNode
     public readonly string dialogueA = "";
     public readonly string dialogueB = "";
     public bool show { get; set; }
+    public bool exit;
 
     /*
      * Constructs a DialogueNode with l as the label, a as the first dialogue,
      * and b and the second dialogue. Show is true by default;
      **/
-    public DialogueNode(string l, string a, string b)
+    public DialogueNode(string l, string a, string b, bool e)
     {
         label = l;
         dialogueA = a;
         dialogueB = b;
         show = true;
+        exit = e;
     }
 }
