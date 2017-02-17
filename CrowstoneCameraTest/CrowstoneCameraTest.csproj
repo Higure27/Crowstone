@@ -90,11 +90,16 @@
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
+    <Compile Include="Assets\Scripts\EnterOrExitScene.cs" />
+    <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
+    <Compile Include="Assets\Scripts\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ShowPopUp.cs" />
     <Compile Include="Assets\Scripts\SmoothFollow.cs" />
     <Compile Include="Assets\Scripts\SwitchToBartender.cs" />
     <Compile Include="Assets\Scripts\SwitchToGambler.cs" />
+    <Compile Include="Assets\Scripts\SwitchToPembertons.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Conversation.txt" />
