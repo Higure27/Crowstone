@@ -1,6 +1,6 @@
 s~a~.~Hey sheriff, what do you want?~False
 t~a+b~I’ve heard you’ve been asking a lot of questions, about the man with the red hat. I need you to stop.~That's none of your business~False
-t~a+c~What have you been up to?~Why do you care?~False
+t~a+c~What have you been up to?~My business~True
 t~a+d~Nevermind...~Goodbye...~True
 t~b+e~I think you're in danger~What do you mean?~False
 t~e+f~The guy you have been following was sent by the people you owe money to, to kill you. You need to leave town.~Shit. Thanks for the heads up.~True
