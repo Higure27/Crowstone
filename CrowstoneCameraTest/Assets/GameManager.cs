@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager gameManager;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +15,17 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void Awake()
+    {
+        //Singleton pattern
+        if (gameManager == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            gameManager = this;
+        }else if(gameManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
