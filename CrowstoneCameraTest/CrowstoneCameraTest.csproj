@@ -87,7 +87,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\LevelManager.cs" />
     <Compile Include="Assets\MenuController.cs" />
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
@@ -95,11 +94,13 @@
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
     <Compile Include="Assets\Scripts\EnterOrExitScene.cs" />
     <Compile Include="Assets\Scripts\FPSCharacterController.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\SetStartLocation.cs" />
     <Compile Include="Assets\Scripts\ShowPopUp.cs" />
     <Compile Include="Assets\Scripts\SmoothFollow.cs" />
     <Compile Include="Assets\Scripts\SwitchToBartender.cs" />

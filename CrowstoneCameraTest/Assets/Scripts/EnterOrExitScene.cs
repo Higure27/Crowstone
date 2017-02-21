@@ -6,29 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class EnterOrExitScene : MonoBehaviour {
 
-    public string SceneName;
+    public string sceneName;
     public GameObject player;
-    public float x, y, z;
-    private NavMeshAgent navAgent;
-    private Vector3 playerDest;
-    private bool headingToDoor;
 
-    private void Start() {
-        playerDest = new Vector3(x, y, z);
-        navAgent = player.GetComponent<NavMeshAgent>();
-        headingToDoor = false;
-    }
-
-    private void Update() {
-        if (headingToDoor && navAgent.remainingDistance == 0) {
-            headingToDoor = false;
-            navAgent.ResetPath();
-            SceneManager.LoadScene(SceneName);
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            GameManager.gameManager.changePreviousLocation();
+            GameManager.gameManager.changeCurrentLocation(sceneName);
+            SceneManager.LoadScene(sceneName);
         }
-    }
-
-    private void OnMouseDown() {
-        navAgent.SetDestination(playerDest);
-        headingToDoor = true;
     }
 }

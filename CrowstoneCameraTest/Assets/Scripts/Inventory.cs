@@ -6,14 +6,14 @@ public class Inventory : MonoBehaviour {
     private Dictionary<string, string> inventory;
 
     private void Awake() {
-        DontDestroyOnLoad(this);
+       // DontDestroyOnLoad(this);
     }
 
     // Use this for initialization
     void Start () {
 		inventory = new Dictionary<string, string>();
     }
-	
+
     public void addItem(string item, string description) {
         inventory.Add(item, description);
     }
