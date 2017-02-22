@@ -16,6 +16,7 @@ public class MenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        onTitleScreen = true;
         title.gameObject.SetActive(true);
         PressAnyKeyPanel.gameObject.SetActive(true);
         MenuPanel.gameObject.SetActive(false);
@@ -52,6 +53,10 @@ public class MenuController : MonoBehaviour {
 
             foreach (Text txt in texts)
             {
+                if (txt.name.Equals("Continue"))
+                {
+                    txt.GetComponent<Button>().interactable = false;
+                }
                 StartCoroutine(FadeInText(txt));
             }
         }
@@ -77,6 +82,11 @@ public class MenuController : MonoBehaviour {
             //load level
             LevelManager.Instance.startLoadFirstLevel();
         }
+    }
+
+    public void MainMenuContinue()
+    {
+        Debug.Log("Continue clicked");
     }
 
     public void MainMenuQuit()
