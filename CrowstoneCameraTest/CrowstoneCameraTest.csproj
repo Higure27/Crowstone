@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\SwitchToBartender.cs" />
     <Compile Include="Assets\Scripts\SwitchToGambler.cs" />
     <Compile Include="Assets\Scripts\SwitchToPembertons.cs" />
+    <Compile Include="Assets\UserInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Conversation.txt" />

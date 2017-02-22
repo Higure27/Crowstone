@@ -10,6 +10,9 @@ public class LevelManager : MonoBehaviour {
 
     public static LevelManager Instance { get { return _instance; } }
 
+    public delegate void newSceneLoaded(string scenename);
+    public static event newSceneLoaded onNewSceneLoaded;
+
     public Canvas loadingScreen;
     public Canvas blackFade;
     public float loadingScreenFadeSpeed = 0.3f;
@@ -121,6 +124,11 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
+        if (onNewSceneLoaded != null)
+        {
+            onNewSceneLoaded(SceneManager.GetActiveScene().name);
+        }
+
         yield return null;
     }
 
@@ -179,6 +187,16 @@ public class LevelManager : MonoBehaviour {
         }
 
         StartCoroutine(FadeLoadingScreenOut());
+
+        while (!loadingScreenOut)
+        {
+            yield return null;
+        }
+
+        if(onNewSceneLoaded != null)
+        {
+            onNewSceneLoaded(SceneManager.GetActiveScene().name);
+        }
 
         yield return null;
     }
