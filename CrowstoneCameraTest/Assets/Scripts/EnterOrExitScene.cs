@@ -15,6 +15,6 @@ public class EnterOrExitScene : MonoBehaviour {
             GameManager.gameManager.changeCurrentLocation(sceneName);
             //SceneManager.LoadScene(sceneName);
             LevelManager.Instance.SwitchArea(sceneName);
-        }
+         }
     }
 }
