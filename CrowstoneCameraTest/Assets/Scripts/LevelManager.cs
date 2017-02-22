@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour {
     private bool blackFadeInComplete;
     private bool blackFadeOutComplete;
     private bool loadingScreenIn;
+    private bool loadingScreenOut;
     private string currentArea;
     private string previousArea;
     private bool loadTheTown;
@@ -150,6 +151,8 @@ public class LevelManager : MonoBehaviour {
                 loadingScreenBackground.color.g, loadingScreenBackground.color.b, 1);
             loadingScreenText.color = new Color(loadingScreenText.color.r,
                 loadingScreenText.color.g, loadingScreenText.color.b, 1);
+            loadingScreenOut = false;
+            StartCoroutine(UpdateLoadingText(GetDayStringFromInt(GameManager.gameManager.getDayNumber())));
         }
         else
         {
@@ -176,6 +179,48 @@ public class LevelManager : MonoBehaviour {
         }
 
         StartCoroutine(FadeLoadingScreenOut());
+
+        yield return null;
+    }
+
+    private string GetDayStringFromInt(int day)
+    {
+        string dayText;
+        switch (day)
+        {
+            case 1:
+                dayText = "Day One";
+                break;
+            case 2:
+                dayText = "Day Two";
+                break;
+            case 3:
+                dayText = "Day Three";
+                break;
+            default:
+                dayText = "No day";
+                break;
+        }
+
+        return dayText;
+    }
+
+    IEnumerator UpdateLoadingText(string day)
+    {
+        float waitTime = 0.5f;
+        while (!loadingScreenOut)
+        {
+            loadingScreenText.text = day;
+            yield return new WaitForSeconds(waitTime);
+            loadingScreenText.text = day + ".";
+            yield return new WaitForSeconds(waitTime);
+            loadingScreenText.text = day + "..";
+            yield return new WaitForSeconds(waitTime);
+            loadingScreenText.text = day + "...";
+            yield return new WaitForSeconds(waitTime);
+
+            yield return null;
+        }
 
         yield return null;
     }
@@ -227,6 +272,8 @@ public class LevelManager : MonoBehaviour {
         }
         loadingScreenBackground.color = new Color(loadingScreenBackground.color.r, loadingScreenBackground.color.g, loadingScreenBackground.color.b, 0);
         loadingScreenText.color = new Color(loadingScreenText.color.r, loadingScreenText.color.g, loadingScreenText.color.b, 0);
+
+        loadingScreenOut = true;
 
         yield return null;
     }
