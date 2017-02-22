@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour {
     private string currentLocation = "Jail";
     private string previousLocation = "None";
 
+    private int currentDay;
+
     // Use this for initialization
     void Start () {
-       
+        currentDay = 1;
     }
 
     // Update is called once per frame
@@ -27,6 +29,11 @@ public class GameManager : MonoBehaviour {
         else if(gameManager != this) {
             Destroy(gameObject);
         }
+    }
+
+    public int getDayNumber()
+    {
+        return currentDay;
     }
 
     public void changePreviousLocation() {

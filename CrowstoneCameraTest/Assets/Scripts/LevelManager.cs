@@ -12,16 +12,17 @@ public class LevelManager : MonoBehaviour {
 
     public Canvas loadingScreen;
     public Canvas blackFade;
-    public float fadeSpeed = 0.3f;
+    public float loadingScreenFadeSpeed = 0.3f;
+    public float changeAreaFadeSpeed = 2.0f;
     public float minSecondsOnLoadingScreen = 2.0f;
 
     private bool blackFadeInComplete;
     private bool blackFadeOutComplete;
     private bool loadingScreenIn;
-    private int currentLevel;
-    private bool loadFirst;
-    private bool loadCurrent;
-    private bool loadNext;
+    private string currentArea;
+    private string previousArea;
+    private bool loadTheTown;
+    private bool loadArea;
 
     private Image loadingScreenBackground;
     private Image blackFadeBackground;
@@ -47,60 +48,89 @@ public class LevelManager : MonoBehaviour {
 
         blackFadeInComplete = false;
         blackFadeOutComplete = false;
-        loadFirst = false;
-        loadCurrent = false;
-        loadNext = false;
+        loadTheTown = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (loadFirst)
+        if (loadTheTown)
         {
-            currentLevel = 1;
-            StartCoroutine(loadLevel(currentLevel));
-            loadFirst = false;
+            StartCoroutine(loadTown());
+            loadTheTown = false;
 
         }
-        else if (loadCurrent)
+        else if (loadArea)
         {
-            StartCoroutine(loadLevel(currentLevel));
-            loadCurrent = false;
-        }
-        else if (loadNext)
-        {
-            StartCoroutine(loadLevel(++currentLevel));
-            loadNext = false;
+            StartCoroutine(EnterArea());
+            loadArea = false;
         }
 	}
 
-    public void startLoadFirstLevel()
+    public void startLoadTown()
     {
-        loadFirst = true;
+        loadTheTown = true;
     }
 
-    public void startLoadCurrentLevel()
+    public float getLoadingFadeSpeed()
     {
-        loadCurrent = true;
+        return loadingScreenFadeSpeed;
     }
 
-    public void startLoadNextLevel()
+    public void SwitchArea(string scenename)
     {
-        loadNext = true;
+        //save previous scene index
+        previousArea = SceneManager.GetActiveScene().name;
+        currentArea = scenename;
+        loadArea = true;
     }
 
-    public float getFadeSpeed()
+    private IEnumerator EnterArea()
     {
-        return fadeSpeed;
+        //fade in black
+        if (blackFade != null)
+        {
+            blackFadeInComplete = false;
+            blackFade.gameObject.SetActive(true);
+            StartCoroutine(FadeBlackIn(changeAreaFadeSpeed));
+
+            while (!blackFadeInComplete)
+            {
+                yield return null;
+            }
+        }
+        else
+        {
+            Debug.Log("no black fade set");
+        }
+
+        //load level async
+        AsyncOperation async = SceneManager.LoadSceneAsync(currentArea);
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+
+        //fade out black
+        blackFadeOutComplete = false;
+        StartCoroutine(FadeBlackOut(changeAreaFadeSpeed));
+
+        while (!blackFadeOutComplete)
+        {
+            yield return null;
+        }
+
+        yield return null;
     }
 
-    private IEnumerator loadLevel(int index)
+    private IEnumerator loadTown()
     {
         //fade in black
         if(blackFade != null)
         {
             blackFadeInComplete = false;
             blackFade.gameObject.SetActive(true);
-            StartCoroutine(FadeBlackIn());
+            StartCoroutine(FadeBlackIn(loadingScreenFadeSpeed));
 
             while (!blackFadeInComplete)
             {
@@ -127,7 +157,7 @@ public class LevelManager : MonoBehaviour {
         }
         //fade out black
         blackFadeOutComplete = false;
-        StartCoroutine(FadeBlackOut());
+        StartCoroutine(FadeBlackOut(loadingScreenFadeSpeed));
 
         while (!blackFadeOutComplete)
         {
@@ -138,7 +168,7 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(minSecondsOnLoadingScreen);
 
         //load level async
-        AsyncOperation async = SceneManager.LoadSceneAsync(index);
+        AsyncOperation async = SceneManager.LoadSceneAsync("Town");
 
         while (!async.isDone)
         {
@@ -150,31 +180,33 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator FadeBlackIn()
+    IEnumerator FadeBlackIn(float fade)
     {
         float alpha = 0.0f;
         while (alpha < 1)
         {
 
             blackFadeBackground.color = new Color(blackFadeBackground.color.r, blackFadeBackground.color.g, blackFadeBackground.color.b, alpha);
-            alpha += Time.deltaTime * fadeSpeed;
+            alpha += Time.deltaTime * fade;
 
             yield return null;
         }
+        blackFadeBackground.color = new Color(blackFadeBackground.color.r, blackFadeBackground.color.g, blackFadeBackground.color.b, 1);
         blackFadeInComplete = true;
 
         yield return null;
     }
 
-    IEnumerator FadeBlackOut()
+    IEnumerator FadeBlackOut(float fade)
     {
         float alpha = blackFadeBackground.color.a;
         while (alpha > 0)
         {
-            alpha -= Time.deltaTime * fadeSpeed;
+            alpha -= Time.deltaTime * fade;
             blackFadeBackground.color = new Color(blackFadeBackground.color.r, blackFadeBackground.color.g, blackFadeBackground.color.b, alpha);
             yield return null;
         }
+        blackFadeBackground.color = new Color(blackFadeBackground.color.r, blackFadeBackground.color.g, blackFadeBackground.color.b, 0);
         blackFadeOutComplete = true;
 
         yield return null;
@@ -187,8 +219,8 @@ public class LevelManager : MonoBehaviour {
 
         while (panelAlpha > 0 || textAlpha > 0)
         {
-            panelAlpha -= Time.deltaTime * fadeSpeed;
-            textAlpha -= Time.deltaTime * fadeSpeed;
+            panelAlpha -= Time.deltaTime * loadingScreenFadeSpeed;
+            textAlpha -= Time.deltaTime * loadingScreenFadeSpeed;
             loadingScreenBackground.color = new Color(loadingScreenBackground.color.r, loadingScreenBackground.color.g, loadingScreenBackground.color.b, panelAlpha);
             loadingScreenText.color = new Color(loadingScreenText.color.r, loadingScreenText.color.g, loadingScreenText.color.b, textAlpha);
             yield return null;

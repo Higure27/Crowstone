@@ -67,7 +67,7 @@ public class MenuController : MonoBehaviour {
         if(!fadingInInProcess && !fadingOutInProcess)
         {
             //change menu fade speed to that of loading screen
-            fadeSpeed = LevelManager.Instance.getFadeSpeed();
+            fadeSpeed = LevelManager.Instance.getLoadingFadeSpeed();
 
             //fade out menu and title
             Text titleText = title.GetComponent<Text>();
@@ -80,7 +80,7 @@ public class MenuController : MonoBehaviour {
             }
 
             //load level
-            LevelManager.Instance.startLoadFirstLevel();
+            LevelManager.Instance.startLoadTown();
         }
     }
 

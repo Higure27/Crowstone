@@ -13,7 +13,8 @@ public class EnterOrExitScene : MonoBehaviour {
         if (other.tag == "Player") {
             GameManager.gameManager.changePreviousLocation();
             GameManager.gameManager.changeCurrentLocation(sceneName);
-            SceneManager.LoadScene(sceneName);
+            //SceneManager.LoadScene(sceneName);
+            LevelManager.Instance.SwitchArea(sceneName);
         }
     }
 }
