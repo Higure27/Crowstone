@@ -94,6 +94,7 @@ public class UserInterface : MonoBehaviour {
 
     public void PauseScreenResumeClicked()
     {
+        Debug.Log("got here");
         if(!fadingOutInProcess && !fadingInInProcess)
         {
             fadingOutInProcess = true;
@@ -103,6 +104,7 @@ public class UserInterface : MonoBehaviour {
 
     public void PauseScreenMainMenuClicked()
     {
+        Debug.Log("got here");
         if (!fadingOutInProcess && !fadingInInProcess)
         {
             fadingOutInProcess = true;
@@ -112,6 +114,7 @@ public class UserInterface : MonoBehaviour {
 
     public void PauseScreenQuit()
     {
+        Debug.Log("got here");
         Application.Quit();
     }
 
