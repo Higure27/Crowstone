@@ -5,11 +5,16 @@ using UnityEngine;
 public class AddGlow : MonoBehaviour {
 
     Transform playerTransform;
+    public GameObject name;
     public float maxDistanceToGlow = 3.5f;
 
 	// Use this for initialization
 	void Start () {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if(name != null)
+        {
+            name.gameObject.SetActive(false);
+        }
 	}
 	
 	// Update is called once per frame
@@ -21,13 +26,19 @@ public class AddGlow : MonoBehaviour {
     {
         if(DistanceBetweenThisAndPlayer() <= maxDistanceToGlow)
         {
-            Debug.Log("acceptable distance to glow");
+            if (name != null)
+            {
+                name.gameObject.SetActive(true);
+            }
         }
     }
 
     void OnMouseExit()
     {
-        
+        if(name != null)
+        {
+            name.gameObject.SetActive(false);
+        }
     }
 
     private float DistanceBetweenThisAndPlayer()
