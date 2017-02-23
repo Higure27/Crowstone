@@ -40,9 +40,13 @@ public class SwitchToGambler : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        switchCamera = true;
-        navAgent.SetDestination(playerDest);
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        if (!GameObject.Find("GameGUI").GetComponent<UserInterface>().OnPauseScreen())
+        {
+            switchCamera = true;
+            navAgent.SetDestination(playerDest);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+        
     }
 
     public void SwitchCamera()

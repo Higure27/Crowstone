@@ -268,4 +268,9 @@ public class UserInterface : MonoBehaviour {
 
         panel.gameObject.SetActive(false);
     }
+
+    public bool OnPauseScreen()
+    {
+        return onPauseScreen;
+    }
 }
