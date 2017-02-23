@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: c3a65ed071950bd4d9e50a00e8642777
+timeCreated: 1487893316
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bar_Back
+    100002: Bar_Counter
+    100004: Bar_Divider
+    100006: Bar_Door
+    100008: Billiard_Table_1
+    100010: Billiard_Table_2
+    100012: Ceiling
+    100014: Floor
+    100016: //RootNode
+    100018: Shelf_1
+    100020: Shelf_2
+    100022: Shelf_3
+    100024: Shelf_4
+    100026: Table_1
+    100028: Table_2
+    100030: Table_3
+    100032: Walls
+    400000: Bar_Back
+    400002: Bar_Counter
+    400004: Bar_Divider
+    400006: Bar_Door
+    400008: Billiard_Table_1
+    400010: Billiard_Table_2
+    400012: Ceiling
+    400014: Floor
+    400016: //RootNode
+    400018: Shelf_1
+    400020: Shelf_2
+    400022: Shelf_3
+    400024: Shelf_4
+    400026: Table_1
+    400028: Table_2
+    400030: Table_3
+    400032: Walls
+    2300000: Bar_Back
+    2300002: Bar_Counter
+    2300004: Bar_Divider
+    2300006: Bar_Door
+    2300008: Billiard_Table_1
+    2300010: Billiard_Table_2
+    2300012: Ceiling
+    2300014: Floor
+    2300016: Shelf_1
+    2300018: Shelf_2
+    2300020: Shelf_3
+    2300022: Shelf_4
+    2300024: Table_1
+    2300026: Table_2
+    2300028: Table_3
+    2300030: Walls
+    3300000: Bar_Back
+    3300002: Bar_Counter
+    3300004: Bar_Divider
+    3300006: Bar_Door
+    3300008: Billiard_Table_1
+    3300010: Billiard_Table_2
+    3300012: Ceiling
+    3300014: Floor
+    3300016: Shelf_1
+    3300018: Shelf_2
+    3300020: Shelf_3
+    3300022: Shelf_4
+    3300024: Table_1
+    3300026: Table_2
+    3300028: Table_3
+    3300030: Walls
+    4300000: Bar_Divider
+    4300002: Bar_Door
+    4300004: Billiard_Table_1
+    4300006: Billiard_Table_2
+    4300008: Table_1
+    4300010: Table_2
+    4300012: Table_3
+    4300014: Shelf_1
+    4300016: Shelf_2
+    4300018: Shelf_3
+    4300020: Shelf_4
+    4300022: Bar_Back
+    4300024: Floor
+    4300026: Walls
+    4300028: Ceiling
+    4300030: Bar_Counter
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
