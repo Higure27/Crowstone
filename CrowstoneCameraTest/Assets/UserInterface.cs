@@ -135,8 +135,10 @@ public class UserInterface : MonoBehaviour {
         }
 
         //stop movement of player and camera
+
         player.GetComponentInChildren<FPSCharacterController>().enabled = false;
         player.GetComponentInChildren<MouseLook>().enabled = false;
+        
 
         yield return null;
     }
