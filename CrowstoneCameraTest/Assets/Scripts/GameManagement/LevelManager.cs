@@ -53,6 +53,13 @@ public class LevelManager : MonoBehaviour {
         blackFadeInComplete = false;
         blackFadeOutComplete = false;
         loadTheTown = false;
+
+        string scenename = SceneManager.GetActiveScene().name;
+
+        if (!scenename.Equals("Start Menu"))
+        {
+            onNewSceneLoaded(scenename);
+        }
 	}
 	
 	// Update is called once per frame
