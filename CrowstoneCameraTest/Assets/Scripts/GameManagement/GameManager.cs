@@ -31,11 +31,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public int getDayNumber()
-    {
-        return currentDay;
-    }
-
     public void changePreviousLocation() {
         previousLocation = currentLocation;
     }

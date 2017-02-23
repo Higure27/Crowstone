@@ -14,6 +14,10 @@ public class UserInterface : MonoBehaviour {
 
     private bool fadingOutInProcess;
     private bool fadingInInProcess;
+    private float pausePanelAlpha;
+    private GameObject player;
+    private bool onPauseScreen;
+    private bool cursorActive;
     
 
 	// Use this for initialization
@@ -25,8 +29,12 @@ public class UserInterface : MonoBehaviour {
         if(pauseScreen != null)
         {
             pauseScreen.gameObject.SetActive(false);
+            pausePanelAlpha = pauseScreen.GetComponentInChildren<Image>().color.a;
         }
-	}
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        cursorActive = false;
+    }
 
     private void OnEnable()
     {
@@ -42,12 +50,29 @@ public class UserInterface : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     private void startDisplaySceneName(string name)
     {
         StartCoroutine(displaySceneName(name));
+    }
+
+    private void OnGUI()
+    {
+        if (onPauseScreen && !cursorActive)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            cursorActive = true;
+        }
+
+        if(!onPauseScreen && cursorActive)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            cursorActive = false;
+        }
     }
 
     private void pausePressed()
@@ -65,8 +90,6 @@ public class UserInterface : MonoBehaviour {
                 StartCoroutine(displayPauseScreen());
             }
         }
-
-
     }
 
     public void PauseScreenResumeClicked()
@@ -94,7 +117,10 @@ public class UserInterface : MonoBehaviour {
 
     private IEnumerator displayPauseScreen()
     {
+        onPauseScreen = true;
+
         //fade in screen
+        pauseScreen.gameObject.SetActive(true);
         fadingInInProcess = true;
         Image background = pauseScreen.GetComponentInChildren<Image>();
         Text[] texts = pauseScreen.GetComponentsInChildren<Text>();
@@ -106,12 +132,15 @@ public class UserInterface : MonoBehaviour {
         }
 
         //stop movement of player and camera
-        
+        player.GetComponentInChildren<FPSCharacterController>().enabled = false;
+        player.GetComponentInChildren<MouseLook>().enabled = false;
+
         yield return null;
     }
 
     private IEnumerator undisplayPauseScreen()
     {
+
         //fade out screen
         fadingOutInProcess = true;
         Image background = pauseScreen.GetComponentInChildren<Image>();
@@ -123,7 +152,14 @@ public class UserInterface : MonoBehaviour {
             StartCoroutine(FadeOutText(txt, pauseScreenFadeSpeed));
         }
 
+        //deactivate panel
+        StartCoroutine(DeactivatePanel(pauseScreen));
+
         //restart movement of player and camera
+        player.GetComponentInChildren<FPSCharacterController>().enabled = true;
+        player.GetComponentInChildren<MouseLook>().enabled = true;
+
+        onPauseScreen = false;
 
         yield return null;
     }
@@ -208,15 +244,23 @@ public class UserInterface : MonoBehaviour {
         fadingInInProcess = true;
 
         float alpha = 0.0f;
-        while (alpha < 1)
+        while (alpha < pausePanelAlpha)
         {
-            alpha += Time.deltaTime * pauseScreenFadeSpeed;
             image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            alpha += Time.deltaTime * pauseScreenFadeSpeed;
+
             yield return null;
         }
 
         fadingInInProcess = false;
 
         yield return null;
+    }
+
+    IEnumerator DeactivatePanel(GameObject panel)
+    {
+        yield return new WaitForSeconds(1.0f / pauseScreenFadeSpeed);
+
+        panel.gameObject.SetActive(false);
     }
 }

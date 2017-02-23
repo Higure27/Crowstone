@@ -224,7 +224,17 @@ public class LevelManager : MonoBehaviour {
             loadingScreenText.color = new Color(loadingScreenText.color.r,
                 loadingScreenText.color.g, loadingScreenText.color.b, 1);
             loadingScreenOut = false;
-            StartCoroutine(UpdateLoadingText(GetDayStringFromInt(GameManager.gameManager.getDayNumber())));
+            string wordToDisplay = "";
+            if(sceneToLoad.Equals("Start Menu"))
+            {
+                wordToDisplay = "Loading";
+            }
+            else
+            {
+                wordToDisplay = GetDayStringFromInt(GameManager.gameManager.getCurrentDay());
+            }
+
+            StartCoroutine(UpdateLoadingText(wordToDisplay));
         }
         else
         {
@@ -287,18 +297,18 @@ public class LevelManager : MonoBehaviour {
         return dayText;
     }
 
-    IEnumerator UpdateLoadingText(string day)
+    IEnumerator UpdateLoadingText(string word)
     {
         float waitTime = 0.5f;
         while (!loadingScreenOut)
         {
-            loadingScreenText.text = day;
+            loadingScreenText.text = word;
             yield return new WaitForSeconds(waitTime);
-            loadingScreenText.text = day + ".";
+            loadingScreenText.text = word + ".";
             yield return new WaitForSeconds(waitTime);
-            loadingScreenText.text = day + "..";
+            loadingScreenText.text = word + "..";
             yield return new WaitForSeconds(waitTime);
-            loadingScreenText.text = day + "...";
+            loadingScreenText.text = word + "...";
             yield return new WaitForSeconds(waitTime);
 
             yield return null;

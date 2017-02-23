@@ -29,9 +29,8 @@ public class InputManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Pause))
+		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("Pause was pressed");
             if(onPausePressed != null)
             {
                 onPausePressed();
