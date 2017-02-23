@@ -10,8 +10,11 @@ public class LevelManager : MonoBehaviour {
 
     public static LevelManager Instance { get { return _instance; } }
 
-    public delegate void newSceneLoaded(string scenename);
+    public delegate void newSceneLoaded();
     public static event newSceneLoaded onNewSceneLoaded;
+
+    public delegate void fadeInFinished(string scenename);
+    public static event fadeInFinished onFadeInFinished;
 
     public Canvas loadingScreen;
     public Canvas blackFade;
@@ -46,6 +49,18 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        string scenename = SceneManager.GetActiveScene().name;
+
+        //dont call this if it is start menu or town
+        if (!scenename.Equals("Start Menu") && !scenename.Equals("Town"))
+        {
+            if (onNewSceneLoaded != null)
+            {
+                onNewSceneLoaded();
+            }
+        }
+
         loadingScreenBackground = loadingScreen.GetComponentInChildren<Image>();
         loadingScreenText = loadingScreen.GetComponentInChildren<Text>();
         blackFadeBackground = blackFade.GetComponentInChildren<Image>();
@@ -53,14 +68,17 @@ public class LevelManager : MonoBehaviour {
         blackFadeInComplete = false;
         blackFadeOutComplete = false;
         loadTheTown = false;
-
-        string scenename = SceneManager.GetActiveScene().name;
-
-        if (!scenename.Equals("Start Menu"))
-        {
-            onNewSceneLoaded(scenename);
-        }
 	}
+
+    private void OnEnable()
+    {
+        onNewSceneLoaded += ActivateByDay;
+    }
+
+    private void OnDisable()
+    {
+        onNewSceneLoaded -= ActivateByDay;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -76,6 +94,38 @@ public class LevelManager : MonoBehaviour {
             loadArea = false;
         }
 	}
+
+    private void ActivateByDay()
+    {
+        int dayAsInt = GameManager.gameManager.getCurrentDay();
+        Debug.Log("Current day is " + dayAsInt);
+
+        GameObject[] days = GameObject.FindGameObjectsWithTag("Day");
+
+        foreach (GameObject day in days)
+        {
+            switch (dayAsInt)
+            {
+                case 1:
+                    if (day.name.Equals("Day1")) day.gameObject.SetActive(true);
+                    else day.gameObject.SetActive(false);
+                    break;
+                case 2:
+                    if (day.name.Equals("Day2")) day.gameObject.SetActive(true);
+                    else day.gameObject.SetActive(false);
+                    break;
+                case 3:
+                    if (day.name.Equals("Day3")) day.gameObject.SetActive(true);
+                    else day.gameObject.SetActive(false);
+                    break;
+                default:
+                    GameManager.gameManager.setCurrentDay(1);
+                    Debug.Log("Current day was reset to " + GameManager.gameManager.getCurrentDay());
+                    ActivateByDay();
+                    break;
+            }
+        }
+    }
 
     public void startLoadTown()
     {
@@ -122,6 +172,11 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
+        if(onNewSceneLoaded != null)
+        {
+            onNewSceneLoaded();
+        }
+
         //fade out black
         blackFadeOutComplete = false;
         StartCoroutine(FadeBlackOut(changeAreaFadeSpeed));
@@ -131,9 +186,9 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
-        if (onNewSceneLoaded != null)
+        if (onFadeInFinished != null)
         {
-            onNewSceneLoaded(SceneManager.GetActiveScene().name);
+            onFadeInFinished(SceneManager.GetActiveScene().name);
         }
 
         yield return null;
@@ -200,9 +255,9 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
-        if(onNewSceneLoaded != null)
+        if(onFadeInFinished != null)
         {
-            onNewSceneLoaded(SceneManager.GetActiveScene().name);
+            onFadeInFinished(SceneManager.GetActiveScene().name);
         }
 
         yield return null;

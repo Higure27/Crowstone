@@ -24,12 +24,12 @@ public class UserInterface : MonoBehaviour {
 
     private void OnEnable()
     {
-        LevelManager.onNewSceneLoaded += startDisplaySceneName;
+        LevelManager.onFadeInFinished += startDisplaySceneName;
     }
 
     private void OnDisable()
     {
-        LevelManager.onNewSceneLoaded -= startDisplaySceneName;
+        LevelManager.onFadeInFinished -= startDisplaySceneName;
     }
 	
 	// Update is called once per frame
