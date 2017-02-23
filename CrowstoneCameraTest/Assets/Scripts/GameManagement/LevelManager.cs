@@ -28,8 +28,9 @@ public class LevelManager : MonoBehaviour {
     private bool loadingScreenOut;
     private string currentArea;
     private string previousArea;
-    private bool loadTheTown;
+    private bool loadScene;
     private bool loadArea;
+    private string sceneToLoad;
 
     private Image loadingScreenBackground;
     private Image blackFadeBackground;
@@ -67,7 +68,7 @@ public class LevelManager : MonoBehaviour {
 
         blackFadeInComplete = false;
         blackFadeOutComplete = false;
-        loadTheTown = false;
+        loadScene = false;
 	}
 
     private void OnEnable()
@@ -82,10 +83,10 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (loadTheTown)
+        if (loadScene)
         {
-            StartCoroutine(loadTown());
-            loadTheTown = false;
+            StartCoroutine(loadAScene());
+            loadScene = false;
 
         }
         else if (loadArea)
@@ -127,9 +128,10 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public void startLoadTown()
+    public void startLoadSpecificScene(string name)
     {
-        loadTheTown = true;
+        sceneToLoad = name;
+        loadScene = true;
     }
 
     public float getLoadingFadeSpeed()
@@ -194,7 +196,7 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
-    private IEnumerator loadTown()
+    private IEnumerator loadAScene()
     {
         //fade in black
         if(blackFade != null)
@@ -241,7 +243,7 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(minSecondsOnLoadingScreen);
 
         //load level async
-        AsyncOperation async = SceneManager.LoadSceneAsync("Town");
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
 
         while (!async.isDone)
         {

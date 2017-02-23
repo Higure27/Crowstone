@@ -82,7 +82,7 @@ public class MenuController : MonoBehaviour {
             //load level
 
             GameManager.gameManager.setCurrentDay(1);
-            LevelManager.Instance.startLoadTown();
+            LevelManager.Instance.startLoadSpecificScene("Town");
         }
     }
 
