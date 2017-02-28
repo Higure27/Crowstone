@@ -73,6 +73,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="CrowstoneCameraTest.Plugins.csproj">
@@ -89,6 +95,7 @@
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
     <Compile Include="Assets\Scripts\EnterOrExitScene.cs" />
     <Compile Include="Assets\Scripts\FPSCharacterController.cs" />
+    <Compile Include="Assets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\GameManagement\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameManagement\LevelManager.cs" />
     <Compile Include="Assets\Scripts\GameManagement\MenuController.cs" />

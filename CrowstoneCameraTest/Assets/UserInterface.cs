@@ -136,8 +136,8 @@ public class UserInterface : MonoBehaviour {
 
         //stop movement of player and camera
 
-        player.GetComponentInChildren<FPSCharacterController>().enabled = false;
-        player.GetComponentInChildren<MouseLook>().enabled = false;
+        player.GetComponentInChildren<FirstPersonController>().enabled = false;
+        //player.GetComponentInChildren<MouseLook>().enabled = false;
         
 
         yield return null;
@@ -161,8 +161,8 @@ public class UserInterface : MonoBehaviour {
         StartCoroutine(DeactivatePanel(pauseScreen));
 
         //restart movement of player and camera
-        player.GetComponentInChildren<FPSCharacterController>().enabled = true;
-        player.GetComponentInChildren<MouseLook>().enabled = true;
+        player.GetComponentInChildren<FirstPersonController>().enabled = true;
+        //player.GetComponentInChildren<MouseLook>().enabled = true;
 
         onPauseScreen = false;
 
