@@ -19,8 +19,12 @@ public class AddGlow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-	}
+        if (DistanceBetweenThisAndPlayer() > maxDistanceToGlow) {
+            if (name != null) {
+                name.gameObject.SetActive(false);
+            }
+        }
+    }
 
     void OnMouseOver()
     {
