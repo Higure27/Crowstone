@@ -1,53 +1,45 @@
 fileFormatVersion: 2
-guid: 27de786dc3a55da4a91562cd5edfb2b6
-timeCreated: 1489114225
+guid: 9e4f4ad932246774d8c3d1dff2916ad4
+timeCreated: 1489133425
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Bar_Back
-    100002: Bar_Counter
-    100004: Bar_Divider
-    100006: Ceiling
-    100008: //RootNode
-    100010: Floor
-    100012: Gate
-    100014: Walls
-    100016: Bar_Divider1
-    400000: Bar_Back
-    400002: Bar_Counter
-    400004: Bar_Divider
-    400006: Ceiling
-    400008: //RootNode
-    400010: Floor
-    400012: Gate
-    400014: Walls
-    400016: Bar_Divider1
-    2300000: Bar_Back
-    2300002: Bar_Counter
-    2300004: Bar_Divider
-    2300006: Ceiling
-    2300008: Floor
-    2300010: Gate
-    2300012: Walls
-    2300014: Bar_Divider1
-    3300000: Bar_Back
-    3300002: Bar_Counter
-    3300004: Bar_Divider
-    3300006: Ceiling
-    3300008: Floor
-    3300010: Gate
-    3300012: Walls
-    3300014: Bar_Divider1
-    4300000: Bar_Divider
-    4300002: Bar_Back
-    4300004: Floor
-    4300006: Walls
-    4300008: Ceiling
-    4300010: Bar_Counter
-    4300012: Gate
-    4300014: Bar_Divider1
-    7400000: Take 001
+    100000: Booth
+    100002: Booth1
+    100004: Booth_Table
+    100006: //RootNode
+    100008: pCube3
+    100010: pCube4
+    100012: pCube5
+    100014: transform1
+    100016: transform2
+    100018: Booth2
+    400000: Booth
+    400002: Booth1
+    400004: Booth_Table
+    400006: //RootNode
+    400008: pCube3
+    400010: pCube4
+    400012: pCube5
+    400014: transform1
+    400016: transform2
+    400018: Booth2
+    2300000: Booth
+    2300002: Booth1
+    2300004: Booth_Table
+    2300006: Booth2
+    2300008: //RootNode
+    3300000: Booth
+    3300002: Booth1
+    3300004: Booth_Table
+    3300006: Booth2
+    3300008: //RootNode
+    4300000: Booth1
+    4300002: Booth
+    4300004: Booth_Table
+    4300006: Booth2
+    4300008: Booth3
     9500000: //RootNode
   materials:
     importMaterials: 1

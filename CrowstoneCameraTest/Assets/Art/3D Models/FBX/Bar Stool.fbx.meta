@@ -1,53 +1,15 @@
 fileFormatVersion: 2
-guid: 27de786dc3a55da4a91562cd5edfb2b6
-timeCreated: 1489114225
+guid: 9993c9d6bb323ef4588b3b37b4ee7b17
+timeCreated: 1489134787
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Bar_Back
-    100002: Bar_Counter
-    100004: Bar_Divider
-    100006: Ceiling
-    100008: //RootNode
-    100010: Floor
-    100012: Gate
-    100014: Walls
-    100016: Bar_Divider1
-    400000: Bar_Back
-    400002: Bar_Counter
-    400004: Bar_Divider
-    400006: Ceiling
-    400008: //RootNode
-    400010: Floor
-    400012: Gate
-    400014: Walls
-    400016: Bar_Divider1
-    2300000: Bar_Back
-    2300002: Bar_Counter
-    2300004: Bar_Divider
-    2300006: Ceiling
-    2300008: Floor
-    2300010: Gate
-    2300012: Walls
-    2300014: Bar_Divider1
-    3300000: Bar_Back
-    3300002: Bar_Counter
-    3300004: Bar_Divider
-    3300006: Ceiling
-    3300008: Floor
-    3300010: Gate
-    3300012: Walls
-    3300014: Bar_Divider1
-    4300000: Bar_Divider
-    4300002: Bar_Back
-    4300004: Floor
-    4300006: Walls
-    4300008: Ceiling
-    4300010: Bar_Counter
-    4300012: Gate
-    4300014: Bar_Divider1
-    7400000: Take 001
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Bar_Stool
     9500000: //RootNode
   materials:
     importMaterials: 1
