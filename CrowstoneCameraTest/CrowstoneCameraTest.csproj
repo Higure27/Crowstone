@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\GameManagement\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameManagement\LevelManager.cs" />
     <Compile Include="Assets\Scripts\GameManagement\MenuController.cs" />
+    <Compile Include="Assets\Scripts\InteractWithNPC.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />

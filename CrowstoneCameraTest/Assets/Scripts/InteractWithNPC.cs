@@ -1,36 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
-public class PickUpItem : MonoBehaviour {
+public class InteractWithNPC : MonoBehaviour {
 
     Transform playerTransform;
     public GameObject UI;
-    public string item;
-    public string description;
+    public string NPC;
     public float distanceToTrigger = 3.5f;
 
     private bool inRange;
     private RaycastHit hit;
 
-
-    private void Start() {
+    // Use this for initialization
+    void Start () {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         inRange = false;
         UI.SetActive(false);
     }
-
-    private void Update() {
-   
+	
+	// Update is called once per frame
+	void Update () {
         if (DistanceBetweenThisAndPlayer() <= distanceToTrigger) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    GameManager.gameManager.addItem(item, description);
+                    //TODO: Fill With Conversation stuff
                     UI.SetActive(false);
-                    DestroyObject(gameObject);
                 }
             }
             else {
