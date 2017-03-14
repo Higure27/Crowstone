@@ -1,15 +1,82 @@
 fileFormatVersion: 2
-guid: 0036a9e15c7fb2a43872a055d1bc820f
-timeCreated: 1489151085
+guid: 57a0c1e2dcca75543a36dbfc46489920
+timeCreated: 1489493717
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: polySurface2
+    100000: Bar_Back
+    100002: Bar_Counter
+    100004: Bar_Divider
+    100006: Bar_Divider1
+    100008: Ceiling
+    100010: Floor
+    100012: Gate
+    100014: //RootNode
+    100016: Outlook
+    100018: Saloon_Door_1
+    100020: Saloon_Door_2
+    100022: Stairs1
+    100024: Stairs2
+    100026: Walls_Lower
+    100028: Walls_Upper
+    400000: Bar_Back
+    400002: Bar_Counter
+    400004: Bar_Divider
+    400006: Bar_Divider1
+    400008: Ceiling
+    400010: Floor
+    400012: Gate
+    400014: //RootNode
+    400016: Outlook
+    400018: Saloon_Door_1
+    400020: Saloon_Door_2
+    400022: Stairs1
+    400024: Stairs2
+    400026: Walls_Lower
+    400028: Walls_Upper
+    2300000: Bar_Back
+    2300002: Bar_Counter
+    2300004: Bar_Divider
+    2300006: Bar_Divider1
+    2300008: Ceiling
+    2300010: Floor
+    2300012: Gate
+    2300014: Outlook
+    2300016: Saloon_Door_1
+    2300018: Saloon_Door_2
+    2300020: Stairs1
+    2300022: Stairs2
+    2300024: Walls_Lower
+    2300026: Walls_Upper
+    3300000: Bar_Back
+    3300002: Bar_Counter
+    3300004: Bar_Divider
+    3300006: Bar_Divider1
+    3300008: Ceiling
+    3300010: Floor
+    3300012: Gate
+    3300014: Outlook
+    3300016: Saloon_Door_1
+    3300018: Saloon_Door_2
+    3300020: Stairs1
+    3300022: Stairs2
+    3300024: Walls_Lower
+    3300026: Walls_Upper
+    4300000: Bar_Divider
+    4300002: Bar_Back
+    4300004: Floor
+    4300006: Walls_Lower
+    4300008: Ceiling
+    4300010: Bar_Counter
+    4300012: Gate
+    4300014: Bar_Divider1
+    4300016: Outlook
+    4300018: Stairs1
+    4300020: Stairs2
+    4300022: Walls_Upper
+    4300024: Saloon_Door_1
+    4300026: Saloon_Door_2
     9500000: //RootNode
   materials:
     importMaterials: 1
