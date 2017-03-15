@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 61b83f24e91c02d4bb36fd6cf86756bc
-timeCreated: 1489112062
+guid: f6736bb355860374c942c1719cc3cbdf
+timeCreated: 1489604700
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Floor
+    4300000: Bar_Stool
     9500000: //RootNode
   materials:
     importMaterials: 1
