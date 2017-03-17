@@ -22,6 +22,15 @@ ModelImporter:
     100028: Table_2
     100030: Table_3
     100032: Walls
+    100034: Bar_Divider1
+    100036: Gate
+    100038: Outlook
+    100040: Saloon_Door_1
+    100042: Saloon_Door_2
+    100044: Stairs1
+    100046: Stairs2
+    100048: Walls_Lower
+    100050: Walls_Upper
     400000: Bar_Back
     400002: Bar_Counter
     400004: Bar_Divider
@@ -39,6 +48,15 @@ ModelImporter:
     400028: Table_2
     400030: Table_3
     400032: Walls
+    400034: Bar_Divider1
+    400036: Gate
+    400038: Outlook
+    400040: Saloon_Door_1
+    400042: Saloon_Door_2
+    400044: Stairs1
+    400046: Stairs2
+    400048: Walls_Lower
+    400050: Walls_Upper
     2300000: Bar_Back
     2300002: Bar_Counter
     2300004: Bar_Divider
@@ -55,6 +73,15 @@ ModelImporter:
     2300026: Table_2
     2300028: Table_3
     2300030: Walls
+    2300032: Bar_Divider1
+    2300034: Gate
+    2300036: Outlook
+    2300038: Saloon_Door_1
+    2300040: Saloon_Door_2
+    2300042: Stairs1
+    2300044: Stairs2
+    2300046: Walls_Lower
+    2300048: Walls_Upper
     3300000: Bar_Back
     3300002: Bar_Counter
     3300004: Bar_Divider
@@ -71,6 +98,15 @@ ModelImporter:
     3300026: Table_2
     3300028: Table_3
     3300030: Walls
+    3300032: Bar_Divider1
+    3300034: Gate
+    3300036: Outlook
+    3300038: Saloon_Door_1
+    3300040: Saloon_Door_2
+    3300042: Stairs1
+    3300044: Stairs2
+    3300046: Walls_Lower
+    3300048: Walls_Upper
     4300000: Bar_Divider
     4300002: Bar_Door
     4300004: Billiard_Table_1
@@ -87,6 +123,15 @@ ModelImporter:
     4300026: Walls
     4300028: Ceiling
     4300030: Bar_Counter
+    4300032: Walls_Upper
+    4300034: Walls_Lower
+    4300036: Bar_Divider1
+    4300038: Stairs2
+    4300040: Stairs1
+    4300042: Outlook
+    4300044: Saloon_Door_2
+    4300046: Saloon_Door_1
+    4300048: Gate
     9500000: //RootNode
   materials:
     importMaterials: 1
