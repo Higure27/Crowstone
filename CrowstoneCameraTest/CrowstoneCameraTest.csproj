@@ -89,7 +89,6 @@
   <ItemGroup>
     <Compile Include="Assets\AddGlow.cs" />
     <Compile Include="Assets\InputManager.cs" />
-    <Compile Include="Assets\ObjectsByDayManager.cs" />
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
@@ -105,6 +104,7 @@
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\NPC\RotateNPCtoCamera.cs" />
+    <Compile Include="Assets\Scripts\ObjectsByDayManager.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ShowDailyTasks.cs" />
@@ -113,7 +113,7 @@
     <Compile Include="Assets\Scripts\SwitchToBartender.cs" />
     <Compile Include="Assets\Scripts\SwitchToGambler.cs" />
     <Compile Include="Assets\Scripts\SwitchToPembertons.cs" />
-    <Compile Include="Assets\UserInterface.cs" />
+    <Compile Include="Assets\Scripts\UserInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Conversation.txt" />
