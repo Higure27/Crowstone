@@ -93,12 +93,13 @@
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
-    <Compile Include="Assets\Scripts\EnterOrExitScene.cs" />
     <Compile Include="Assets\Scripts\FPSCharacterController.cs" />
     <Compile Include="Assets\Scripts\FirstPersonController.cs" />
+    <Compile Include="Assets\Scripts\GameManagement\EnterOrExitScene.cs" />
     <Compile Include="Assets\Scripts\GameManagement\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameManagement\LevelManager.cs" />
     <Compile Include="Assets\Scripts\GameManagement\MenuController.cs" />
+    <Compile Include="Assets\Scripts\GameManagement\SetStartLocation.cs" />
     <Compile Include="Assets\Scripts\InteractWithNPC.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Assets\Scripts\NPC\RotateNPCtoCamera.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\SetStartLocation.cs" />
     <Compile Include="Assets\Scripts\ShowPopUp.cs" />
     <Compile Include="Assets\Scripts\SmoothFollow.cs" />
     <Compile Include="Assets\Scripts\SwitchToBartender.cs" />
