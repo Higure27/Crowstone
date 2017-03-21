@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using Ink.Runtime;
 
 public class InteractWithNPC : MonoBehaviour {
 
@@ -6,6 +8,9 @@ public class InteractWithNPC : MonoBehaviour {
     public GameObject UI;
     public string NPC;
     public float distanceToTrigger = 3.5f;
+
+    [SerializeField]
+    private Transform DialogueUI;
 
     private bool inRange;
     private RaycastHit hit;
@@ -19,12 +24,16 @@ public class InteractWithNPC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger) {
+        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger && GameManager.gameManager.g) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E)) {
                     //TODO: Fill With Conversation stuff
+                    var dialogueTransform = Instantiate(DialogueUI);
+                    NewConversationUI dialogueUI = dialogueTransform.GetComponent<NewConversationUI>();
+                    KeyValuePair<string, List<Choice>> dialogues = DayManager.StartParsing(NPC);
+                    dialogueUI.UpdateDialogue(dialogues);
                     UI.SetActive(false);
                 }
             }
@@ -35,6 +44,11 @@ public class InteractWithNPC : MonoBehaviour {
         else {
             UI.SetActive(false);
         }
+    }
+
+    public static KeyValuePair<string, List<Choice>> UpdateDialogueUI(Choice c)
+    {
+        return DayManager.ContinueParsing(c);
     }
 
     private float DistanceBetweenThisAndPlayer() {
