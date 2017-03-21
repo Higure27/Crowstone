@@ -36,16 +36,18 @@ public class ShowDailyTasks : MonoBehaviour {
                 else {
                     UI.SetActive(false);
                 }
-                if (Input.GetKeyDown(KeyCode.E)) {
+                if (Input.GetKeyDown(KeyCode.E) && GameManager.gameManager.getPause() == false) {
                     if (taskPanelActive) {
                         taskPanel.SetActive(false);
                         taskPanelActive = false;
                         player.GetComponentInChildren<FirstPersonController>().enabled = true;
+                        GameManager.gameManager.flipInUI();
                     }
                     else {
                         taskPanel.SetActive(true);
                         taskPanelActive = true;
                         player.GetComponentInChildren<FirstPersonController>().enabled = false;
+                        GameManager.gameManager.flipInUI();
                     }
                 }
             }

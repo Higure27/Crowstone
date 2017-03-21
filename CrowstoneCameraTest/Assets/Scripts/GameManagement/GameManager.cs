@@ -8,18 +8,22 @@ public class GameManager : MonoBehaviour {
     private string currentLocation = "Town";
     private string previousLocation = "None";
     private float currency;
+    private bool isPaused;
+    private bool inUI;
     private Dictionary<string, string> inventory;
 
     private int currentDay = 1;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         inventory = new Dictionary<string, string>();
         currency = 100;
+        isPaused = false;
+        inUI = false;
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
 
     }
 
@@ -29,7 +33,7 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             gameManager = this;
         }
-        else if(gameManager != this) {
+        else if (gameManager != this) {
             Destroy(gameObject);
         }
     }
@@ -50,13 +54,11 @@ public class GameManager : MonoBehaviour {
         return currentLocation;
     }
 
-    public int getCurrentDay()
-    {
+    public int getCurrentDay() {
         return currentDay;
     }
 
-    public void setCurrentDay(int day)
-    {
+    public void setCurrentDay(int day) {
         currentDay = day;
     }
 
@@ -79,5 +81,21 @@ public class GameManager : MonoBehaviour {
 
     public float getCurrency() {
         return currency;
+    }
+
+    public void flipPause() {
+        isPaused = !isPaused;
+    }
+
+    public bool getPause() {
+        return isPaused;
+    }
+
+    public void flipInUI() {
+        inUI = !inUI;
+    }
+
+    public bool getInUI() {
+        return inUI;
     }
 }

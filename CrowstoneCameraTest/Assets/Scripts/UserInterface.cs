@@ -121,6 +121,7 @@ public class UserInterface : MonoBehaviour {
     private IEnumerator displayPauseScreen()
     {
         onPauseScreen = true;
+        GameManager.gameManager.flipPause();
 
         //fade in screen
         pauseScreen.gameObject.SetActive(true);
@@ -160,11 +161,14 @@ public class UserInterface : MonoBehaviour {
         //deactivate panel
         StartCoroutine(DeactivatePanel(pauseScreen));
 
-        //restart movement of player and camera
-        player.GetComponentInChildren<FirstPersonController>().enabled = true;
-        //player.GetComponentInChildren<MouseLook>().enabled = true;
+        if (GameManager.gameManager.getInUI() == false) {
+            //restart movement of player and camera
+            player.GetComponentInChildren<FirstPersonController>().enabled = true;
+            //player.GetComponentInChildren<MouseLook>().enabled = true;
+        }
 
         onPauseScreen = false;
+        GameManager.gameManager.flipPause();
 
         yield return null;
     }
