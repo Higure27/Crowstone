@@ -2,10 +2,6 @@ VAR found_book = false
 VAR john_is_an_idiot = false
 VAR getting_out_of_town = false
 
-
-
-->Gambler
-
 ===Prisoner===
 =Pop_Up
 Sheriff!
