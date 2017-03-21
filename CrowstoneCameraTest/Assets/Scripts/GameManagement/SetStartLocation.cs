@@ -14,5 +14,6 @@ public class SetStartLocation : MonoBehaviour {
             gameObject.transform.position = new Vector3(-15.71f, 0f, -6.85f);
             gameObject.transform.Rotate(0, 90, 0);
         }
+        
     }
 }
