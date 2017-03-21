@@ -224,6 +224,16 @@ public class LevelManager : MonoBehaviour {
             onFadeInFinished(SceneManager.GetActiveScene().name);
         }
 
+        if (loadingScreen != null)
+        {
+            loadingScreen.gameObject.SetActive(false);
+        }
+
+        if(blackFade != null)
+        {
+            blackFade.gameObject.SetActive(false);
+        }
+
         yield return null;
     }
 
@@ -301,6 +311,17 @@ public class LevelManager : MonoBehaviour {
         if(onFadeInFinished != null)
         {
             onFadeInFinished(SceneManager.GetActiveScene().name);
+        }
+
+        if(loadingScreen != null)
+        {
+            loadingScreen.gameObject.SetActive(false);
+
+        }
+
+        if(blackFade != null)
+        {
+            blackFade.gameObject.SetActive(false);
         }
 
         yield return null;
