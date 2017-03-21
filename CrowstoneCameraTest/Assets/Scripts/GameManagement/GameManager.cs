@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
@@ -63,7 +64,28 @@ public class GameManager : MonoBehaviour {
     }
 
     public void addItem(string item, string description) {
-        inventory.Add(item, description);
+        if (!checkForItem(item))
+        {
+            inventory.Add(item, description);
+            Debug.Log("picked up item: " + item);
+        }
+    }
+
+    public string[] getAllItems()
+    {
+        string[] items;
+
+        if (inventory != null)
+        {
+           items = new string[inventory.Count];
+            items = inventory.Keys.ToArray<string>(); 
+        }
+        else
+        {
+            items = new string[1];
+            items[0] = "empty";
+        }
+        return items;
     }
 
     public bool checkForItem(string item) {

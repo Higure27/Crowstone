@@ -74,11 +74,13 @@ public class LevelManager : MonoBehaviour {
     private void OnEnable()
     {
         onNewSceneLoaded += ActivateByDay;
+        onNewSceneLoaded += DeactivatePickedupItems;
     }
 
     private void OnDisable()
     {
         onNewSceneLoaded -= ActivateByDay;
+        onNewSceneLoaded -= DeactivatePickedupItems;
     }
 	
 	// Update is called once per frame
@@ -96,10 +98,34 @@ public class LevelManager : MonoBehaviour {
         }
 	}
 
+    private void DeactivatePickedupItems()
+    {
+        string[] items = GameManager.gameManager.getAllItems();
+
+        if (items == null) return;
+        else
+        {
+            if(items != null && items[0].Equals("empty")){
+                return;
+            }
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                                string nameOfObject = items[i];
+                GameObject objectToDeactivate = GameObject.Find(nameOfObject);
+                Debug.Log("object to deactivate is called : " + nameOfObject);
+                if (objectToDeactivate != null)
+                {
+                    objectToDeactivate.gameObject.SetActive(false);
+                }
+
+            }
+        }
+    }
+
     private void ActivateByDay()
     {
         int dayAsInt = GameManager.gameManager.getCurrentDay();
-        Debug.Log("Current day is " + dayAsInt);
 
         GameObject[] days = GameObject.FindGameObjectsWithTag("Day");
 
