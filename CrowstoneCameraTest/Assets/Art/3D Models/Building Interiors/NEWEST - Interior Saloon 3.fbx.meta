@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 5d5bfb4b6e8476743b3feff8019fcf4a
+timeCreated: 1489735293
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bar_Back
+    100002: Bar_Counter
+    100004: Bar_Divider
+    100006: Bar_Divider1
+    100008: Ceiling
+    100010: Floor
+    100012: Gate
+    100014: Outlook
+    100016: Saloon_Door_1
+    100018: Saloon_Door_2
+    100020: Stairs1
+    100022: Stairs2
+    100024: //RootNode
+    100026: Walls_Lower
+    100028: Walls_Upper
+    100030: Bar_Divider_Lower
+    100032: Bar_Divider_Upper
+    100034: Side_Divider_Lower
+    100036: Side_Divider_Upper
+    400000: Bar_Back
+    400002: Bar_Counter
+    400004: Bar_Divider
+    400006: Bar_Divider1
+    400008: Ceiling
+    400010: Floor
+    400012: Gate
+    400014: Outlook
+    400016: Saloon_Door_1
+    400018: Saloon_Door_2
+    400020: Stairs1
+    400022: Stairs2
+    400024: //RootNode
+    400026: Walls_Lower
+    400028: Walls_Upper
+    400030: Bar_Divider_Lower
+    400032: Bar_Divider_Upper
+    400034: Side_Divider_Lower
+    400036: Side_Divider_Upper
+    2300000: Bar_Back
+    2300002: Bar_Counter
+    2300004: Bar_Divider
+    2300006: Bar_Divider1
+    2300008: Ceiling
+    2300010: Floor
+    2300012: Gate
+    2300014: Outlook
+    2300016: Saloon_Door_1
+    2300018: Saloon_Door_2
+    2300020: Stairs1
+    2300022: Stairs2
+    2300024: Walls_Lower
+    2300026: Walls_Upper
+    2300028: Bar_Divider_Lower
+    2300030: Bar_Divider_Upper
+    2300032: Side_Divider_Lower
+    2300034: Side_Divider_Upper
+    3300000: Bar_Back
+    3300002: Bar_Counter
+    3300004: Bar_Divider
+    3300006: Bar_Divider1
+    3300008: Ceiling
+    3300010: Floor
+    3300012: Gate
+    3300014: Outlook
+    3300016: Saloon_Door_1
+    3300018: Saloon_Door_2
+    3300020: Stairs1
+    3300022: Stairs2
+    3300024: Walls_Lower
+    3300026: Walls_Upper
+    3300028: Bar_Divider_Lower
+    3300030: Bar_Divider_Upper
+    3300032: Side_Divider_Lower
+    3300034: Side_Divider_Upper
+    4300000: Ceiling
+    4300002: Walls_Upper
+    4300004: Walls_Lower
+    4300006: Floor
+    4300008: Bar_Divider
+    4300010: Bar_Divider1
+    4300012: Bar_Counter
+    4300014: Bar_Back
+    4300016: Stairs2
+    4300018: Stairs1
+    4300020: Outlook
+    4300022: Saloon_Door_2
+    4300024: Saloon_Door_1
+    4300026: Gate
+    4300028: Bar_Divider_Upper
+    4300030: Side_Divider_Upper
+    4300032: Side_Divider_Lower
+    4300034: Bar_Divider_Lower
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

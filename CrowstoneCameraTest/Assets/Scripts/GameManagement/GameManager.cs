@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gameManager;
     private string currentLocation = "Jail";
     private string previousLocation = "None";
+    private float currency;
     private Dictionary<string, string> inventory;
 
     private int currentDay = 1;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         inventory = new Dictionary<string, string>();
+        currency = 100;
     }
 
     // Update is called once per frame
@@ -69,5 +71,13 @@ public class GameManager : MonoBehaviour {
         else {
             return false;
         }
+    }
+
+    public void modifyCurrency(float amount) {
+        currency += amount;
+    }
+
+    public float getCurrency() {
+        return currency;
     }
 }
