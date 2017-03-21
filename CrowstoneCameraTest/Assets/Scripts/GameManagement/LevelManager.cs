@@ -105,7 +105,12 @@ public class LevelManager : MonoBehaviour {
         if (items == null) return;
         else
         {
-            if(items != null && items[0].Equals("empty")){
+            if(items != null){
+                return;
+            }
+
+            if (items.Length > 1 && items[0].Equals("empty"))
+            {
                 return;
             }
 
