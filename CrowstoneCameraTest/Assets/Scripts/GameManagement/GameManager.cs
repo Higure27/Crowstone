@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
-    private string currentLocation = "Jail";
+    private string currentLocation = "Town";
     private string previousLocation = "None";
     private float currency;
     private Dictionary<string, string> inventory;
