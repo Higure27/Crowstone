@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
@@ -8,19 +9,24 @@ public class GameManager : MonoBehaviour {
     private string currentLocation = "Town";
     private string previousLocation = "None";
     private float currency;
+    private bool isPaused;
+    private bool inUI;
     private Dictionary<string, string> inventory;
 
     private int currentDay = 1;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         inventory = new Dictionary<string, string>();
         currency = 100;
+        isPaused = false;
+        inUI = false;
     }
 
     // Update is called once per frame
-    void Update () {
-        
+    void Update()
+    {
+
     }
 
     void Awake() {
@@ -29,7 +35,7 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             gameManager = this;
         }
-        else if(gameManager != this) {
+        else if (gameManager != this) {
             Destroy(gameObject);
         }
     }
@@ -50,18 +56,37 @@ public class GameManager : MonoBehaviour {
         return currentLocation;
     }
 
-    public int getCurrentDay()
-    {
+    public int getCurrentDay() {
         return currentDay;
     }
 
-    public void setCurrentDay(int day)
-    {
+    public void setCurrentDay(int day) {
         currentDay = day;
     }
 
     public void addItem(string item, string description) {
-        inventory.Add(item, description);
+        if (!checkForItem(item))
+        {
+            inventory.Add(item, description);
+            Debug.Log("picked up item: " + item);
+        }
+    }
+
+    public string[] getAllItems()
+    {
+        string[] items;
+
+        if (inventory != null)
+        {
+           items = new string[inventory.Count];
+            items = inventory.Keys.ToArray<string>(); 
+        }
+        else
+        {
+            items = new string[1];
+            items[0] = "empty";
+        }
+        return items;
     }
 
     public bool checkForItem(string item) {
@@ -79,5 +104,21 @@ public class GameManager : MonoBehaviour {
 
     public float getCurrency() {
         return currency;
+    }
+
+    public void flipPause() {
+        isPaused = !isPaused;
+    }
+
+    public bool getPause() {
+        return isPaused;
+    }
+
+    public void flipInUI() {
+        inUI = !inUI;
+    }
+
+    public bool getInUI() {
+        return inUI;
     }
 }

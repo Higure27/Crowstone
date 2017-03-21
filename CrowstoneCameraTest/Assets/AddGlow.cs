@@ -6,6 +6,7 @@ public class AddGlow : MonoBehaviour {
 
     Transform playerTransform;
     public GameObject name;
+    public GameObject glow;
     public float maxDistanceToGlow = 3.5f;
 
 	// Use this for initialization
@@ -14,6 +15,11 @@ public class AddGlow : MonoBehaviour {
         if(name != null)
         {
             name.gameObject.SetActive(false);
+        }
+
+        if(glow != null)
+        {
+            glow.gameObject.SetActive(false);
         }
 	}
 	
@@ -34,6 +40,11 @@ public class AddGlow : MonoBehaviour {
             {
                 name.gameObject.SetActive(true);
             }
+
+            if (glow != null)
+            {
+                glow.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -42,6 +53,11 @@ public class AddGlow : MonoBehaviour {
         if(name != null)
         {
             name.gameObject.SetActive(false);
+        }
+
+        if( glow != null)
+        {
+            glow.gameObject.SetActive(false);
         }
     }
 
