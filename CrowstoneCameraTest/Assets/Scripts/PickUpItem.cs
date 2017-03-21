@@ -23,7 +23,7 @@ public class PickUpItem : MonoBehaviour {
 
     private void Update() {
    
-        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger) {
+        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger && GameManager.gameManager.getPause() == false) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
