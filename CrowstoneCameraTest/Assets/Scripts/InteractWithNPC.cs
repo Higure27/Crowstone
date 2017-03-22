@@ -31,18 +31,31 @@ public class InteractWithNPC : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    //TODO: Fill With Conversation stuff
-                    var dialogueTransform = Instantiate(DialogueUI);
-                    NewConversationUI dialogueUI = dialogueTransform.GetComponent<NewConversationUI>();
-                    KeyValuePair<string, List<Choice>> dialogues = DayManager.StartParsing(NPC);
-                    dialogueUI.UpdateDialogue(dialogues);
-                    GameManager.gameManager.flipInUI();
-                    player.GetComponentInChildren<FirstPersonController>().enabled = false;
+                    if (Cursor.visible == false)
+                    {
+                        //TODO: Fill With Conversation stuff
+                        var dialogueTransform = Instantiate(DialogueUI);
+                        NewConversationUI dialogueUI = dialogueTransform.GetComponent<NewConversationUI>();
+                        KeyValuePair<string, List<Choice>> dialogues = DayManager.StartParsing(NPC);
+                        dialogueUI.UpdateDialogue(dialogues);
+                        GameManager.gameManager.flipInUI();
+                        player.GetComponentInChildren<FirstPersonController>().enabled = false;
 
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
 
-                    UI.SetActive(false);
+                        UI.SetActive(false);
+                    }
+                    else
+                    {
+                        GameObject player = GameObject.FindGameObjectWithTag("Player");
+                        player.GetComponentInChildren<FirstPersonController>().enabled = true;
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+
+                        GameObject UI = GameObject.FindGameObjectWithTag("DialogueUI");
+                        DestroyObject(UI);
+                    }
                 }
             }
             else {
