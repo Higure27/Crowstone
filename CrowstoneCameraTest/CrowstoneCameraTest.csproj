@@ -73,6 +73,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="CrowstoneCameraTest.Plugins.csproj">
@@ -82,10 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AddGlow.cs" />
+    <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
     <Compile Include="Assets\InputManager.cs" />
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
+    <Compile Include="Assets\Scripts\DayManager.cs" />
     <Compile Include="Assets\Scripts\FPSCharacterController.cs" />
     <Compile Include="Assets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\GameManagement\EnterOrExitScene.cs" />
@@ -98,6 +106,7 @@
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\NPC\RotateNPCtoCamera.cs" />
+    <Compile Include="Assets\Scripts\NewConversationUI.cs" />
     <Compile Include="Assets\Scripts\ObjectsByDayManager.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -111,6 +120,7 @@
     <Compile Include="Assets\haloScript.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\Ink\Resources\InkDefaultTemplate.txt" />
     <None Include="Assets\Scripts\Conversation.txt" />
     <None Include="Assets\SkeletonData\animations.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
