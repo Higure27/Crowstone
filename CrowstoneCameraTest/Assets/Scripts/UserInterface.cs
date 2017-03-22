@@ -174,6 +174,7 @@ public class UserInterface : MonoBehaviour {
 
     private IEnumerator displaySceneName(string name)
     {
+        /*
         //set text
         gameUI.gameObject.SetActive(true);
         sceneNameText.text = name;
@@ -192,8 +193,10 @@ public class UserInterface : MonoBehaviour {
 
         //fade out text
         StartCoroutine(FadeOutText(sceneNameText, textFadeSpeed));
-
+        gameUI.gameObject.SetActive(true);
+        */    
         yield return null;
+
     }
 
     IEnumerator FadeOutText(Text text, float speed)
