@@ -52,7 +52,7 @@ Found a book
 
 ===Gambler===
 Sheriff! What do you want?
-    * [I heard you’ve been asking a lot of questions about the new man in town.] The one with the red hat. I need you to stop.
+    + [I heard you’ve been asking a lot of questions about the new man in town.] The one with the red hat. I need you to stop.
             That’s none of your business.
             **{john_is_an_idiot} [I think he’s a threat to you, John.]
                 What do you mean?
@@ -70,6 +70,8 @@ Sheriff! What do you want?
                                     You have yourself a deal, Sheriff.
                                     ~ getting_out_of_town = true
                                     ->DONE
+            ++ [I guess you're right.]
+                ->DONE
     *[What have you been up to?]
         Why do you care?
          **The man you've been following is a danger to you!
@@ -127,7 +129,7 @@ Hey, Sheriff. What can I do for you?”
     I don’t think you can afford one right now,
 *“What do you know about John?”
     ->ask_about_john 
-*Nothing, thanks.
++Nothing, thanks.
     ->DONE
 - anything else I can do for you Sheriff?
 ->question
@@ -139,7 +141,7 @@ Depends, What do you want to know about him?”
     “He’s a nice enough fella, but he ain’t too bright. 
 *Have you ever noticed anything odd about him?
     “Well, I dunno if it’s odd, but I know he usually carries a book around with him. I guess it’s important to him."
-*Nothing, I'm good
++Nothing, I'm good
     ->DONE
 -Is there anything else you need to know about him?"
 ->ask_more
