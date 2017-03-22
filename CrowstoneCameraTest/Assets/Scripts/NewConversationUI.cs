@@ -59,4 +59,9 @@ public class NewConversationUI : MonoBehaviour {
         foreach (Transform child in selfDialogueOptionsViewport)
             Destroy(child.gameObject);
     }
+
+    public void EndDialogue()
+    {
+        DestroyObject(gameObject);
+    }
 }

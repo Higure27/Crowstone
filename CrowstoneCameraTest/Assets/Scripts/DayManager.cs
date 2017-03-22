@@ -8,6 +8,7 @@ public class DayManager : MonoBehaviour {
     // Class members
     public TextAsset _inkAsset;
     public static Story _dayStory;
+    private static string _partner;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,6 +22,7 @@ public class DayManager : MonoBehaviour {
 
     public static KeyValuePair<string, List<Choice>> StartParsing(string partner)
     {
+        _partner = partner;
         string partnerDialogue = "";
         List<Choice> outputList = new List<Choice>();
 
@@ -38,7 +40,6 @@ public class DayManager : MonoBehaviour {
                 Choice choice = _dayStory.currentChoices[i];
                 outputList.Add(choice);
             }
-            //dialogueprefab.updatedialogue(partnerDialogue, dialogueChoices);
         }
         Debug.Log("Your choices: ");
         foreach (Choice choice in outputList)
@@ -65,7 +66,16 @@ public class DayManager : MonoBehaviour {
                 Choice choice = _dayStory.currentChoices[i];
                 outputList.Add(choice);
             }
-            //dialogueprefab.updatedialogue(partnerDialogue, dialogueChoices);
+        }
+        else
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponentInChildren<FirstPersonController>().enabled = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            GameObject UI = GameObject.FindGameObjectWithTag("DialogueUI");
+            DestroyObject(UI);
         }
         Debug.Log("Your choices: ");
         foreach (Choice choice in outputList)

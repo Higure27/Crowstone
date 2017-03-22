@@ -13,18 +13,20 @@ public class InteractWithNPC : MonoBehaviour {
     private Transform DialogueUI;
 
     private bool inRange;
+    private GameObject player;
     private RaycastHit hit;
 
     // Use this for initialization
     void Start () {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         inRange = false;
+        player = GameObject.FindGameObjectWithTag("Player");
         UI.SetActive(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger && GameManager.gameManager.g) {
+        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger && !GameManager.gameManager.getPause()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
@@ -34,6 +36,12 @@ public class InteractWithNPC : MonoBehaviour {
                     NewConversationUI dialogueUI = dialogueTransform.GetComponent<NewConversationUI>();
                     KeyValuePair<string, List<Choice>> dialogues = DayManager.StartParsing(NPC);
                     dialogueUI.UpdateDialogue(dialogues);
+                    GameManager.gameManager.flipInUI();
+                    player.GetComponentInChildren<FirstPersonController>().enabled = false;
+
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+
                     UI.SetActive(false);
                 }
             }
@@ -49,6 +57,11 @@ public class InteractWithNPC : MonoBehaviour {
     public static KeyValuePair<string, List<Choice>> UpdateDialogueUI(Choice c)
     {
         return DayManager.ContinueParsing(c);
+    }
+
+    public void EndDialogue()
+    {
+        DestroyObject(DialogueUI.gameObject);
     }
 
     private float DistanceBetweenThisAndPlayer() {
