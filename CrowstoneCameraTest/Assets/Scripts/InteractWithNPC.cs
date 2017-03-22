@@ -26,7 +26,7 @@ public class InteractWithNPC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger && !GameManager.gameManager.getPause()) {
+        if (DistanceBetweenThisAndPlayer() <= distanceToTrigger && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);

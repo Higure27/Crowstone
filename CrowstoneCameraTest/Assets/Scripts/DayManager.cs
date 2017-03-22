@@ -77,6 +77,7 @@ public class DayManager : MonoBehaviour {
 
             GameObject UI = GameObject.FindGameObjectWithTag("DialogueUI");
             DestroyObject(UI);
+            GameManager.gameManager.flipInUI();
         }
         Debug.Log("Your choices: ");
         foreach (Choice choice in outputList)
