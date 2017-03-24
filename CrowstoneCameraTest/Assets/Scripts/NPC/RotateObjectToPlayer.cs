@@ -8,9 +8,10 @@ using UnityEngine;
 /// Takes the position of the player relative to the object this script is attached to, 
 /// and rotates the object towards the player
 /// </summary>
-public class RotateNPCtoCamera : MonoBehaviour {
+public class RotateObjectToPlayer : MonoBehaviour {
 
     public bool rotateToPlayer;
+    public bool mirrorView;
     public float damping = 3.0f; //speed at which the object turns
 
     private Transform playerTransform;
@@ -31,7 +32,12 @@ public class RotateNPCtoCamera : MonoBehaviour {
             Vector3 lookPos = playerTransform.position - npcTransform.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
+            if (mirrorView)
+            {
+                rotation = Quaternion.Inverse(rotation);
+            }
             npcTransform.rotation = Quaternion.Slerp(npcTransform.rotation, rotation, Time.deltaTime * damping);
+             
         }
 	}
 }

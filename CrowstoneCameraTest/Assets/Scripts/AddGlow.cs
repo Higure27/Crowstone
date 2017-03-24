@@ -47,7 +47,7 @@ public class AddGlow : MonoBehaviour {
     /// </summary>
     void OnMouseOver()
     {
-        if(DistanceBetweenThisAndPlayer() <= distanceToGlow)
+        if(DistanceBetweenThisAndPlayer() <= distanceToGlow && GameManager.gameManager.CanGlow())
         {
             //activate name
             if (nameToDisplay != null)

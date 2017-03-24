@@ -145,7 +145,7 @@ public class MenuController : MonoBehaviour {
     }
 
     /// <summary>
-    /// changes the alpha value over time of the given text from 0 to 100
+    /// changes the alpha value over time of the given text from 0 to 1
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
@@ -191,7 +191,7 @@ public class MenuController : MonoBehaviour {
 
     /// <summary>
     /// changes the alpha value of the given image over time
-    /// from 0 to 100
+    /// from 0 to 1
     /// </summary>
     /// <param name="image"></param>
     /// <returns></returns>

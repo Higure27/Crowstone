@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     private float currency;
     private bool isPaused;
     private bool inUI;
+    private bool canGlow;
     private Dictionary<string, string> inventory;
 
     private int currentDay = 1;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
         currency = 100;
         isPaused = false;
         inUI = false;
+        canGlow = true;
     }
 
     // Update is called once per frame
@@ -61,6 +63,15 @@ public class GameManager : MonoBehaviour {
     /// <param name="sceneName">string</param>
     public void changeCurrentLocation(string sceneName) {
         currentLocation = sceneName;
+    }
+
+    /// <summary>
+    /// resets the game state, is called when
+    /// player is in game and clicks on main menu
+    /// </summary>
+    public void resetGameState()
+    {
+        //TODO: finish this function
     }
 
     /// <summary>
@@ -187,5 +198,15 @@ public class GameManager : MonoBehaviour {
     /// <returns>bool</returns>
     public bool getInUI() {
         return inUI;
+    }
+
+    public bool CanGlow()
+    {
+        return canGlow;
+    }
+
+    public void SetGlow(bool b)
+    {
+        canGlow = b;
     }
 }

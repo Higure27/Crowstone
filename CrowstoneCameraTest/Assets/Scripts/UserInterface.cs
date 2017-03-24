@@ -1,8 +1,14 @@
-﻿using System.Collections;
+﻿//created by Jared Shaw
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// handles the user interface such as scene name
+/// and pause screen
+/// </summary>
 public class UserInterface : MonoBehaviour {
 
     public float displayTime = 2.0f;
@@ -22,10 +28,12 @@ public class UserInterface : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //disable parent object called gameUI
 		if(gameUI != null)
         {
             gameUI.gameObject.SetActive(false);
         }
+        //disable pause screen
         if(pauseScreen != null)
         {
             pauseScreen.gameObject.SetActive(false);
@@ -36,12 +44,18 @@ public class UserInterface : MonoBehaviour {
         cursorActive = false;
     }
 
+    /// <summary>
+    /// add delegates to events
+    /// </summary>
     private void OnEnable()
     {
         LevelManager.onFadeInFinished += startDisplaySceneName;
         InputManager.onPausePressed += pausePressed;
     }
 
+    /// <summary>
+    /// remove delegates from events
+    /// </summary>
     private void OnDisable()
     {
         LevelManager.onFadeInFinished -= startDisplaySceneName;
@@ -53,11 +67,19 @@ public class UserInterface : MonoBehaviour {
 
 	}
 
+    /// <summary>
+    /// is called when fade in has finished after loading a scene
+    /// </summary>
+    /// <param name="name"></param>
     private void startDisplaySceneName(string name)
     {
         StartCoroutine(displaySceneName(name));
     }
 
+    /// <summary>
+    /// controls the behaviour of the mouse when pause screen
+    /// has been enable and disabled
+    /// </summary>
     private void OnGUI()
     {
         if (onPauseScreen && !cursorActive)
@@ -75,48 +97,77 @@ public class UserInterface : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// is called from event in input manager when ESC or P is pressed
+    /// </summary>
     private void pausePressed()
     {
+        //if nothing is currently being faded in or out
         if(!fadingOutInProcess && !fadingInInProcess)
         {
+            //if the pause screen is currently enabled, 
+            // then fade it out
             if (pauseScreen.gameObject.activeSelf)
             {
                 fadingOutInProcess = true;
                 StartCoroutine(undisplayPauseScreen());
+                GameManager.gameManager.SetGlow(true);
             }
+            //if the pause screen is disabled then
+            //start fading it in
             else
             {
                 fadingInInProcess = true;
                 StartCoroutine(displayPauseScreen());
+                GameManager.gameManager.SetGlow(false);
             }
         }
     }
 
+    /// <summary>
+    /// is called when player clicks "Resume" on the pause screen
+    /// </summary>
     public void PauseScreenResumeClicked()
     {
-
+        //if nothing is being faded in or out
+        //then fade out the pause screen
         if(!fadingOutInProcess && !fadingInInProcess)
         {
             fadingOutInProcess = true;
             StartCoroutine(undisplayPauseScreen());
+            GameManager.gameManager.SetGlow(true);
         }
     }
 
+    /// <summary>
+    /// is called when player clicks "Main menu" on the pause screen
+    /// </summary>
     public void PauseScreenMainMenuClicked()
     {
+        //if nothing is being faded in or out
+        //then reset game state and load the main menu
         if (!fadingOutInProcess && !fadingInInProcess)
         {
             fadingOutInProcess = true;
             LevelManager.Instance.startLoadSpecificScene("Start Menu");
+            GameManager.gameManager.resetGameState();
         }
     }
 
+    /// <summary>
+    /// if player clicks "quit" on the pause screen, quits the game
+    /// </summary>
     public void PauseScreenQuit()
     {
         Debug.Log("got here");
         Application.Quit();
     }
 
+    /// <summary>
+    /// is run as a co-routine
+    /// fades in the pause screen
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator displayPauseScreen()
     {
         onPauseScreen = true;
@@ -134,15 +185,18 @@ public class UserInterface : MonoBehaviour {
             StartCoroutine(FadeInText(txt, pauseScreenFadeSpeed));
         }
 
-        //stop movement of player and camera
-
+        //stop movement of player
         player.GetComponentInChildren<FirstPersonController>().enabled = false;
         //player.GetComponentInChildren<MouseLook>().enabled = false;
         
-
         yield return null;
     }
 
+    /// <summary>
+    /// is run as a co-routine
+    /// fades out the pause screen
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator undisplayPauseScreen()
     {
 
@@ -172,6 +226,12 @@ public class UserInterface : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// displays the scene name in the top left corner
+    /// is called after fadein event is done
+    /// </summary>
+    /// <param name="name">string</param>
+    /// <returns></returns>
     private IEnumerator displaySceneName(string name)
     {
         /*
@@ -199,6 +259,13 @@ public class UserInterface : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// changes the alpha value of text over time with the given speed
+    /// from what its current value to 0
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="speed"></param>
+    /// <returns></returns>
     IEnumerator FadeOutText(Text text, float speed)
     {
         fadingOutInProcess = true;
@@ -216,6 +283,14 @@ public class UserInterface : MonoBehaviour {
         yield return null;
     }
 
+
+    /// <summary>
+    /// changes the alpha value of the given text over time
+    /// from 0 to 1
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="speed"></param>
+    /// <returns></returns>
     IEnumerator FadeInText(Text text, float speed)
     {
         fadingInInProcess = true;
@@ -233,6 +308,12 @@ public class UserInterface : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the current alpha value of the given image over time
+    /// to zero
+    /// </summary>
+    /// <param name="image"></param>
+    /// <returns></returns>
     IEnumerator FadeOutImage(Image image)
     {
         fadingOutInProcess = true;
@@ -250,6 +331,12 @@ public class UserInterface : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value of the given image over time
+    /// from 0 to 1
+    /// </summary>
+    /// <param name="image"></param>
+    /// <returns></returns>
     IEnumerator FadeInImage(Image image)
     {
         fadingInInProcess = true;
@@ -268,6 +355,12 @@ public class UserInterface : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// gives enough time for panel to fade out
+    /// then deactivates it
+    /// </summary>
+    /// <param name="panel"></param>
+    /// <returns></returns>
     IEnumerator DeactivatePanel(GameObject panel)
     {
         yield return new WaitForSeconds(1.0f / pauseScreenFadeSpeed);
@@ -275,6 +368,10 @@ public class UserInterface : MonoBehaviour {
         panel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// returns on pause screen boolean
+    /// </summary>
+    /// <returns>bool</returns>
     public bool OnPauseScreen()
     {
         return onPauseScreen;

@@ -98,7 +98,7 @@
     <Compile Include="Assets\Scripts\InteractWithNPC.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
-    <Compile Include="Assets\Scripts\NPC\RotateNPCtoCamera.cs" />
+    <Compile Include="Assets\Scripts\NPC\RotateObjectToPlayer.cs" />
     <Compile Include="Assets\Scripts\NewConversationUI.cs" />
     <Compile Include="Assets\Scripts\ObjectsByDayManager.cs" />
     <Compile Include="Assets\Scripts\PickUpItem.cs" />

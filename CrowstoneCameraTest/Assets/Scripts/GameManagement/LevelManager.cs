@@ -452,7 +452,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// changes the alpha value of the black screen from 0 to 100 using the fade speed
+    /// changes the alpha value of the black screen from 0 to 1 using the fade speed
     /// </summary>
     /// <param name="fade"></param>
     /// <returns></returns>
