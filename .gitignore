@@ -51,3 +51,5 @@ CrowstoneCameraTest/Temp/
 /CrowstoneCameraTest/Temp
 CrowstoneCameraTest/Assets/3D Assets.meta
 /CrowstoneCameraTest/.vs/CrowstoneCameraTest/v14/.suo
+/CrowstoneCameraTest/.vs/CrowstoneCameraTest/v14/*.suo
+*.meta
