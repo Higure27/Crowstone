@@ -4,6 +4,7 @@ VAR getting_out_of_town = false
 VAR day1_Complete = false
 
 
+
 ===Prisoner===
 =Pop_Up
 Sheriff!
@@ -45,8 +46,6 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
 ->DONE
 //*[“What’s in it for me?”]
 ===Book===
-Found a book
-*...
     ~found_book = true 
 ->DONE
 
