@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿// Created by Jared Shaw
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Takes the position of the player relative to the object this script is attached to, 
+/// and rotates the object towards the player
+/// </summary>
 public class RotateNPCtoCamera : MonoBehaviour {
 
     public bool rotateToPlayer;
-    public float damping = 3.0f;
+    public float damping = 3.0f; //speed at which the object turns
 
     private Transform playerTransform;
     private Transform npcTransform;
@@ -18,6 +24,8 @@ public class RotateNPCtoCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //if true, rotates this object to the player
         if (rotateToPlayer)
         {
             Vector3 lookPos = playerTransform.position - npcTransform.position;

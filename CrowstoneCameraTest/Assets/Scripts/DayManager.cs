@@ -12,7 +12,7 @@ public class DayManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        _dayStory = new Story(_inkAsset.text);
+        if(_inkAsset != null) _dayStory = new Story(_inkAsset.text);
         DontDestroyOnLoad(gameObject);
     }
 	
