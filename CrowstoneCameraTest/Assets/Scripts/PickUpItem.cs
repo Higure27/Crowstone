@@ -30,7 +30,8 @@ public class PickUpItem : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.E)) {
                     GameManager.gameManager.addItem(item, description);
                     UI.SetActive(false);
-                    DestroyObject(gameObject);
+                    //DestroyObject(gameObject);
+                    gameObject.SetActive(false); //avoid dynamic memory deallocation
                 }
             }
             else {

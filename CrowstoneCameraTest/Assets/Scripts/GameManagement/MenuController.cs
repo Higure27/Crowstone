@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// This scripts controls transitions on the main menu
+/// after a button has been clicked, for the purpose of
+/// adding fading
+/// </summary>
 public class MenuController : MonoBehaviour {
 
     public GameObject title;
@@ -27,6 +33,7 @@ public class MenuController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // handles the "press any key" event from the initial start screen
         if (onTitleScreen)
         {
             if (Input.anyKey)
@@ -37,8 +44,13 @@ public class MenuController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// handles the transition from "press any key" screen
+    /// to the main menu
+    /// </summary>
     public void FadeToMenu()
     {
+        //if we are not already fading someting in or out
         if (!fadingInInProcess && !fadingOutInProcess)
         {
             //fade out pressanykey screen
@@ -62,6 +74,9 @@ public class MenuController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// handles the transition from the main menu to starting the game
+    /// </summary>
     public void MainMenuStart()
     {
         if(!fadingInInProcess && !fadingOutInProcess)
@@ -79,18 +94,24 @@ public class MenuController : MonoBehaviour {
                 StartCoroutine(FadeOutText(txt));
             }
 
-            //load level
-
+            //set current day and start loading the scene
             GameManager.gameManager.setCurrentDay(1);
             LevelManager.Instance.startLoadSpecificScene("Town");
         }
     }
 
+    /// <summary>
+    /// handles the transition from main menu->continue
+    /// no save game functionality yet
+    /// </summary>
     public void MainMenuContinue()
     {
         Debug.Log("Continue clicked");
     }
 
+    /// <summary>
+    /// main menu->quit game
+    /// </summary>
     public void MainMenuQuit()
     {
         if(!fadingInInProcess && !fadingOutInProcess)
@@ -100,6 +121,12 @@ public class MenuController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// changes the alpha value over time on the font of the given text from
+    /// whatever value it was until it reaches 0
+    /// </summary>
+    /// <param name="text">Text</param>
+    /// <returns></returns>
     IEnumerator FadeOutText(Text text)
     {
         fadingOutInProcess = true;
@@ -117,6 +144,11 @@ public class MenuController : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value over time of the given text from 0 to 100
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     IEnumerator FadeInText(Text text)
     {
         fadingInInProcess = true;
@@ -134,6 +166,12 @@ public class MenuController : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value of the given image over time
+    /// from whatever it was until it reaches 0
+    /// </summary>
+    /// <param name="image"></param>
+    /// <returns></returns>
     IEnumerator FadeOutImage(Image image)
     {
         fadingOutInProcess = true;
@@ -151,6 +189,12 @@ public class MenuController : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value of the given image over time
+    /// from 0 to 100
+    /// </summary>
+    /// <param name="image"></param>
+    /// <returns></returns>
     IEnumerator FadeInImage(Image image)
     {
         fadingInInProcess = true;
@@ -168,6 +212,13 @@ public class MenuController : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// is called after a fade out is called.
+    /// after allowing for enough time for the panel to fade 
+    /// out it then deactivates it
+    /// </summary>
+    /// <param name="panel"></param>
+    /// <returns></returns>
     IEnumerator DeactivatePanel(GameObject panel)
     {
         yield return new WaitForSeconds(1.0f / fadeSpeed);
