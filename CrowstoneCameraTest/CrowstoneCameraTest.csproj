@@ -96,7 +96,6 @@
     <Compile Include="Assets\Scripts\GameManagement\SetStartLocation.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\InteractWithNPC.cs" />
-    <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\NPC\RotateNPCtoCamera.cs" />
@@ -111,7 +110,6 @@
     <Compile Include="Assets\Scripts\SwitchToGambler.cs" />
     <Compile Include="Assets\Scripts\SwitchToPembertons.cs" />
     <Compile Include="Assets\Scripts\UserInterface.cs" />
-    <Compile Include="Assets\Scripts\haloScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Ink\Resources\InkDefaultTemplate.txt" />

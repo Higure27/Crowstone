@@ -1,8 +1,16 @@
-﻿using System.Collections;
+﻿//Created by Jared Shaw
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
+/// <summary>
+/// This is a static class that stays throughout the whole game
+/// without being destroyed, as such it stores information that is needed
+/// accross scenes such as inventory, current day, currency, etc
+/// </summary>
 public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
@@ -30,40 +38,68 @@ public class GameManager : MonoBehaviour {
     }
 
     void Awake() {
-        //Singleton pattern
+        //Singleton pattern: if none of these objects exist then keep it from being destroyed
         if (gameManager == null) {
             DontDestroyOnLoad(gameObject);
             gameManager = this;
-        }
+        }//if another game manager exists then destroy it
         else if (gameManager != this) {
             Destroy(gameObject);
         }
     }
 
+    /// <summary>
+    /// updates previous location with current location
+    /// </summary>
     public void changePreviousLocation() {
         previousLocation = currentLocation;
     }
 
+    /// <summary>
+    /// updates current location with the given scene name
+    /// </summary>
+    /// <param name="sceneName">string</param>
     public void changeCurrentLocation(string sceneName) {
         currentLocation = sceneName;
     }
 
+    /// <summary>
+    /// returns the previous location
+    /// </summary>
+    /// <returns>string</returns>
     public string getPreviousLocation() {
         return previousLocation;
     }
 
+    /// <summary>
+    /// returns the current location
+    /// </summary>
+    /// <returns>string</returns>
     public string getCurrentLocation() {
         return currentLocation;
     }
 
+    /// <summary>
+    /// returns the current day
+    /// </summary>
+    /// <returns>int</returns>
     public int getCurrentDay() {
         return currentDay;
     }
 
+    /// <summary>
+    /// sets the current day
+    /// </summary>
+    /// <param name="day">int</param>
     public void setCurrentDay(int day) {
         currentDay = day;
     }
 
+    /// <summary>
+    /// adds the given item and description to inventory if it is not there already
+    /// </summary>
+    /// <param name="item">string</param>
+    /// <param name="description">string</param>
     public void addItem(string item, string description) {
         if (!checkForItem(item))
         {
@@ -72,6 +108,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// returns the name of all items in inventory
+    /// </summary>
+    /// <returns>string[]</returns>
     public string[] getAllItems()
     {
         string[] items;
@@ -89,6 +129,11 @@ public class GameManager : MonoBehaviour {
         return items;
     }
 
+    /// <summary>
+    /// checks whether an item is in inventory
+    /// </summary>
+    /// <param name="item">string</param>
+    /// <returns>bool</returns>
     public bool checkForItem(string item) {
         if (inventory.ContainsKey(item)) {
             return true;
@@ -98,26 +143,48 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// adds the given amount to total currency
+    /// </summary>
+    /// <param name="amount">float</param>
     public void modifyCurrency(float amount) {
         currency += amount;
     }
 
+    /// <summary>
+    /// returns the total currency
+    /// </summary>
+    /// <returns>float</returns>
     public float getCurrency() {
         return currency;
     }
 
+    /// <summary>
+    /// flips the pause state between paused, unpaused
+    /// </summary>
     public void flipPause() {
         isPaused = !isPaused;
     }
 
+    /// <summary>
+    /// returns the state of pause
+    /// </summary>
+    /// <returns>bool</returns>
     public bool getPause() {
         return isPaused;
     }
 
+    /// <summary>
+    /// flips the UI state between inUI, not inUI
+    /// </summary>
     public void flipInUI() {
         inUI = !inUI;
     }
 
+    /// <summary>
+    /// returns the state of UI
+    /// </summary>
+    /// <returns>bool</returns>
     public bool getInUI() {
         return inUI;
     }

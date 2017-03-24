@@ -1,18 +1,32 @@
-﻿using System.Collections;
+﻿//Created by Jared Shaw
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// The is a static class that remains through the whole game
+/// manages all changing of scenes and level specific functions
+/// </summary>
 public class LevelManager : MonoBehaviour {
 
     private static LevelManager _instance;
 
     public static LevelManager Instance { get { return _instance; } }
 
+    /// <summary>
+    /// this is an event that is triggered the moment a scene is loaded
+    /// </summary>
     public delegate void newSceneLoaded();
     public static event newSceneLoaded onNewSceneLoaded;
 
+    /// <summary>
+    /// this is an event that is triggered after a scene is loaded
+    /// and the screen faded in is complete
+    /// </summary>
+    /// <param name="scenename"></param>
     public delegate void fadeInFinished(string scenename);
     public static event fadeInFinished onFadeInFinished;
 
@@ -38,6 +52,7 @@ public class LevelManager : MonoBehaviour {
 
     private void Awake()
     {
+        //make sure there is only ever one of these 
         if(_instance != null && _instance != this)
         {
             Destroy(gameObject);
@@ -71,12 +86,18 @@ public class LevelManager : MonoBehaviour {
         loadScene = false;
 	}
 
+    /// <summary>
+    /// add functions to events
+    /// </summary>
     private void OnEnable()
     {
         onNewSceneLoaded += ActivateByDay;
         onNewSceneLoaded += DeactivatePickedupItems;
     }
 
+    /// <summary>
+    /// removes functions from events
+    /// </summary>
     private void OnDisable()
     {
         onNewSceneLoaded -= ActivateByDay;
@@ -85,12 +106,15 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //start loading the town from the start menu
         if (loadScene)
         {
             StartCoroutine(loadAScene());
             loadScene = false;
 
         }
+        //start loading any scene, saloon, jail, town, etc
         else if (loadArea)
         {
             StartCoroutine(EnterArea());
@@ -98,6 +122,10 @@ public class LevelManager : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// looks through the game objects and deactivates
+    /// any items that are already in inventory
+    /// </summary>
     private void DeactivatePickedupItems()
     {
         string[] items = GameManager.gameManager.getAllItems();
@@ -118,7 +146,6 @@ public class LevelManager : MonoBehaviour {
             {
                                 string nameOfObject = items[i];
                 GameObject objectToDeactivate = GameObject.Find(nameOfObject);
-                Debug.Log("object to deactivate is called : " + nameOfObject);
                 if (objectToDeactivate != null)
                 {
                     objectToDeactivate.gameObject.SetActive(false);
@@ -128,6 +155,10 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// looks through the game objects and disables the parent day objects
+    /// depending on which day it is
+    /// </summary>
     private void ActivateByDay()
     {
         int dayAsInt = GameManager.gameManager.getCurrentDay();
@@ -159,17 +190,30 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// this is called primarily to load the town from the menu
+    /// </summary>
+    /// <param name="name"></param>
     public void startLoadSpecificScene(string name)
     {
         sceneToLoad = name;
         loadScene = true;
     }
 
+    /// <summary>
+    /// returns the speed of fading on the load screen
+    /// </summary>
+    /// <returns>float</returns>
     public float getLoadingFadeSpeed()
     {
         return loadingScreenFadeSpeed;
     }
 
+    /// <summary>
+    /// this is called primarily between scenes in game
+    /// such as saloon->town->jail etc
+    /// </summary>
+    /// <param name="scenename"></param>
     public void SwitchArea(string scenename)
     {
         //save previous scene index
@@ -178,9 +222,15 @@ public class LevelManager : MonoBehaviour {
         loadArea = true;
     }
 
+    /// <summary>
+    /// a co-routine that runs in the background
+    /// this fades in black, then loads the desired scene
+    /// then fades the black out
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator EnterArea()
     {
-        //fade in black
+        //activate and fade in black fade screen
         if (blackFade != null)
         {
             blackFadeInComplete = false;
@@ -200,30 +250,35 @@ public class LevelManager : MonoBehaviour {
         //load level async
         AsyncOperation async = SceneManager.LoadSceneAsync(currentArea);
 
+        //wait for level to load
         while (!async.isDone)
         {
             yield return null;
         }
 
+        //send off loaded scene event
         if(onNewSceneLoaded != null)
         {
             onNewSceneLoaded();
         }
 
-        //fade out black
+        //fade out black screen
         blackFadeOutComplete = false;
         StartCoroutine(FadeBlackOut(changeAreaFadeSpeed));
 
+        //wait for black screen to fade out
         while (!blackFadeOutComplete)
         {
             yield return null;
         }
 
+        //fire off fade in screen event
         if (onFadeInFinished != null)
         {
             onFadeInFinished(SceneManager.GetActiveScene().name);
         }
 
+        //make sure objects are disabled after use is complete
         if (loadingScreen != null)
         {
             loadingScreen.gameObject.SetActive(false);
@@ -237,9 +292,15 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// This is a co-routine that runs in the background
+    /// called to load the town from menu
+    /// fades in black->activates loading screen->fades out black->loads level->fades out loading screen
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator loadAScene()
     {
-        //fade in black
+        //activate and fade in black screen
         if(blackFade != null)
         {
             blackFadeInComplete = false;
@@ -266,6 +327,8 @@ public class LevelManager : MonoBehaviour {
                 loadingScreenText.color.g, loadingScreenText.color.b, 1);
             loadingScreenOut = false;
             string wordToDisplay = "";
+
+            //if you are loading the start menu then display "loading" otherwise display the current day
             if(sceneToLoad.Equals("Start Menu"))
             {
                 wordToDisplay = "Loading";
@@ -281,7 +344,7 @@ public class LevelManager : MonoBehaviour {
         {
             Debug.Log("no loading screen set");
         }
-        //fade out black
+        //fade out black screen
         blackFadeOutComplete = false;
         StartCoroutine(FadeBlackOut(loadingScreenFadeSpeed));
 
@@ -290,29 +353,36 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
-        //wait min time
+        //this is used to pause on the loading screen
+        //if you take away this line you will not see the loading screen 
+        //because the scenes load too quick
         yield return new WaitForSeconds(minSecondsOnLoadingScreen);
 
         //load level async
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
 
+        //wait for level to load
         while (!async.isDone)
         {
             yield return null;
         }
 
+        //start fading out the loading screen using a co-routine
         StartCoroutine(FadeLoadingScreenOut());
 
+        //wait for loading screen to completely fade out
         while (!loadingScreenOut)
         {
             yield return null;
         }
 
+        //fire off fade in event
         if(onFadeInFinished != null)
         {
             onFadeInFinished(SceneManager.GetActiveScene().name);
         }
 
+        //deactivate objects after use
         if(loadingScreen != null)
         {
             loadingScreen.gameObject.SetActive(false);
@@ -327,6 +397,11 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// returns a string format of integer for current day
+    /// </summary>
+    /// <param name="day">int</param>
+    /// <returns>string</returns>
     private string GetDayStringFromInt(int day)
     {
         string dayText;
@@ -349,6 +424,13 @@ public class LevelManager : MonoBehaviour {
         return dayText;
     }
 
+    /// <summary>
+    /// this is run as a co-routine in the background
+    /// it basically just adds periods periodically to the end of the given word
+    /// which should be "Loading" or "Day One" etc
+    /// </summary>
+    /// <param name="word"></param>
+    /// <returns></returns>
     IEnumerator UpdateLoadingText(string word)
     {
         float waitTime = 0.5f;
@@ -369,6 +451,11 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value of the black screen from 0 to 100 using the fade speed
+    /// </summary>
+    /// <param name="fade"></param>
+    /// <returns></returns>
     IEnumerator FadeBlackIn(float fade)
     {
         float alpha = 0.0f;
@@ -386,6 +473,11 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value of the black screen from whatever it is to 0 using the fade speed
+    /// </summary>
+    /// <param name="fade"></param>
+    /// <returns></returns>
     IEnumerator FadeBlackOut(float fade)
     {
         float alpha = blackFadeBackground.color.a;
@@ -401,6 +493,10 @@ public class LevelManager : MonoBehaviour {
         yield return null;
     }
 
+    /// <summary>
+    /// changes the alpha value of the loading screen from whatever it is to 0 using loading screen fade speed
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FadeLoadingScreenOut()
     {
         float panelAlpha = loadingScreenBackground.color.a;
