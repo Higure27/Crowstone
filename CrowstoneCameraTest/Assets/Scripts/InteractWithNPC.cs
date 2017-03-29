@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// Bradley Dawn
+using UnityEngine;
 using System.Collections.Generic;
 using Ink.Runtime;
 
