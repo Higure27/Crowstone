@@ -6,13 +6,17 @@ public class FirstPersonController : MonoBehaviour {
 
     public float movementSpeed = 5.0f;
     public float mouseSensitivity = 2.0f;
+    public float upDownRange = 60.0f;
 
     private float rotUpDown = 0;
-    public float upDownRange = 60.0f;
+    private float baseMovementSpeed;
+    private bool sprintActive;
 
 	// Use this for initialization
 	void Start () {
         Cursor.lockState = CursorLockMode.Locked;
+        sprintActive = false;
+        baseMovementSpeed = movementSpeed;
     }
 	
 	// Update is called once per frame
@@ -33,8 +37,24 @@ public class FirstPersonController : MonoBehaviour {
 
         transform.Translate(strafe, 0, translation);
 
-        if (Input.GetKeyDown("escape")) {
-            Cursor.lockState = CursorLockMode.None;
+        //if (Input.GetKeyDown("escape")) {
+        // Cursor.lockState = CursorLockMode.None;
+        //}
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            sprintActive = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            sprintActive = false;
+        }
+
+        if (sprintActive) {
+            movementSpeed = baseMovementSpeed + 6;
+        }
+
+        else {
+            movementSpeed = baseMovementSpeed;
         }
     }
 }
