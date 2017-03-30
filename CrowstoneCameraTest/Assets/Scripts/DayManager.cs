@@ -10,10 +10,16 @@ public class DayManager : MonoBehaviour {
     public static Story _dayStory;
     private static string _partner;
 
-	// Use this for initialization
-	void Awake () {
+    [SerializeField]
+    private Transform DialogueUI;
+    private NewConversationUI dialogueUI;
+
+    // Use this for initialization
+    void Awake () {
         if(_inkAsset != null) _dayStory = new Story(_inkAsset.text);
         DontDestroyOnLoad(gameObject);
+        InteractWithNPC.dialogueStarted += StartDialogue;
+        NewConversationUI.dialogueChosen += ContinueParsing;
     }
 	
 	// Update is called once per frame
@@ -21,7 +27,7 @@ public class DayManager : MonoBehaviour {
 		
 	}
 
-    public static KeyValuePair<string, List<Choice>> StartParsing(string partner)
+    public void StartParsing(string partner)
     {
         _partner = partner;
         string partnerDialogue = "";
@@ -31,7 +37,7 @@ public class DayManager : MonoBehaviour {
         
         while (_dayStory.canContinue)
         {
-            partnerDialogue += _dayStory.Continue().Trim();
+            partnerDialogue += _dayStory.Continue();
         }
         Debug.Log("Partner: " + partnerDialogue);
         if (_dayStory.currentChoices.Count > 0)
@@ -41,23 +47,25 @@ public class DayManager : MonoBehaviour {
                 Choice choice = _dayStory.currentChoices[i];
                 outputList.Add(choice);
             }
+            dialogueUI.UpdateDialogue(new KeyValuePair<string, List<Choice>>(partnerDialogue, outputList));
         }
-        Debug.Log("Your choices: ");
-        foreach (Choice choice in outputList)
-            Debug.Log(choice.text + "\n");
-        return new KeyValuePair<string, List<Choice>>(partnerDialogue, outputList);
+        else
+        {
+            dialogueUI.EndDialogue(partnerDialogue);
+        }
     }
 
-    public static KeyValuePair<string, List<Choice>> ContinueParsing(Choice c)
+    public void ContinueParsing(Choice c)
     {
         _dayStory.ChooseChoiceIndex(c.index);
 
         string partnerDialogue = "";
+        _dayStory.Continue();
         List<Choice> outputList = new List<Choice>();
 
         while (_dayStory.canContinue)
         {
-            partnerDialogue += _dayStory.Continue().Trim();
+            partnerDialogue += _dayStory.Continue();
         }
         Debug.Log("Partner: " + partnerDialogue);
         if (_dayStory.currentChoices.Count > 0)
@@ -67,21 +75,25 @@ public class DayManager : MonoBehaviour {
                 Choice choice = _dayStory.currentChoices[i];
                 outputList.Add(choice);
             }
+            dialogueUI.UpdateDialogue(new KeyValuePair<string, List<Choice>>(partnerDialogue, outputList));
         }
         else
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponentInChildren<FirstPersonController>().enabled = true;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            dialogueUI.EndDialogue(partnerDialogue);
+        }     
+    }
 
-            GameObject UI = GameObject.FindGameObjectWithTag("DialogueUI");
-            DestroyObject(UI);
-            GameManager.gameManager.flipInUI();
-        }
-        Debug.Log("Your choices: ");
-        foreach (Choice choice in outputList)
-            Debug.Log(choice.text + "\n");
-        return new KeyValuePair<string, List<Choice>>(partnerDialogue, outputList);
+    public void StartDialogue(string partner)
+    {
+        var dialogueTransform = Instantiate(DialogueUI);
+        dialogueUI = dialogueTransform.GetComponent<NewConversationUI>();
+        StartParsing(partner);
+        GameManager.gameManager.flipInUI();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponentInChildren<FirstPersonController>().enabled = false;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        StartParsing(partner);
     }
 }

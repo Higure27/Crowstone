@@ -96,12 +96,12 @@ Sheriff! What do you want?
 
 
 =book_talk
-My book! Give it to me!
-* Sure #gave_book_wilingly
-    Thank you Sheriff!
+My book! Give it to me! 
+*Sure. #gave_book_wilingly
+    Thank you Sheriff! 
     ->DONE
-* Not so fast 
-    What do you want?
+*Not so fast. 
+    What do you want? 
     **For you to get out of town! #used_threat
         I always disliked you Sheriff 
         ~ getting_out_of_town = true
@@ -112,37 +112,37 @@ My book! Give it to me!
     
 
 ===Pemberton_Return===
-Well, Sheriff? Were you able to silence your local gambler?
-    *[Yes, John won't be a problem now.]
-- I knew I could count on you, Sheriff.
-    *[Is there anything else I can do to help?]
--Maybe tomorrow. I'll have to see if I can find any other people for you to investigate.
+Well, Sheriff? Were you able to silence your local gambler? 
+    *[Yes, John won't be a problem now. ]
+-I knew I could count on you, Sheriff. 
+    *[Is there anything else I can do to help? ]
+-Maybe tomorrow. I'll have to see if I can find any other people for you to investigate. 
     *Right. I'll talk to you tomorrow, then. 
         ~ day1_Complete = true
         -> DONE   
 ===Bartender===
-Hey, Sheriff. What can I do for you?”
+Hey, Sheriff. What can I do for you? 
 ->question 
 =question 
-+ "Can I get a drink?"
-    I don’t think you can afford one right now,
-*“What do you know about John?”
++Can I get a drink? 
+    I don’t think you can afford one right now. 
+*What do you know about John? 
     ->ask_about_john 
-+Nothing, thanks.
++Nothing, thanks. 
     ->DONE
-- anything else I can do for you Sheriff?
+-Anything else I can do for you Sheriff? 
 ->question
 =ask_about_john
-Depends, What do you want to know about him?”
+Depends, What do you want to know about him? 
 -(ask_more)
-*“What do you know about him?” 
+*What do you know about him? 
     ~ john_is_an_idiot = true
-    “He’s a nice enough fella, but he ain’t too bright. 
-*Have you ever noticed anything odd about him?
-    “Well, I dunno if it’s odd, but I know he usually carries a book around with him. I guess it’s important to him."
-+Nothing, I'm good
+    He’s a nice enough fella, but he ain’t too bright.  
+*Have you ever noticed anything odd about him? 
+    Well, I dunno if it’s odd, but I know he usually carries a book around with him. I guess it’s important to him. 
++Nothing, I'm good. 
     ->DONE
--Is there anything else you need to know about him?"
+-Is there anything else you need to know about him? 
 ->ask_more
 
 

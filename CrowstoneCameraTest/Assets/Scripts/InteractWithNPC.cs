@@ -8,9 +8,8 @@ public class InteractWithNPC : MonoBehaviour {
     public GameObject UI;
     public string NPC;
     public float distanceToTrigger = 3.5f;
-
-    [SerializeField]
-    private Transform DialogueUI;
+    public delegate void DialogueEvent(string partner);
+    public static event DialogueEvent dialogueStarted; 
 
     private bool inRange;
     private GameObject player;
@@ -31,31 +30,10 @@ public class InteractWithNPC : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    //if (Cursor.visible == false)
-                   // {
-                        //TODO: Fill With Conversation stuff
-                        var dialogueTransform = Instantiate(DialogueUI);
-                        NewConversationUI dialogueUI = dialogueTransform.GetComponent<NewConversationUI>();
-                        KeyValuePair<string, List<Choice>> dialogues = DayManager.StartParsing(NPC);
-                        dialogueUI.UpdateDialogue(dialogues);
-                        GameManager.gameManager.flipInUI();
-                        player.GetComponentInChildren<FirstPersonController>().enabled = false;
+                    if (dialogueStarted != null)
+                        dialogueStarted(NPC);
 
-                        Cursor.visible = true;
-                        Cursor.lockState = CursorLockMode.None;
-
-                        UI.SetActive(false);
-                    //}
-                    //else
-                    //{
-                    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-                    //    player.GetComponentInChildren<FirstPersonController>().enabled = true;
-                    //    Cursor.visible = false;
-                    //    Cursor.lockState = CursorLockMode.Locked;
-
-                    //    GameObject UI = GameObject.FindGameObjectWithTag("DialogueUI");
-                    //    DestroyObject(UI);
-                    //}
+                    UI.SetActive(false);
                 }
             }
             else {
@@ -65,16 +43,6 @@ public class InteractWithNPC : MonoBehaviour {
         else {
             UI.SetActive(false);
         }
-    }
-
-    public static KeyValuePair<string, List<Choice>> UpdateDialogueUI(Choice c)
-    {
-        return DayManager.ContinueParsing(c);
-    }
-
-    public void EndDialogue()
-    {
-        DestroyObject(DialogueUI.gameObject);
     }
 
     private float DistanceBetweenThisAndPlayer() {

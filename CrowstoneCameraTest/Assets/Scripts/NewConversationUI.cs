@@ -29,9 +29,15 @@ public class NewConversationUI : MonoBehaviour {
      **/
     private Text partnerDialogue;
 
-	// Use this for initialization
-	void Awake () {
-        selfDialogueOptionsViewport = transform.GetChild(1).GetChild(0).GetChild(0);
+    /**
+     * 
+     **/
+    public delegate void DialogueEvent(Choice dialogueChoice);
+    public static event DialogueEvent dialogueChosen;
+
+    // Use this for initialization
+    void Awake () {
+        selfDialogueOptionsViewport = transform.GetChild(1).GetChild(1).GetChild(0);
         partnerDialogue = transform.GetChild(0).GetComponent<Text>();
 	}
 
@@ -43,14 +49,13 @@ public class NewConversationUI : MonoBehaviour {
     {
         partnerDialogue.text = kvp.Key;
         ClearPlayerDialogueOptions();
-        int i = 0;
         foreach (Choice dialogueOption in kvp.Value)
         {
             var b = Instantiate(dialogueButtonPrefab) as Transform;
             b.GetComponentInChildren<Text>().text = dialogueOption.text;
             b.transform.parent = selfDialogueOptionsViewport;
             Button button = b.GetComponent<Button>();
-            button.onClick.AddListener(() => UpdateDialogue(InteractWithNPC.UpdateDialogueUI(dialogueOption)));
+            button.onClick.AddListener(() => dialogueChosen(dialogueOption));
         }
     }
 
@@ -60,8 +65,25 @@ public class NewConversationUI : MonoBehaviour {
             Destroy(child.gameObject);
     }
 
-    public void EndDialogue()
+    public void EndDialogue(string s)
     {
-        DestroyObject(gameObject);
+        ClearPlayerDialogueOptions();
+        partnerDialogue.text = s;
+        var b = Instantiate(dialogueButtonPrefab) as Transform;
+        b.GetComponentInChildren<Text>().text = "*End Conversation*";
+        b.transform.parent = selfDialogueOptionsViewport;
+        Button button = b.GetComponent<Button>();
+        button.onClick.AddListener(() => ActuallyEndDialogue());
+        //DestroyObject(gameObject);
+    }
+
+    public void ActuallyEndDialogue()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponentInChildren<FirstPersonController>().enabled = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.gameManager.flipInUI();
+        Destroy(gameObject);
     }
 }
