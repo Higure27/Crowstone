@@ -37,8 +37,8 @@ public class NewConversationUI : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        selfDialogueOptionsViewport = transform.GetChild(1).GetChild(1).GetChild(0);
-        partnerDialogue = transform.GetChild(0).GetComponent<Text>();
+        selfDialogueOptionsViewport = transform.GetChild(2).GetChild(1).GetChild(0);
+        partnerDialogue = transform.GetChild(1).GetComponent<Text>();
 	}
 
     /**
