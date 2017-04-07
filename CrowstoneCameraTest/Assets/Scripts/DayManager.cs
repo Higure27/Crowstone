@@ -21,6 +21,12 @@ public class DayManager : MonoBehaviour {
         InteractWithNPC.dialogueStarted += StartDialogue;
         NewConversationUI.dialogueChosen += ContinueParsing;
     }
+
+    void OnDestroy()
+    {
+        InteractWithNPC.dialogueStarted -= StartDialogue;
+        NewConversationUI.dialogueChosen -= ContinueParsing;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -39,7 +45,7 @@ public class DayManager : MonoBehaviour {
         {
             partnerDialogue += _dayStory.Continue();
         }
-        Debug.Log("Partner: " + partnerDialogue);
+        //Debug.Log("Partner: " + partnerDialogue);
         if (_dayStory.currentChoices.Count > 0)
         {
             for (int i = 0; i < _dayStory.currentChoices.Count; i++)
@@ -60,14 +66,14 @@ public class DayManager : MonoBehaviour {
         _dayStory.ChooseChoiceIndex(c.index);
 
         string partnerDialogue = "";
-        _dayStory.Continue();
+        Debug.Log(_dayStory.Continue());
         List<Choice> outputList = new List<Choice>();
 
         while (_dayStory.canContinue)
         {
             partnerDialogue += _dayStory.Continue();
         }
-        Debug.Log("Partner: " + partnerDialogue);
+        //Debug.Log("Partner: " + partnerDialogue);
         if (_dayStory.currentChoices.Count > 0)
         {
             for (int i = 0; i < _dayStory.currentChoices.Count; i++)
@@ -95,5 +101,12 @@ public class DayManager : MonoBehaviour {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         StartParsing(partner);
+    }
+
+    public static void ItemPickup(string item)
+    {
+        _dayStory.ChoosePathString(item);
+        while (_dayStory.canContinue)
+            _dayStory.Continue();
     }
 }

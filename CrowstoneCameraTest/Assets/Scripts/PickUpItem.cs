@@ -11,6 +11,9 @@ public class PickUpItem : MonoBehaviour {
     public string description;
     public float distanceToTrigger = 3.5f;
 
+    public delegate void DialogueEvent(string partner);
+    public static event DialogueEvent pickedUp;
+
     private bool inRange;
     private RaycastHit hit;
 
@@ -29,6 +32,7 @@ public class PickUpItem : MonoBehaviour {
                 UI.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E)) {
                     GameManager.gameManager.addItem(item, description);
+                    DayManager.ItemPickup(item);
                     UI.SetActive(false);
                     //DestroyObject(gameObject);
                     gameObject.SetActive(false); //avoid dynamic memory deallocation
