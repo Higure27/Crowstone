@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
     <Compile Include="Assets\Scripts\AddGlow.cs" />
+    <Compile Include="Assets\Scripts\ChangeDay.cs" />
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
@@ -120,7 +121,6 @@
   <ItemGroup>
     <None Include="Assets\Plugins\Ink\Resources\InkDefaultTemplate.txt" />
     <None Include="Assets\Scripts\Conversation.txt" />
-    <None Include="Assets\SkeletonData\animations.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
   </ItemGroup>

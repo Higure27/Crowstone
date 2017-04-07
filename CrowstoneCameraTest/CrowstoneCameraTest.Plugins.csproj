@@ -148,7 +148,6 @@
   <ItemGroup>
     <None Include="Assets\Plugins\Ink\Resources\InkDefaultTemplate.txt" />
     <None Include="Assets\Scripts\Conversation.txt" />
-    <None Include="Assets\SkeletonData\animations.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
   </ItemGroup>
