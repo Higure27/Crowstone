@@ -24,6 +24,28 @@ ModelImporter:
     100032: Bar_Divider_Upper
     100034: Side_Divider_Lower
     100036: Side_Divider_Upper
+    100038: Outlook_Floor
+    100040: Outlook_Grip
+    100042: Outlook_Post_1
+    100044: Outlook_Wall
+    100046: Stair_1_Railing
+    100048: Stair_1_Steps
+    100050: Stairs_1_Post_1
+    100052: Stairs_1_Post_2
+    100054: Stairs_1_Post_3
+    100056: Stairs_1_Post_4
+    100058: Stairs_1_Post_5
+    100060: Stairs_1_Post_6
+    100062: Stairs_1_Wall
+    100064: Stairs_2_Post_1
+    100066: Stairs_2_Post_2
+    100068: Stairs_2_Post_3
+    100070: Stairs_2_Post_4
+    100072: Stairs_2_Post_5
+    100074: Stairs_2_Post_6
+    100076: Stairs_2_Railing
+    100078: Stairs_2_Steps
+    100080: Stairs_2_Wall
     400000: Bar_Back
     400002: Bar_Counter
     400004: Bar_Divider
@@ -43,6 +65,28 @@ ModelImporter:
     400032: Bar_Divider_Upper
     400034: Side_Divider_Lower
     400036: Side_Divider_Upper
+    400038: Outlook_Floor
+    400040: Outlook_Grip
+    400042: Outlook_Post_1
+    400044: Outlook_Wall
+    400046: Stair_1_Railing
+    400048: Stair_1_Steps
+    400050: Stairs_1_Post_1
+    400052: Stairs_1_Post_2
+    400054: Stairs_1_Post_3
+    400056: Stairs_1_Post_4
+    400058: Stairs_1_Post_5
+    400060: Stairs_1_Post_6
+    400062: Stairs_1_Wall
+    400064: Stairs_2_Post_1
+    400066: Stairs_2_Post_2
+    400068: Stairs_2_Post_3
+    400070: Stairs_2_Post_4
+    400072: Stairs_2_Post_5
+    400074: Stairs_2_Post_6
+    400076: Stairs_2_Railing
+    400078: Stairs_2_Steps
+    400080: Stairs_2_Wall
     2300000: Bar_Back
     2300002: Bar_Counter
     2300004: Bar_Divider
@@ -61,6 +105,28 @@ ModelImporter:
     2300030: Bar_Divider_Upper
     2300032: Side_Divider_Lower
     2300034: Side_Divider_Upper
+    2300036: Outlook_Floor
+    2300038: Outlook_Grip
+    2300040: Outlook_Post_1
+    2300042: Outlook_Wall
+    2300044: Stair_1_Railing
+    2300046: Stair_1_Steps
+    2300048: Stairs_1_Post_1
+    2300050: Stairs_1_Post_2
+    2300052: Stairs_1_Post_3
+    2300054: Stairs_1_Post_4
+    2300056: Stairs_1_Post_5
+    2300058: Stairs_1_Post_6
+    2300060: Stairs_1_Wall
+    2300062: Stairs_2_Post_1
+    2300064: Stairs_2_Post_2
+    2300066: Stairs_2_Post_3
+    2300068: Stairs_2_Post_4
+    2300070: Stairs_2_Post_5
+    2300072: Stairs_2_Post_6
+    2300074: Stairs_2_Railing
+    2300076: Stairs_2_Steps
+    2300078: Stairs_2_Wall
     3300000: Bar_Back
     3300002: Bar_Counter
     3300004: Bar_Divider
@@ -79,6 +145,28 @@ ModelImporter:
     3300030: Bar_Divider_Upper
     3300032: Side_Divider_Lower
     3300034: Side_Divider_Upper
+    3300036: Outlook_Floor
+    3300038: Outlook_Grip
+    3300040: Outlook_Post_1
+    3300042: Outlook_Wall
+    3300044: Stair_1_Railing
+    3300046: Stair_1_Steps
+    3300048: Stairs_1_Post_1
+    3300050: Stairs_1_Post_2
+    3300052: Stairs_1_Post_3
+    3300054: Stairs_1_Post_4
+    3300056: Stairs_1_Post_5
+    3300058: Stairs_1_Post_6
+    3300060: Stairs_1_Wall
+    3300062: Stairs_2_Post_1
+    3300064: Stairs_2_Post_2
+    3300066: Stairs_2_Post_3
+    3300068: Stairs_2_Post_4
+    3300070: Stairs_2_Post_5
+    3300072: Stairs_2_Post_6
+    3300074: Stairs_2_Railing
+    3300076: Stairs_2_Steps
+    3300078: Stairs_2_Wall
     4300000: Ceiling
     4300002: Walls_Upper
     4300004: Walls_Lower
@@ -97,6 +185,28 @@ ModelImporter:
     4300030: Side_Divider_Upper
     4300032: Side_Divider_Lower
     4300034: Bar_Divider_Lower
+    4300036: Outlook_Wall
+    4300038: Outlook_Floor
+    4300040: Outlook_Grip
+    4300042: Outlook_Post_1
+    4300044: Stairs_1_Wall
+    4300046: Stair_1_Steps
+    4300048: Stair_1_Railing
+    4300050: Stairs_1_Post_1
+    4300052: Stairs_1_Post_2
+    4300054: Stairs_1_Post_3
+    4300056: Stairs_1_Post_4
+    4300058: Stairs_1_Post_5
+    4300060: Stairs_1_Post_6
+    4300062: Stairs_2_Wall
+    4300064: Stairs_2_Steps
+    4300066: Stairs_2_Railing
+    4300068: Stairs_2_Post_1
+    4300070: Stairs_2_Post_2
+    4300072: Stairs_2_Post_3
+    4300074: Stairs_2_Post_4
+    4300076: Stairs_2_Post_5
+    4300078: Stairs_2_Post_6
     9500000: //RootNode
   materials:
     importMaterials: 1
