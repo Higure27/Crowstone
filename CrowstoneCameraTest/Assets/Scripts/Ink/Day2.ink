@@ -38,5 +38,14 @@ Well, good day to you, Sheriff. What can I do you for?
 +[Nothing for now. have a good day Miss.]
     ->DONE
     
+    
+===Katherine_Blakely===
+Good day, Sheriff! You don't make your way out this way too often. What can I do for you?
 
-===
+*{wanted_Poster}[I understand you've been seeing Jacob Morgan]
+    Wh-what is this...? A wanted poster? With Jacob on it? This can't be...I thought I knew him. I need to speak to him right now. Thank you, Sheriff. ->DONE
+    
+*[Nothing for now Ms. Blakley]
+    ->DONE
+    
+

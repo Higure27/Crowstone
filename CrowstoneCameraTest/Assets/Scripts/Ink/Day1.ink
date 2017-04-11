@@ -1,9 +1,8 @@
 VAR found_book = false
 VAR john_is_an_idiot = false
 VAR getting_out_of_town = false
-VAR day1_Complete = false
-
-
+VAR day_Complete = false
+VAR met_pemberton =false
 
 ===Prisoner===
 =Pop_Up
@@ -19,7 +18,9 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
     "Unlike you."
     ->DONE
 
-===Pemberton
+===Pemberton===
+{met_pemberton: ->second_meeting|->first_meeting}
+=first_meeting
 “Sheriff Rawley?”
     *[Yes?Can I Help you]
     “I’m hoping you can, Sheriff. There’s been a bit of a...problem going down in Crowstone, and I need your help in handling it.”
@@ -40,30 +41,41 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
                 **** [Do you have any investigation tips?]
                         Try talking to your townsfolk to find out more about him, or you can look around for evidence you can use against him. Do whatever you can to keep him quiet.
                 **** [I'm on it]
+                    ~ met_pemberton = true
                     ->DONE
             *** [I'm on it]
+                    ~met_pemberton = true
                     ->DONE
-->DONE
-//*[“What’s in it for me?”]
+                    
+= second_meeting
+Well, Sheriff? Were you able to silence your local gambler?
+    *[Yes, John won't be a problem now.]
+- I knew I could count on you, Sheriff.
+    *[Is there anything else I can do to help?]
+-Maybe tomorrow. I'll have to see if I can find any other people for you to investigate.
+    *Right. I'll talk to you tomorrow, then. 
+        ~ day_Complete = true
+        -> DONE   
 ===Book===
     ~found_book = true 
 ->DONE
 
 ===Gambler===
 Sheriff! What do you want?
-    + [I heard you’ve been asking a lot of questions about the new man in town. The one with the red hat. I need you to stop.]
+    + [I heard you’ve been asking a lot of questions about the new man in town.] The one with the red hat. I need you to stop.
             That’s none of your business.
             **{john_is_an_idiot} [I think he’s a threat to you, John.]
                 What do you mean?
                     ->threat
-            **{found_book} [I think it is my business. (Show  ledger)]                 
+            **{found_book} [I think it is my business.]
+                    (Show  ledger)
                     Is that my ledger?! Where did you get that?!
                     ***[That doesn't matter. If you want it, you need to  leave town for a little while.]
                             Fine, I'll go! Just give it back to me!
                             ~ getting_out_of_town = true
                             ->DONE
                     ***[Where you left it. But you can have it back.]
-                            Seriously? What's the catch?
+                            How can I repay you, Sheriff?
                             ****[Stop asking questions about the new guy in town.]
                                     You have yourself a deal, Sheriff.
                                     ~ getting_out_of_town = true
@@ -77,72 +89,35 @@ Sheriff! What do you want?
              ->threat
              
 = threat
-*[I overheard him earlier today, something about you owing him money? I think he’s fixing to kill you. I’d feel a lot better if you left town for a while.]
+*[I overheard him earlier today saying that he’s looking for you.] Something about you owing him money? I think he’s fixing to kill you. I’d feel a lot better if you left town for a while.
                             Thanks, Sheriff! I’d best be getting out of here! 
                                   ~ getting_out_of_town = true 
                                   ->DONE
-===Gambler2===
-Sheriff! What do you want?
-*{found_book} found your book
-    ->book_talk
-*I heared you've been asking questions
-    What about it? 
-    **Nothing
-        ->DONE
-*{john_is_an_idiot} Aliens!#Aliens
-    ~ getting_out_of_town = true
-    ->DONE
 
-
-=book_talk
-My book! Give it to me! 
-*Sure. #gave_book_wilingly
-    Thank you Sheriff! 
-    ->DONE
-*Not so fast. 
-    What do you want? 
-    **For you to get out of town! #used_threat
-        I always disliked you Sheriff 
-        ~ getting_out_of_town = true
-        ->DONE
-    **A hug #used_love
-    `   there you go Sheriff
-    - ->DONE
-    
-
-===Pemberton_Return===
-Well, Sheriff? Were you able to silence your local gambler? 
-    *[Yes, John won't be a problem now. ]
--I knew I could count on you, Sheriff. 
-    *[Is there anything else I can do to help? ]
--Maybe tomorrow. I'll have to see if I can find any other people for you to investigate. 
-    *Right. I'll talk to you tomorrow, then. 
-        ~ day1_Complete = true
-        -> DONE   
 
 ===Bartender===
-Hey, Sheriff. What can I do for you? 
+Hey, Sheriff. What can I do for you?”
 ->question 
 =question 
-+Can I get a drink? 
-    I don’t think you can afford one right now. 
-*What do you know about John? 
++ "Can I get a drink?"
+    I don’t think you can afford one right now,
+*“What do you know about John?”
     ->ask_about_john 
-+Nothing, thanks. 
++Nothing, thanks.
     ->DONE
--Anything else I can do for you Sheriff? 
+- anything else I can do for you Sheriff?
 ->question
 =ask_about_john
-Depends, What do you want to know about him? 
+Depends, What do you want to know about him?”
 -(ask_more)
-*What do you know about him? 
+*“What do you know about him?” 
     ~ john_is_an_idiot = true
-    He’s a nice enough fella, but he ain’t too bright.  
-*Have you ever noticed anything odd about him? 
-    Well, I dunno if it’s odd, but I know he usually carries a book around with him. I guess it’s important to him. 
-+Nothing, I'm good. 
+    “He’s a nice enough fella, but he ain’t too bright. 
+*Have you ever noticed anything odd about him?
+    “Well, I dunno if it’s odd, but I know he usually carries a book around with him. I guess it’s important to him."
++Nothing, I'm good
     ->DONE
--Is there anything else you need to know about him? 
+-Is there anything else you need to know about him?"
 ->ask_more
 
 
