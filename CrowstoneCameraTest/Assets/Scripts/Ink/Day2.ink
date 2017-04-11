@@ -1,11 +1,11 @@
 CONST Currency = 0
-VAR day2_Complete = false
+VAR day_Complete = false
 VAR wanted_Poster = false
 VAR showed_Poster_Kathrine = false
 
 
 
-->Harriet
+
 ===Pemberton===
 Good morning, Sheriff. I'm glad to see you're an early riser. I have a new lead for you to follow. There's a man in town, Jacob Morgan. I believe he's caught wind of my presence. ->converstation_options
 =converstation_options
