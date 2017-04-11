@@ -19,6 +19,9 @@ public class PickUpItem : MonoBehaviour {
     private bool inRange;
     private RaycastHit hit;
 
+    public delegate void itemPickedUp();
+    public static event itemPickedUp onItemPickedUp;
+
 
     private void Start() {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -33,6 +36,9 @@ public class PickUpItem : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100)) {
                 UI.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E)) {
+                    //play sound
+                    onItemPickedUp();
+
                     GameManager.gameManager.addItem(item, description);
                     DayManager.ItemPickup(item);
                     UI.SetActive(false);

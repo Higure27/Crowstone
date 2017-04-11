@@ -22,6 +22,9 @@ public class LevelManager : MonoBehaviour {
     public delegate void newSceneLoaded();
     public static event newSceneLoaded onNewSceneLoaded;
 
+    public delegate void openingDoor();
+    public static event openingDoor onOpeningDoor;
+
     /// <summary>
     /// this is an event that is triggered after a scene is loaded
     /// and the screen faded in is complete
@@ -230,6 +233,9 @@ public class LevelManager : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator EnterArea()
     {
+        //play sound
+        onOpeningDoor();
+
         //activate and fade in black fade screen
         if (blackFade != null)
         {
