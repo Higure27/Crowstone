@@ -40,6 +40,7 @@ What the hell do you want, Sheriff? Can't a man walk the streets without a lawma
 * [I hear you've been poking your nose into business that isn't yours, Jacob.] The man in the red hat...I need you to stop talking about him.
         And why should I listen to you? Who cares if it's my business or not? It's a free country, last I checked. I can talk about anybody I want to.
         **[I'll be back to continue this conversation later.]
+            ~met_Morgen =true
             ->DONE
 =second_meeting
 Back again, Sheriff? I thought I made it clear that I didn't want to talk to you.
