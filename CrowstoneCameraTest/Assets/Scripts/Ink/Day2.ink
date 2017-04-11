@@ -21,8 +21,14 @@ Good morning, Sheriff. I'm glad to see you're an early riser. I have a new lead 
     ->DONE
     
 =second_meeting
-test
-->DONE
+I trust you were successful again, Sheriff?
++[Not yet]
+    ->DONE
+*[Yes, Jacob won't be a problem anymore.]
+    Another job well done. You're proving to be quite the ally, Sheriff. I'm going to do a little more detective work on another of your citizens. Come back tomorrow and I should have more information for you.
+    **[Right. Until then.]
+        ~day_Complete = true
+        ->DONE
 
 
 ===Jacob_Morgen===
