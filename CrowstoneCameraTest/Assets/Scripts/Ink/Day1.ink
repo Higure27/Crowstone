@@ -53,13 +53,15 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
                     
 = second_meeting
 Well, Sheriff? Were you able to silence your local gambler?
-    *[Yes, John won't be a problem now.]
-         I knew I could count on you, Sheriff.
+    *{getting_out_of_town}[Yes, John won't be a problem now.]
+        I knew I could count on you, Sheriff.
             **[Is there anything else I can do to help?]
                 Maybe tomorrow. I'll have to see if I can find any other people for you to investigate.
-                ***[Right. I'll talk to you tomorrow, then.] 
-                    ~ day_Complete = true
-                    Head home and get some rest Sheriff. -> DONE   
+                    ***[Right. I'll talk to you tomorrow, then.] 
+                        ~ day_Complete = true
+                        Head home and get some rest Sheriff. -> DONE  
+    +[I'm Handling it]
+        ->DONE
 ===Book===
     ~found_book = true 
 ->DONE
