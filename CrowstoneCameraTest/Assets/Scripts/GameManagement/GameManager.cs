@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour {
     public static GameManager gameManager;
     private string currentLocation = "Town";
     private string previousLocation = "None";
-    private string dailyTask;
     private float currency;
     private bool isPaused;
+    private string dailyTask;
     private bool inUI;
     private bool canGlow;
     private bool doneWithDay;
@@ -37,8 +37,7 @@ public class GameManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
     }
 
@@ -79,8 +78,7 @@ public class GameManager : MonoBehaviour {
     /// resets the game state, is called when
     /// player is in game and clicks on main menu
     /// </summary>
-    public void resetGameState()
-    {
+    public void resetGameState() {
         //TODO: finish this function
     }
 
@@ -144,8 +142,7 @@ public class GameManager : MonoBehaviour {
     /// <param name="item">string</param>
     /// <param name="description">string</param>
     public void addItem(string item, string description) {
-        if (!checkForItem(item))
-        {
+        if (!checkForItem(item)) {
             inventory.Add(item, description);
             Debug.Log("picked up item: " + item);
         }
@@ -155,17 +152,14 @@ public class GameManager : MonoBehaviour {
     /// returns the name of all items in inventory
     /// </summary>
     /// <returns>string[]</returns>
-    public string[] getAllItems()
-    {
+    public string[] getAllItems() {
         string[] items;
 
-        if (inventory != null)
-        {
-           items = new string[inventory.Count];
-            items = inventory.Keys.ToArray<string>(); 
+        if (inventory != null) {
+            items = new string[inventory.Count];
+            items = inventory.Keys.ToArray<string>();
         }
-        else
-        {
+        else {
             items = new string[1];
             items[0] = "empty";
         }
@@ -232,13 +226,11 @@ public class GameManager : MonoBehaviour {
         return inUI;
     }
 
-    public bool CanGlow()
-    {
+    public bool CanGlow() {
         return canGlow;
     }
 
-    public void SetGlow(bool b)
-    {
+    public void SetGlow(bool b) {
         canGlow = b;
     }
 }
