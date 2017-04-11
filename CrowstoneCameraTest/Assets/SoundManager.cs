@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour {
 
@@ -8,14 +9,18 @@ public class SoundManager : MonoBehaviour {
     public float doorVolume = 1.0f;
     public AudioClip walking;
     public float walkingVolume = 1.0f;
+    public float walkingPitch = 1.25f;
     public AudioClip running;
     public float runningVolume = 1.0f;
+    public float RunningPitch = 2.0f;
+
     public AudioClip itemPickup;
     public float itemPickupVolume = 1.0f;
 
     private static SoundManager _instance;
 
     private AudioSource player;
+    private float defaultPitch = 1.0f;
 
     public static SoundManager Instance { get { return _instance; } }
 
@@ -28,7 +33,40 @@ public class SoundManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (!LevelManager.Instance.getScenename().Equals("Start Menu"))
+        {
+            if (GameManager.gameManager.getInUI() == false && GameManager.gameManager.getPause() == false)
+            {
 
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+                {
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        playRunning();
+                    }
+                    else
+                    {
+                        playWalking();
+                    }
+                }
+                else
+                {
+                    player.Stop();
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    player.Stop();
+                    playRunning();
+                }
+
+                if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    player.Stop();
+                    playWalking();
+                }
+            }
+        }
     }
 
     private void OnEnable()
@@ -47,6 +85,9 @@ public class SoundManager : MonoBehaviour {
     {
         if(enterDoor != null)
         {
+
+            player.Stop();
+            player.pitch = defaultPitch;
             player.PlayOneShot(enterDoor, doorVolume);
 
         }
@@ -60,6 +101,10 @@ public class SoundManager : MonoBehaviour {
     {
         if(walking != null)
         {
+            if (player.isPlaying) return;
+
+            player.pitch = walkingPitch;
+            Debug.Log("walking");
             player.PlayOneShot(walking, walkingVolume);
 
         }
@@ -73,6 +118,10 @@ public class SoundManager : MonoBehaviour {
     {
         if(running != null)
         {
+            if (player.isPlaying) return;
+
+            player.pitch = RunningPitch;
+            Debug.Log("running");
             player.PlayOneShot(running, runningVolume);
 
         }
@@ -86,6 +135,8 @@ public class SoundManager : MonoBehaviour {
     {
         if(itemPickup != null)
         {
+            player.Stop();
+            player.pitch = defaultPitch;
             player.PlayOneShot(itemPickup, itemPickupVolume);
 
         }

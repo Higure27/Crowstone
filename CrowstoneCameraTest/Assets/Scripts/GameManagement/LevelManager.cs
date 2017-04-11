@@ -225,6 +225,13 @@ public class LevelManager : MonoBehaviour {
         loadArea = true;
     }
 
+    public string getScenename()
+    {
+        Scene scene;
+        scene = SceneManager.GetActiveScene();
+        return scene.name;
+    }
+
     /// <summary>
     /// a co-routine that runs in the background
     /// this fades in black, then loads the desired scene
