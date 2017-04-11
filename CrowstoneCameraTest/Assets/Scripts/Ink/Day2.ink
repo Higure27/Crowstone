@@ -3,6 +3,8 @@ VAR day_Complete = false
 VAR wanted_Poster = false
 VAR showed_Poster_Kathrine = false
 VAR met_Pemberton = false
+VAR met_Morgen = false
+VAR morgan_Ran = false
 
 
 
@@ -24,7 +26,7 @@ Good morning, Sheriff. I'm glad to see you're an early riser. I have a new lead 
 I trust you were successful again, Sheriff?
 +[Not yet]
     ->DONE
-*[Yes, Jacob won't be a problem anymore.]
+*{morgan_Ran}[Yes, Jacob won't be a problem anymore.]
     Another job well done. You're proving to be quite the ally, Sheriff. I'm going to do a little more detective work on another of your citizens. Come back tomorrow and I should have more information for you.
     **[Right. Until then.]
         ~day_Complete = true
@@ -32,11 +34,23 @@ I trust you were successful again, Sheriff?
 
 
 ===Jacob_Morgen===
+{met_Morgen: ->second_meeting|->first_meeting}
+=first_meeting
 What the hell do you want, Sheriff? Can't a man walk the streets without a lawman riding his coat tails.
 * [I hear you've been poking your nose into business that isn't yours, Jacob.] The man in the red hat...I need you to stop talking about him.
         And why should I listen to you? Who cares if it's my business or not? It's a free country, last I checked. I can talk about anybody I want to.
         **[I'll be back to continue this conversation later.]
             ->DONE
+=second_meeting
+Back again, Sheriff? I thought I made it clear that I didn't want to talk to you.
+*{wanted_Poster} [Jacob, I found this. Care to explain how your face got on this wanted poster?]
+    What?! Now, Sheriff...let's not be hasty here. I'm not lookin' to hang today....
+    **[Then you'd better leave town, Jacob. I don't want to see you around here for a while.]
+        ~morgan_Ran =true
+        Right, Sheriff. I got some loose ends to tie up today, then I'll get outta your hair. I swear.
+        ->DONE
++[I'll be back Morgen]
+    ->DONE
 
             
 ===Harriet===

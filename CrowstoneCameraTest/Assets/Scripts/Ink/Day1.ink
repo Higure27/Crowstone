@@ -54,12 +54,12 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
 = second_meeting
 Well, Sheriff? Were you able to silence your local gambler?
     *[Yes, John won't be a problem now.]
-- I knew I could count on you, Sheriff.
-    *[Is there anything else I can do to help?]
--Maybe tomorrow. I'll have to see if I can find any other people for you to investigate.
-    *Right. I'll talk to you tomorrow, then. 
-        ~ day_Complete = true
-        -> DONE   
+         I knew I could count on you, Sheriff.
+            **[Is there anything else I can do to help?]
+                Maybe tomorrow. I'll have to see if I can find any other people for you to investigate.
+                ***[Right. I'll talk to you tomorrow, then.] 
+                    ~ day_Complete = true
+                    Head home and get some rest Sheriff. -> DONE   
 ===Book===
     ~found_book = true 
 ->DONE
@@ -103,23 +103,23 @@ Sheriff! What do you want?
 Hey, Sheriff. What can I do for you?”
 ->question 
 =question 
-+ "Can I get a drink?"
++ ["Can I get a drink?"]
     I don’t think you can afford one right now,
-*“What do you know about John?”
+*[“What do you know about John?”]
     ->ask_about_john 
-+Nothing, thanks.
++[Nothing, thanks.]
     ->DONE
 - anything else I can do for you Sheriff?
 ->question
 =ask_about_john
 Depends, What do you want to know about him?”
 -(ask_more)
-*“What do you know about him?” 
+*[“What do you know about him?”] 
     ~ john_is_an_idiot = true
     “He’s a nice enough fella, but he ain’t too bright. 
-*Have you ever noticed anything odd about him?
+*[Have you ever noticed anything odd about him?]
     “Well, I dunno if it’s odd, but I know he usually carries a book around with him. I guess it’s important to him."
-+Nothing, I'm good
++[Nothing, I'm good]
     ->DONE
 -Is there anything else you need to know about him?"
 ->ask_more
