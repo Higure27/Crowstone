@@ -40,6 +40,10 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
                 However you can. If you think you're skilled enough, you can try to persuade him. If that doesn't work, try investigating him.
                 **** [Do you have any investigation tips?]
                         Try talking to your townsfolk to find out more about him, or you can look around for evidence you can use against him. Do whatever you can to keep him quiet.
+                        *****[I'm on it]
+                             ~ met_pemberton = true
+                             ->DONE
+                            
                 **** [I'm on it]
                     ~ met_pemberton = true
                     ->DONE

@@ -2,17 +2,27 @@ CONST Currency = 0
 VAR day_Complete = false
 VAR wanted_Poster = false
 VAR showed_Poster_Kathrine = false
+VAR met_Pemberton = false
 
 
 
 
 ===Pemberton===
+
+{met_Pemberton:->second_meeting |->first_meeting}
+
+=first_meeting
 Good morning, Sheriff. I'm glad to see you're an early riser. I have a new lead for you to follow. There's a man in town, Jacob Morgan. I believe he's caught wind of my presence. ->converstation_options
 =converstation_options
 *[Have any tips on how I should handle him?]
     He seems a hard man, so I would suggest that in addition to trying to persuade him, you could try the route of blackmail. I'll bet he has some dirt on him. He seems the type. Of course, you're always welcome to try the other options we discussed yesterday. -> converstation_options
 +[I'd best get to work, then.]
+    ~met_Pemberton = true
     ->DONE
+    
+=second_meeting
+test
+->DONE
 
 
 ===Jacob_Morgen===
@@ -45,7 +55,7 @@ Good day, Sheriff! You don't make your way out this way too often. What can I do
 *{wanted_Poster}[I understand you've been seeing Jacob Morgan]
     Wh-what is this...? A wanted poster? With Jacob on it? This can't be...I thought I knew him. I need to speak to him right now. Thank you, Sheriff. ->DONE
     
-*[Nothing for now Ms. Blakley]
++[Nothing for now Ms. Blakley]
     ->DONE
     
 
