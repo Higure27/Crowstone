@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowDailyTasks : MonoBehaviour {
 
     Transform playerTransform;
     public GameObject taskPanel;
     public GameObject UI;
-    public string tasks;
+    public Text taskBoard;
     public float distanceToTrigger = 3.5f;
 
     private bool inRange;
@@ -23,6 +24,7 @@ public class ShowDailyTasks : MonoBehaviour {
         taskPanelActive = false;
         UI.SetActive(false);
         taskPanel.SetActive(false);
+        taskBoard.text = GameManager.gameManager.getTask();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

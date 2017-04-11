@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gameManager;
     private string currentLocation = "Town";
     private string previousLocation = "None";
+    private string dailyTask;
     private float currency;
     private bool isPaused;
     private bool inUI;
@@ -127,6 +128,14 @@ public class GameManager : MonoBehaviour {
     /// <returns></returns>
     public bool getDayStatus() {
         return doneWithDay;
+    }
+
+    public string getTask() {
+        return dailyTask;
+    }
+
+    public void setTask(string task) {
+        dailyTask = task;
     }
 
     /// <summary>
