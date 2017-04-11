@@ -3,8 +3,8 @@
 public class PlayerController : MonoBehaviour {
     public float yRotation;
     public bool canMove;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         Camera.main.enabled = true;
     }
 

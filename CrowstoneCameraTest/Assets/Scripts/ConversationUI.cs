@@ -67,14 +67,14 @@ public class ConversationUI : MonoBehaviour {
         {
             try
             {
-                GetComponentInParent<SwitchToBartender>().SwitchCamera();
+                //GetComponentInParent<SwitchToBartender>().SwitchCamera();
                 transform.parent.GetComponentInParent<BoxCollider>().enabled = true;
                 Destroy(transform.parent.gameObject);
             }
             catch (Exception e)
             {
                 {
-                    GetComponentInParent<SwitchToGambler>().SwitchCamera();
+                    //GetComponentInParent<SwitchToGambler>().SwitchCamera();
                     transform.parent.GetComponentInParent<BoxCollider>().enabled = true;
                     Destroy(transform.parent.gameObject);
                 }

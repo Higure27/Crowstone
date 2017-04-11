@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     private bool isPaused;
     private bool inUI;
     private bool canGlow;
+    private bool doneWithDay;
     private Dictionary<string, string> inventory;
 
     private int currentDay = 1;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour {
         isPaused = false;
         inUI = false;
         canGlow = true;
+        doneWithDay = true;
     }
 
     // Update is called once per frame
@@ -55,6 +57,13 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void changePreviousLocation() {
         previousLocation = currentLocation;
+    }
+    /// <summary>
+    /// Resets locations on new day start
+    /// </summary>
+    public void resetLocations() {
+        currentLocation = "Town";
+        previousLocation = "None";
     }
 
     /// <summary>
@@ -104,6 +113,20 @@ public class GameManager : MonoBehaviour {
     /// <param name="day">int</param>
     public void setCurrentDay(int day) {
         currentDay = day;
+        doneWithDay = false;
+    }
+    /// <summary>
+    /// sets doneWithDay to true to enable day changing
+    /// </summary>
+    public void endDay() {
+        doneWithDay = true;
+    }
+    /// <summary>
+    /// returns current day status
+    /// </summary>
+    /// <returns></returns>
+    public bool getDayStatus() {
+        return doneWithDay;
     }
 
     /// <summary>

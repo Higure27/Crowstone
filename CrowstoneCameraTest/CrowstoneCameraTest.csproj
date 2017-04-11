@@ -89,12 +89,12 @@
   <ItemGroup>
     <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
     <Compile Include="Assets\Scripts\AddGlow.cs" />
+    <Compile Include="Assets\Scripts\ButtonLayoutHelper.cs" />
     <Compile Include="Assets\Scripts\ChangeDay.cs" />
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />
     <Compile Include="Assets\Scripts\DayManager.cs" />
-    <Compile Include="Assets\Scripts\FPSCharacterController.cs" />
     <Compile Include="Assets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\GameManagement\EnterOrExitScene.cs" />
     <Compile Include="Assets\Scripts\GameManagement\GameManager.cs" />
@@ -104,7 +104,6 @@
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\InteractWithNPC.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
-    <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\NPC\RotateObjectToPlayer.cs" />
     <Compile Include="Assets\Scripts\NewConversationUI.cs" />
     <Compile Include="Assets\Scripts\ObjectsByDayManager.cs" />
@@ -113,9 +112,6 @@
     <Compile Include="Assets\Scripts\ShowDailyTasks.cs" />
     <Compile Include="Assets\Scripts\ShowPopUp.cs" />
     <Compile Include="Assets\Scripts\SmoothFollow.cs" />
-    <Compile Include="Assets\Scripts\SwitchToBartender.cs" />
-    <Compile Include="Assets\Scripts\SwitchToGambler.cs" />
-    <Compile Include="Assets\Scripts\SwitchToPembertons.cs" />
     <Compile Include="Assets\Scripts\UserInterface.cs" />
   </ItemGroup>
   <ItemGroup>
