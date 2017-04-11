@@ -66,7 +66,7 @@ public class DayManager : MonoBehaviour {
         _dayStory.ChooseChoiceIndex(c.index);
 
         string partnerDialogue = "";
-        Debug.Log(_dayStory.Continue());
+        //Debug.Log(_dayStory.Continue());
         List<Choice> outputList = new List<Choice>();
 
         while (_dayStory.canContinue)

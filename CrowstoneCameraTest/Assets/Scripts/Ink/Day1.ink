@@ -51,20 +51,19 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
 
 ===Gambler===
 Sheriff! What do you want?
-    + [I heard you’ve been asking a lot of questions about the new man in town.] The one with the red hat. I need you to stop.
+    + [I heard you’ve been asking a lot of questions about the new man in town. The one with the red hat. I need you to stop.]
             That’s none of your business.
             **{john_is_an_idiot} [I think he’s a threat to you, John.]
                 What do you mean?
                     ->threat
-            **{found_book} [I think it is my business.]
-                    (Show  ledger)
+            **{found_book} [I think it is my business. (Show  ledger)]                 
                     Is that my ledger?! Where did you get that?!
                     ***[That doesn't matter. If you want it, you need to  leave town for a little while.]
                             Fine, I'll go! Just give it back to me!
                             ~ getting_out_of_town = true
                             ->DONE
                     ***[Where you left it. But you can have it back.]
-                            How can I repay you, Sheriff?
+                            Seriously? What's the catch?
                             ****[Stop asking questions about the new guy in town.]
                                     You have yourself a deal, Sheriff.
                                     ~ getting_out_of_town = true
@@ -78,7 +77,7 @@ Sheriff! What do you want?
              ->threat
              
 = threat
-*[I overheard him earlier today saying that he’s looking for you.] Something about you owing him money? I think he’s fixing to kill you. I’d feel a lot better if you left town for a while.
+*[I overheard him earlier today, something about you owing him money? I think he’s fixing to kill you. I’d feel a lot better if you left town for a while.]
                             Thanks, Sheriff! I’d best be getting out of here! 
                                   ~ getting_out_of_town = true 
                                   ->DONE
@@ -120,6 +119,7 @@ Well, Sheriff? Were you able to silence your local gambler?
     *Right. I'll talk to you tomorrow, then. 
         ~ day1_Complete = true
         -> DONE   
+
 ===Bartender===
 Hey, Sheriff. What can I do for you? 
 ->question 
