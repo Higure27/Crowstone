@@ -52,6 +52,9 @@ Back again, Sheriff? I thought I made it clear that I didn't want to talk to you
 +[I'll be back Morgen]
     ->DONE
 
+===wanted_Poster===
+    ~wanted_Poster = true
+    ->DONE
             
 ===Harriet===
 Well, good day to you, Sheriff. What can I do you for?

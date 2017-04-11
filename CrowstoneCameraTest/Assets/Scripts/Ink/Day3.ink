@@ -3,9 +3,9 @@ VAR met_Pemberton = false
 VAR adelaida_ran = false
 VAR Currency = 0
 VAR heared_rumor =false
+VAR san_fran = false
 
 
-->Pemberton
 
 ===Pemberton===
 
@@ -40,7 +40,7 @@ Sheriff, you were successful in silencing Adelaida?
 Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
 =talk
 + [Can I get a drink?]
-    {Currency > 50: ->get_drink|I don’t think you can afford one right now. ->talk}
+    {Currency >= 50: ->get_drink|I don’t think you can afford one right now. ->talk}
 +[What can you tell me about Adelaida?]
     You're nosy, aren't you? I guess I can help you out. What do you need to know?
     ->investigate
@@ -57,12 +57,31 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
     
 
 =get_drink 
- ~Currency = Currency-50
+ ~Currency = Currency - 50
  Don't over due it Sheriff.
  Anything else I can do for you?
  ->talk
  
 ===Adelaida===
-Well, hello there, Sheriff. What's a fine man like yourself doing out here in this heat?
+{adelaida_ran: busy|->intialize}
+=intialize
+Well, hello there, Sheriff. What's a fine man like yourself doing out here in this heat?->talk
+=talk
+*{heared_rumor}[I hear you're looking to leave town. Why's that?]
+    ~san_fran = true
+    Isn't it obvious? There's nothing here for me in this pathetic town. There's no love, no money. A woman has needs, you know? Ever since my husband left me, I have nothing! There's only one place in this world worthy of a woman like me: San Francisco!->talk
+*{san_fran} [About San-Francisco...]
+            ->san_fran_talk
++[I have to go]
+    ->DONE
+=san_fran_talk
+Yes?
+*{Currency >= 400} [I'd hate to see a woman like you be forced to stay in a town that doesn't deserve you. How about I spot you some money for a coach ride to San Francisco?]
+        ~Currency = Currency - 400
+        ~adelaida_ran = true
+        You'd do that for me, Sheriff?! Aiye, you're a saint! San Francisco, get ready for me!->DONE
++[Never mind]
+    ->talk
+=busy
+Sorry Sheriff I'm to busy planning on getting away from here is far as possible
 ->DONE
-
