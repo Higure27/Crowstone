@@ -13,7 +13,7 @@ VAR met_pemberton_day2 = false
 VAR met_Morgen = false
 VAR morgan_Ran = false
 
-VAR day_Complete = false
+VAR day_Complete3 = false
 VAR met_pemberton_day3 = false
 VAR adelaida_ran = false
 VAR Currency = 0
@@ -82,7 +82,7 @@ Well, Sheriff? Were you able to silence your local gambler?
             **[Is there anything else I can do to help?]
                 Maybe tomorrow. I'll have to see if I can find any other people for you to investigate.
                     ***[Right. I'll talk to you tomorrow, then.] 
-                        ~ day_Complete = true
+                        ~ day_Complete1 = true
                         Head home and get some rest Sheriff. -> DONE  
     +[I'm Handling it]
         ->DONE
@@ -108,7 +108,7 @@ I trust you were successful again, Sheriff?
 *{morgan_Ran}[Yes, Jacob won't be a problem anymore.]
     Another job well done. You're proving to be quite the ally, Sheriff. I'm going to do a little more detective work on another of your citizens. Come back tomorrow and I should have more information for you.
     **[Right. Until then.]
-        ~day_Complete = true
+        ~day_Complete2 = true
         ->DONE
         
         
@@ -135,7 +135,7 @@ Sheriff, you were successful in silencing Adelaida?
 *{adelaida_ran}[Yes, she won't be asking about you anymore.]
                 I knew I could count on you. Thank you for all your help.
                 **[It's no problem.]
-                    ~day_Complete = true
+                    ~day_Complete3 = true
                     ->DONE
 ===Book===
     ~found_book = true 
