@@ -316,7 +316,7 @@ Good day, Sheriff! You don't make your way out this way too often. What can I do
     
 
 ===Adelaida===
-{adelaida_ran: busy|->intialize}
+{adelaida_ran: ->busy|->intialize}
 =intialize
 Well, hello there, Sheriff. What's a fine man like yourself doing out here in this heat?->talk
 =talk
@@ -325,6 +325,12 @@ Well, hello there, Sheriff. What's a fine man like yourself doing out here in th
     Isn't it obvious? There's nothing here for me in this pathetic town. There's no love, no money. A woman has needs, you know? Ever since my husband left me, I have nothing! There's only one place in this world worthy of a woman like me: San Francisco!->talk
 *{san_fran} [About San-Francisco...]
             ->san_fran_talk
+*{heared_rumor}[I hear you've been going around town and seducing all the men]
+                That's private! Where di you hear that?!
+                **[If you want me to keep quiet about this, I need you to do something for me. I know you've been snooping for information on the man in the red hat. I need you to keep to your own business.]
+                        ~adelaida_ran = true
+                        If you do, I won't ask anymore questions about that man. I swear! ->DONE
+                        
 +[I have to go]
     ->DONE
 =san_fran_talk
