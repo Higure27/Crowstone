@@ -152,6 +152,7 @@ Head home and get spme rest Sheriff
 ->DONE
 
 ===Gambler===
+{gambler_ran: ->gambler_silenced}
 Sheriff! What do you want?
     + [I heard you’ve been asking a lot of questions about the new man in town.] The one with the red hat. I need you to stop.
             That’s none of your business.
@@ -185,7 +186,9 @@ Sheriff! What do you want?
                                   ~ gambler_ran = true 
                                   ->DONE
 
-
+=gambler_silenced
+I'm going to avoid that man like the plague!
+->DONE
 ===Bartender===
 {
     -day == 1: ->day1
@@ -222,7 +225,8 @@ Hey, Sheriff. What can I do for you?”
 ->question2 
 =question2 
 + ["Can I get a drink?"]
-    I don’t think you can afford one right now,
+    I don’t think you can afford one right now
+    ->question2
 +[Nothing, thanks.]
     ->DONE
 +[What can you tell me about Jacob Morgan?]
@@ -275,6 +279,7 @@ What the hell do you want, Sheriff? Can't a man walk the streets without a lawma
             ~met_Morgen =true
             ->DONE
 =second_meeting
+{morgan_Ran: ->silenced_morgen}
 Back again, Sheriff? I thought I made it clear that I didn't want to talk to you.
 *{wanted_Poster} [Jacob, I found this. Care to explain how your face got on this wanted poster?]
     What?! Now, Sheriff...let's not be hasty here. I'm not lookin' to hang today....
@@ -284,6 +289,10 @@ Back again, Sheriff? I thought I made it clear that I didn't want to talk to you
         ->DONE
 +[I'll be back Morgen]
     ->DONE
+    
+=silenced_morgen
+You'll never see me again Sheriff, I swear!
+->DONE
 
 ===wanted_Poster===
     ~wanted_Poster = true
