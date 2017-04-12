@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
         isPaused = false;
         inUI = false;
         canGlow = true;
-        doneWithDay = true;
+        doneWithDay = false;
         currentDay = 1;
     }
 
@@ -126,8 +126,16 @@ public class GameManager : MonoBehaviour {
     /// returns current day status
     /// </summary>
     /// <returns></returns>
-    public int getDayStatus() {
-        return (int) DayManager._dayStory.variablesState["day_Complete"];
+    public int getDayStatus(int day) {
+        if (GameManager.gameManager != null && DayManager._dayStory != null) {
+            if (day == 1)
+                return (int)DayManager._dayStory.variablesState["day_Complete1"];
+            else if (day == 2)
+                return (int)DayManager._dayStory.variablesState["day_Complete2"];
+            else if (day == 3)
+                return (int)DayManager._dayStory.variablesState["day_Complete3"];
+        }
+        return -1;
     }
     /// <summary>
     /// Get daily task
