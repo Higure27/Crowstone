@@ -23,16 +23,15 @@ public class DayManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         if (dayManager == null) {
-            if (_inkAsset != null) _dayStory = new Story(_inkAsset.text);
+            if (_inkAsset != null) {
+                _dayStory = new Story(_inkAsset.text);
+                Debug.Log("SET");
+            }
             DontDestroyOnLoad(gameObject);
             InteractWithNPC.dialogueStarted += StartDialogue;
             NewConversationUI.dialogueChosen += ContinueParsing;
             dayManager = this;
         }
-    }
-
-    private void Start() {
-        
     }
 
     void OnDestroy()
@@ -56,7 +55,6 @@ public class DayManager : MonoBehaviour {
         _partner = partner;
         string partnerDialogue = "";
         List<Choice> outputList = new List<Choice>();
-
         _dayStory.ChoosePathString(partner);
         
         while (_dayStory.canContinue)
