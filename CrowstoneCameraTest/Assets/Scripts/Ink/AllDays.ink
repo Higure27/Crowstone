@@ -120,7 +120,7 @@ See you tomorrow Sheriff
 
 =day3
 
-{met_pemberton_day3: ->second_meeting|->first_meeting3}
+{met_pemberton_day3: ->second_meeting3|->first_meeting3}
 
 =first_meeting3
 Sheriff, good morning! I'm glad you're here. My suspicions were correct. There's a woman in town, Adelaida Santorez. She knows about me. I need you to guarantee her silence.
