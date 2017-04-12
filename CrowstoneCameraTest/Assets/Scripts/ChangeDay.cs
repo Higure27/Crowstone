@@ -26,8 +26,8 @@ public class ChangeDay : MonoBehaviour {
     }
 
     private void Update() {
-
-        bool dayFinished = GameManager.gameManager.getDayStatus();
+        /*
+        int dayFinished = GameManager.gameManager.getDayStatus();
 
         if (DistanceBetweenThisAndPlayer() <= distanceToTrigger) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -56,7 +56,7 @@ public class ChangeDay : MonoBehaviour {
         else {
             dayFinishedUI.SetActive(false);
             dayUnfinishedUI.SetActive(false);
-        }
+        }*/
     }
 
     private float DistanceBetweenThisAndPlayer() {
@@ -80,6 +80,6 @@ public class ChangeDay : MonoBehaviour {
         int day = GameManager.gameManager.getCurrentDay() + 1;
         GameManager.gameManager.setCurrentDay(day);
         GameManager.gameManager.resetLocations();
-        LevelManager.Instance.SwitchArea("Town");
+        LevelManager.Instance.startLoadSpecificScene("Town");
     } 
 }

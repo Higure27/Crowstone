@@ -24,7 +24,7 @@ public class ShowDailyTasks : MonoBehaviour {
         taskPanelActive = false;
         UI.SetActive(false);
         taskPanel.SetActive(false);
-        taskBoard.text = GameManager.gameManager.getTask();
+        //taskBoard.text = GameManager.gameManager.getTask();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

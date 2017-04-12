@@ -6,16 +6,28 @@ using Ink.Runtime;
 public class DayManager : MonoBehaviour {
 
     // Class members
-    public TextAsset _inkAsset;
+    public TextAsset _day1;
+    public TextAsset _day2;
     public static Story _dayStory;
     private static string _partner;
 
     [SerializeField]
     private Transform DialogueUI;
     private NewConversationUI dialogueUI;
+    private int dayComplete;
+    private int day = -1;
+    private static TextAsset _inkAsset;
+
 
     // Use this for initialization
     void Awake () {
+        setDay();
+        if (day == 1) {
+            _inkAsset = _day1;
+        }
+        else if (day == 2) {
+            _inkAsset = _day2;
+        }
         if(_inkAsset != null) _dayStory = new Story(_inkAsset.text);
         DontDestroyOnLoad(gameObject);
         InteractWithNPC.dialogueStarted += StartDialogue;
@@ -30,8 +42,13 @@ public class DayManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+    }
+
+    public void setDay() {
+        if (GameManager.gameManager != null)
+            day = GameManager.gameManager.getCurrentDay();
+    }
 
     public void StartParsing(string partner)
     {
@@ -108,5 +125,12 @@ public class DayManager : MonoBehaviour {
         _dayStory.ChoosePathString(item);
         while (_dayStory.canContinue)
             _dayStory.Continue();
+    }
+
+    void changeDay() {
+        int day = GameManager.gameManager.getCurrentDay() + 1;
+        GameManager.gameManager.setCurrentDay(day);
+        GameManager.gameManager.resetLocations();
+        LevelManager.Instance.startLoadSpecificScene("Town");
     }
 }

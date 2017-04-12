@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
     private bool doneWithDay;
     private Dictionary<string, string> inventory;
 
-    private int currentDay = 1;
+    private int currentDay;
 
     // Use this for initialization
     void Start() {
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
         inUI = false;
         canGlow = true;
         doneWithDay = true;
+        currentDay = 1;
     }
 
     // Update is called once per frame
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour {
         //Singleton pattern: if none of these objects exist then keep it from being destroyed
         if (gameManager == null) {
             DontDestroyOnLoad(gameObject);
+            Debug.Log("Created");
             gameManager = this;
         }//if another game manager exists then destroy it
         else if (gameManager != this) {
@@ -124,16 +126,22 @@ public class GameManager : MonoBehaviour {
     /// returns current day status
     /// </summary>
     /// <returns></returns>
-    public bool getDayStatus() {
-        return doneWithDay;
+    public int getDayStatus() {
+        return (int) DayManager._dayStory.variablesState["day_Complete"];
     }
-
+    /// <summary>
+    /// Get daily task
+    /// </summary>
+    /// <returns></returns>
     public string getTask() {
         return dailyTask;
     }
-
+    /// <summary>
+    /// Set daily task
+    /// </summary>
+    /// <param name="task"></param>
     public void setTask(string task) {
-        dailyTask = task;
+        dailyTask = (string) DayManager._dayStory.variablesState["task"];
     }
 
     /// <summary>
