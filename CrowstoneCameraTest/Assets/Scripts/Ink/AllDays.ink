@@ -3,7 +3,7 @@ VAR day = 1
 VAR john_is_an_idiot = false
 VAR gambler_ran = false
 VAR day_Complete1 = false
-VAR met_pemberton_day1 =false
+VAR met_pemberton_day1 = false
 
 
 VAR day_Complete2 = false
@@ -19,6 +19,7 @@ VAR adelaida_ran = false
 VAR Currency = 0
 VAR heared_rumor =false
 VAR san_fran = false
+
 
 ===Prisoner===
 =Pop_Up
@@ -76,6 +77,7 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
                     ->DONE
                     
 = second_meeting
+{day_Complete1: ->end_day1}
 Well, Sheriff? Were you able to silence your local gambler?
     *{gambler_ran}[Yes, John won't be a problem now.]
         I knew I could count on you, Sheriff.
@@ -86,7 +88,8 @@ Well, Sheriff? Were you able to silence your local gambler?
                         Head home and get some rest Sheriff. -> DONE  
     +[I'm Handling it]
         ->DONE
-        
+= end_day1
+Head home and get some rest Sheriff. -> DONE
         
         
 =day2
@@ -102,6 +105,7 @@ Good morning, Sheriff. I'm glad to see you're an early riser. I have a new lead 
     ->DONE
     
 =second_meeting2
+{day_Complete2: ->end_day2}
 I trust you were successful again, Sheriff?
 +[Not yet]
     ->DONE
@@ -110,10 +114,11 @@ I trust you were successful again, Sheriff?
     **[Right. Until then.]
         ~day_Complete2 = true
         ->DONE
-        
-        
-=day3
+=end_day2
+See you tomorrow Sheriff
+->DONE
 
+=day3
 
 {met_pemberton_day3: ->second_meeting|->first_meeting3}
 
@@ -129,6 +134,7 @@ Sheriff, good morning! I'm glad you're here. My suspicions were correct. There's
         ~ met_pemberton_day3 = true
         ->DONE
 =second_meeting3
+{day_Complete3: ->end_day3}
 Sheriff, you were successful in silencing Adelaida?
 +[Still working on it]
     ->DONE
@@ -137,6 +143,10 @@ Sheriff, you were successful in silencing Adelaida?
                 **[It's no problem.]
                     ~day_Complete3 = true
                     ->DONE
+=end_day3
+Head home and get spme rest Sheriff
+->DONE
+
 ===Book===
     ~found_book = true 
 ->DONE
@@ -215,6 +225,16 @@ Hey, Sheriff. What can I do for you?”
     I don’t think you can afford one right now,
 +[Nothing, thanks.]
     ->DONE
++[What can you tell me about Jacob Morgan?]
+    Jacob Morgan? Oh, yes! He's the new man in town, right? The rugged fellow. I know a little bit, Sheriff. What would you like to know about him? I'll see if I can help. ->investigate2
+=investigate2
+    
+*[What is he like?]
+        Hard to tell, really. He's a firm man, and he rarely smiles. I've noticed he looks an awful lot like one of the wanted posters you have hanging up on your wall. 'Black Jack?' But surely that can't be him.... Is there anything else you need to know?->investigate2
+*[Do you know who he associates with in town?]
+        Between you, me, and the tree, Sheriff, I've seen him over at Katherine Blakley's school. I think he fancies her. Isn't young love sweet? What else can I do you for, Sheriff?->investigate2
++[Nothing for now. have a good day Henry]
+    ->DONE
     
 =day3
 
@@ -280,8 +300,8 @@ Well, good day to you, Sheriff. What can I do you for?
 *[What is he like?]
         Hard to tell, really. He's a firm man, and he rarely smiles. I've noticed he looks an awful lot like one of the wanted posters you have hanging up on your wall. 'Black Jack?' But surely that can't be him.... Is there anything else you need to know?->investigate
 *[Do you know who he associates with in town?]
-        Between you, me, and the tree, Sheriff, I've seen him over at Katherine Blakley's home. I think he fancies her. Isn't young love sweet? What else can I do you for, Sheriff?->investigate
-+[Nothing for now. have a good day Miss.]
+        Between you, me, and the tree, Sheriff, I've seen him over at Katherine Blakley's school. I think he fancies her. Isn't young love sweet? What else can I do you for, Sheriff?->investigate
++[Nothing for now. have a good day Henry]
     ->DONE
     
     
