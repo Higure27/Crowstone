@@ -41,7 +41,7 @@ VAR currTask = ""
                 ~currTask = "Take care of Morgen"
             }
           -else: 
-            ~currTask = "Go to Sheriff"
+            ~currTask = "Go to the Sheriff's office"
         }
 }
 ->DONE
