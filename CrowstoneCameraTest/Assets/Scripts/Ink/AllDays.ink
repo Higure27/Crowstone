@@ -180,19 +180,18 @@ Head home and get spme rest Sheriff
 {met_pemberton_day1: ->coneversation | ->busy}
 =busy
 Sorry sherrif but I'm a little preoccupied at the moment.
-    +Stay out trouble
+    +[Stay out of trouble]
         ->DONE
 =coneversation
 {gambler_ran: ->gambler_silenced}
 Sheriff! What do you want?
-    + [I heard you’ve been asking a lot of questions about the new man in town. The one with the red hat. I need you to stop.]
+    +[I heard you’ve been asking a lot of questions about the new man in town. The one with the red hat. I need you to stop.]
             That’s none of your business.
-            **{john_is_an_idiot} [I think he’s a threat to you, John.]
+                **{john_is_an_idiot} [I think he’s a threat to you, John.]
                 What do you mean?
                     ->threat
-            **{found_book} [I think it is my business.]
-                    *Show  ledger*
-                    Is that my ledger?! Where did you get that?!
+                **{found_book}[I think it is my business.]
+                    (Show  ledger) Is that my ledger?! Where did you get that?!
                     ***[That doesn't matter. If you want it, you need to  leave town for a little while.]
                             Fine, I'll go! Just give it back to me!
                             ~ gambler_ran = true
