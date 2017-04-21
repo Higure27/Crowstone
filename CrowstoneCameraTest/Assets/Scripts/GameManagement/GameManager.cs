@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gameManager;
     public GameObject HUD;
     public Text currentTask;
+    public Text currentMoney;
     private string currentLocation = "Town";
     private string previousLocation = "None";
     private float currency;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour {
     private bool inUI;
     private bool canGlow;
     private bool doneWithDay;
+    private float elapsedTime;
     private Dictionary<string, string> inventory;
 
     private int currentDay;
@@ -36,10 +38,13 @@ public class GameManager : MonoBehaviour {
         canGlow = true;
         doneWithDay = false;
         currentDay = 1;
+        elapsedTime = 0.0f;
     }
 
     // Update is called once per frame
     void Update() {
+        elapsedTime += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Space) && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
             if (HUD.activeSelf)
                 HUD.SetActive(false);
@@ -49,13 +54,26 @@ public class GameManager : MonoBehaviour {
                     DayManager._dayStory.Continue();
                 currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
                 HUD.SetActive(true);
+                elapsedTime = 0;
             }
         }
-        if (HUD.activeSelf && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
-            DayManager._dayStory.ChoosePathString("CheckTask");
-            while (DayManager._dayStory.canContinue)
-                DayManager._dayStory.Continue();
-            currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+
+        else if (GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+            HUD.SetActive(false);
+        }
+
+        else if (HUD.activeSelf) {
+            if (elapsedTime >= 3.0f)
+                HUD.SetActive(false);
+            else if (!GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+                int money = (int)DayManager._dayStory.variablesState["Currency"];
+                currentMoney.text = money.ToString();
+                DayManager._dayStory.ChoosePathString("CheckTask");
+                while (DayManager._dayStory.canContinue)
+                    DayManager._dayStory.Continue();
+                currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                
+            }
         }
     }
 
