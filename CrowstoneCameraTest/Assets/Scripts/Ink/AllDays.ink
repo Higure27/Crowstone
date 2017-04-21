@@ -177,15 +177,21 @@ Head home and get spme rest Sheriff
 ->DONE
 
 ===Gambler===
+{met_pemberton_day1: ->coneversation | ->busy}
+=busy
+Sorry sherrif but I'm a little preoccupied at the moment.
+    +Stay out trouble
+        ->DONE
+=coneversation
 {gambler_ran: ->gambler_silenced}
 Sheriff! What do you want?
-    + [I heard you’ve been asking a lot of questions about the new man in town.] The one with the red hat. I need you to stop.
+    + [I heard you’ve been asking a lot of questions about the new man in town. The one with the red hat. I need you to stop.]
             That’s none of your business.
             **{john_is_an_idiot} [I think he’s a threat to you, John.]
                 What do you mean?
                     ->threat
             **{found_book} [I think it is my business.]
-                    (Show  ledger)
+                    *Show  ledger*
                     Is that my ledger?! Where did you get that?!
                     ***[That doesn't matter. If you want it, you need to  leave town for a little while.]
                             Fine, I'll go! Just give it back to me!
@@ -206,7 +212,7 @@ Sheriff! What do you want?
              ->threat
              
 = threat
-*[I overheard him earlier today saying that he’s looking for you.] Something about you owing him money? I think he’s fixing to kill you. I’d feel a lot better if you left town for a while.
+*[I overheard him earlier today saying that he’s looking for you. Something about you owing him money? I think he’s fixing to kill you. I’d feel a lot better if you left town for a while.]
                             Thanks, Sheriff! I’d best be getting out of here! 
                                   ~ gambler_ran = true 
                                   ->DONE
@@ -226,7 +232,7 @@ Hey, Sheriff. What can I do for you?”
 =question 
 + ["Can I get a drink?"]
     I don’t think you can afford one right now,
-*[“What do you know about John?”]
+*{met_pemberton_day1}[“What do you know about John?”]
     ->ask_about_john 
 +[Nothing, thanks.]
     ->DONE
@@ -252,10 +258,10 @@ Hey, Sheriff. What can I do for you?”
 + ["Can I get a drink?"]
     I don’t think you can afford one right now
     ->question2
++{met_pemberton_day2}[What can you tell me about Jacob Morgan?]
+    Jacob Morgan? Oh, yes! He's the new man in town, right? The rugged fellow. I know a little bit, Sheriff. What would you like to know about him? I'll see if I can help. ->investigate2
 +[Nothing, thanks.]
     ->DONE
-+[What can you tell me about Jacob Morgan?]
-    Jacob Morgan? Oh, yes! He's the new man in town, right? The rugged fellow. I know a little bit, Sheriff. What would you like to know about him? I'll see if I can help. ->investigate2
 =investigate2
     
 *[What is he like?]
@@ -274,7 +280,7 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
 =talk
 + [Can I get a drink?]
     {Currency >= 50: ->get_drink|I don’t think you can afford one right now. ->talk}
-+[What can you tell me about Adelaida?]
++{met_pemberton_day3}[What can you tell me about Adelaida?]
     You're nosy, aren't you? I guess I can help you out. What do you need to know?
     ->investigate
 +[I'm good for now]
@@ -295,7 +301,14 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
  ->talk
  
  ===Jacob_Morgen===
+ {met_pemberton_day2==false:->busy}
+ 
 {met_Morgen: ->second_meeting|->first_meeting}
+=busy
+Can't you see I'm busy here Rawley
+ +Stay out of trouble Morgen...
+    ->DONE
+ 
 =first_meeting
 What the hell do you want, Sheriff? Can't a man walk the streets without a lawman riding his coat tails.
 * [I hear you've been poking your nose into business that isn't yours, Jacob.] The man in the red hat...I need you to stop talking about him.
@@ -342,7 +355,7 @@ Well, good day to you, Sheriff. What can I do you for?
 ===Katherine_Blakely===
 Good day, Sheriff! You don't make your way out this way too often. What can I do for you?
 
-*{wanted_Poster}[I understand you've been seeing Jacob Morgan]
+*{wanted_Poster}{met_pemberton_day2}[I understand you've been seeing Jacob Morgan]
     Wh-what is this...? A wanted poster? With Jacob on it? This can't be...I thought I knew him. I need to speak to him right now. Thank you, Sheriff. ->DONE
     
 +[Nothing for now Ms. Blakley]
@@ -376,7 +389,7 @@ Yes?
 +[Never mind]
     ->talk
 =busy
-Sorry Sheriff I'm to busy planning on getting away from here is far as possible
+Sorry Sheriff I'm to busy planning on getting away from here as far as possible
 ->DONE
 
 
