@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour {
         string scenename = SceneManager.GetActiveScene().name;
 
         //dont call this if it is start menu or town
-        if (!scenename.Equals("Start Menu") && !scenename.Equals("Town"))
+        if (!scenename.Equals("Start Menu"))
         {
             if (onNewSceneLoaded != null)
             {
@@ -136,29 +136,32 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     private void DeactivatePickedupItems()
     {
+
         string[] items = GameManager.gameManager.getAllItems();
 
         if (items == null) return;
         else
         {
-            if(items != null){
-                return;
-            }
+            if (items.Length == 0) return;
 
             if (items.Length > 1 && items[0].Equals("empty"))
             {
+                Debug.Log("No items in inventory");
                 return;
             }
-
-            for (int i = 0; i < items.Length; i++)
+            else
             {
-                                string nameOfObject = items[i];
-                GameObject objectToDeactivate = GameObject.Find(nameOfObject);
-                if (objectToDeactivate != null)
+                for (int i = 0; i < items.Length; i++)
                 {
-                    objectToDeactivate.gameObject.SetActive(false);
-                }
+                    string nameOfObject = items[i];
+                    Debug.Log(nameOfObject + " was found in inventory");
+                    GameObject objectToDeactivate = GameObject.Find(nameOfObject);
+                    if (objectToDeactivate != null)
+                    {
+                        objectToDeactivate.gameObject.SetActive(false);
+                    }
 
+                }
             }
         }
     }
@@ -383,6 +386,12 @@ public class LevelManager : MonoBehaviour {
         while (!async.isDone)
         {
             yield return null;
+        }
+
+        //send off loaded scene event
+        if (onNewSceneLoaded != null)
+        {
+            onNewSceneLoaded();
         }
 
         //start fading out the loading screen using a co-routine
