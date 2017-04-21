@@ -21,6 +21,7 @@ public class EnterOrExitScene : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         grabDayStatuses();
         if (other.tag == "Player") {
+            GameManager.gameManager.HUD.SetActive(false);
             if (day1finished == 1) {
                 //changing = true;
                 int day = 2;

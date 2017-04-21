@@ -114,6 +114,10 @@ public class LevelManager : MonoBehaviour {
         if (loadScene)
         {
             StartCoroutine(loadAScene());
+            if (!GameManager.gameManager.getFirstHUDActive()) {
+                GameManager.gameManager.setHUDActive();
+                GameManager.gameManager.setFirstHUDActive();
+            }
             loadScene = false;
 
         }
@@ -121,6 +125,7 @@ public class LevelManager : MonoBehaviour {
         else if (loadArea)
         {
             StartCoroutine(EnterArea());
+            GameManager.gameManager.setHUDActive();
             loadArea = false;
         }
 	}
@@ -284,7 +289,7 @@ public class LevelManager : MonoBehaviour {
         {
             yield return null;
         }
-
+        
         //fire off fade in screen event
         if (onFadeInFinished != null)
         {

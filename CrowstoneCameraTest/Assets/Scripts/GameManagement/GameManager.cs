@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This is a static class that stays throughout the whole game
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour {
     private bool isPaused;
     private bool inUI;
     private bool canGlow;
+    private bool activateHUD;
+    private bool firstHUDActivate;
     private bool doneWithDay;
     private float elapsedTime;
     private string lastKnownTask;
@@ -40,56 +43,74 @@ public class GameManager : MonoBehaviour {
         doneWithDay = false;
         currentDay = 1;
         elapsedTime = 0.0f;
+        lastKnownTask = null;
+        activateHUD = false;
+        firstHUDActivate = false;
     }
 
     // Update is called once per frame
     void Update() {
         elapsedTime += Time.deltaTime;
+        if (SceneManager.GetActiveScene().name.Equals("Start Menu")) {
 
-        if (Input.GetKeyDown(KeyCode.Space) && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
-            if (HUD.activeSelf)
+        }
+        else {
+            if (Input.GetKeyDown(KeyCode.Space) && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+                if (HUD.activeSelf)
+                    HUD.SetActive(false);
+                else {
+                    DayManager._dayStory.ChoosePathString("CheckTask");
+                    while (DayManager._dayStory.canContinue)
+                        DayManager._dayStory.Continue();
+                    currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                    HUD.SetActive(true);
+                    elapsedTime = 0;
+                }
+            }
+
+            else if (GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
                 HUD.SetActive(false);
-            else {
+            }
+
+            else if (HUD.activeSelf) {
+                if (elapsedTime >= 3.5f)
+                    HUD.SetActive(false);
+                else if (!GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+                    int money = (int)DayManager._dayStory.variablesState["Currency"];
+                    currentMoney.text = money.ToString();
+                    DayManager._dayStory.ChoosePathString("CheckTask");
+                    while (DayManager._dayStory.canContinue)
+                        DayManager._dayStory.Continue();
+                    currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                    lastKnownTask = currentTask.text;
+
+                }
+            }
+
+            else if (!HUD.activeSelf && elapsedTime > 5.0f && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI() && lastKnownTask != null) {
+                DayManager._dayStory.ChoosePathString("CheckTask");
+                while (DayManager._dayStory.canContinue)
+                    DayManager._dayStory.Continue();
+                string task = (string)DayManager._dayStory.variablesState["currTask"];
+                Debug.Log(task);
+                if (!lastKnownTask.Equals(task)) {
+                    currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                    lastKnownTask = currentTask.text;
+                    HUD.SetActive(true);
+                }
+                elapsedTime = 0;
+            }
+
+            else if (activateHUD) {
+                Debug.Log("Activate");
                 DayManager._dayStory.ChoosePathString("CheckTask");
                 while (DayManager._dayStory.canContinue)
                     DayManager._dayStory.Continue();
                 currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
                 HUD.SetActive(true);
                 elapsedTime = 0;
+                activateHUD = false;
             }
-        }
-
-        else if (GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
-            HUD.SetActive(false);
-        }
-
-        else if (HUD.activeSelf) {
-            if (elapsedTime >= 3.0f)
-                HUD.SetActive(false);
-            else if (!GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
-                int money = (int)DayManager._dayStory.variablesState["Currency"];
-                currentMoney.text = money.ToString();
-                DayManager._dayStory.ChoosePathString("CheckTask");
-                while (DayManager._dayStory.canContinue)
-                    DayManager._dayStory.Continue();
-                currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
-                lastKnownTask = currentTask.text;
-                
-            }
-        }
-
-        else if (!HUD.activeSelf && elapsedTime > 5.0f && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
-            DayManager._dayStory.ChoosePathString("CheckTask");
-            while (DayManager._dayStory.canContinue)
-                DayManager._dayStory.Continue();
-            string task = (string)DayManager._dayStory.variablesState["currTask"];
-            Debug.Log(task);
-            if (!lastKnownTask.Equals(task)) {
-                currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
-                lastKnownTask = currentTask.text;
-                HUD.SetActive(true);
-            }
-            elapsedTime = 0;
         }
     }
 
@@ -285,5 +306,17 @@ public class GameManager : MonoBehaviour {
 
     public void SetGlow(bool b) {
         canGlow = b;
+    }
+
+    public void setHUDActive() {
+        activateHUD = true;
+    }
+
+    public bool getFirstHUDActive() {
+        return firstHUDActivate;
+    }
+
+    public void setFirstHUDActive() {
+        firstHUDActivate = true;
     }
 }
