@@ -38,6 +38,8 @@ public class DayManager : MonoBehaviour {
     {
         InteractWithNPC.dialogueStarted -= StartDialogue;
         NewConversationUI.dialogueChosen -= ContinueParsing;
+        Debug.Log("HERE");
+        //GameManager.gameManager.HUD.SetActive(true);
     }
 	
 	// Update is called once per frame

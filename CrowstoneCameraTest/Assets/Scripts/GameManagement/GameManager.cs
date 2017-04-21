@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     private bool canGlow;
     private bool doneWithDay;
     private float elapsedTime;
+    private string lastKnownTask;
     private Dictionary<string, string> inventory;
 
     private int currentDay;
@@ -72,8 +73,23 @@ public class GameManager : MonoBehaviour {
                 while (DayManager._dayStory.canContinue)
                     DayManager._dayStory.Continue();
                 currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                lastKnownTask = currentTask.text;
                 
             }
+        }
+
+        else if (!HUD.activeSelf && elapsedTime > 5.0f && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+            DayManager._dayStory.ChoosePathString("CheckTask");
+            while (DayManager._dayStory.canContinue)
+                DayManager._dayStory.Continue();
+            string task = (string)DayManager._dayStory.variablesState["currTask"];
+            Debug.Log(task);
+            if (!lastKnownTask.Equals(task)) {
+                currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                lastKnownTask = currentTask.text;
+                HUD.SetActive(true);
+            }
+            elapsedTime = 0;
         }
     }
 
