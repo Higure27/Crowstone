@@ -23,6 +23,12 @@ public class SetStartLocation : MonoBehaviour {
             gameObject.transform.position = new Vector3(.09f, 0f, -8.23f);
             gameObject.transform.Rotate(0, 180, 0);
         }
+        else if (GameManager.gameManager.getPreviousLocation().Equals("Town")) {
+            if (GameManager.gameManager.getCurrentLocation().Equals("Saloon")) {
+                gameObject.transform.position = new Vector3(63.61f, -7.67f, 68.81f);
+                gameObject.transform.Rotate(0, -25f, 0);
+            }
+        }
 
     }
 }
