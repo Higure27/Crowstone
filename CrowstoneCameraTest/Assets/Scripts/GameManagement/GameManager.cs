@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using UnityEngine.UI;
 
 /// <summary>
 /// This is a static class that stays throughout the whole game
@@ -14,11 +14,12 @@ using System.Linq;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
+    public GameObject HUD;
+    public Text currentTask;
     private string currentLocation = "Town";
     private string previousLocation = "None";
     private float currency;
     private bool isPaused;
-    private string dailyTask;
     private bool inUI;
     private bool canGlow;
     private bool doneWithDay;
@@ -39,7 +40,23 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if (Input.GetKeyDown(KeyCode.Space) && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+            if (HUD.activeSelf)
+                HUD.SetActive(false);
+            else {
+                DayManager._dayStory.ChoosePathString("CheckTask");
+                while (DayManager._dayStory.canContinue)
+                    DayManager._dayStory.Continue();
+                currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+                HUD.SetActive(true);
+            }
+        }
+        if (HUD.activeSelf && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+            DayManager._dayStory.ChoosePathString("CheckTask");
+            while (DayManager._dayStory.canContinue)
+                DayManager._dayStory.Continue();
+            currentTask.text = (string)DayManager._dayStory.variablesState["currTask"];
+        }
     }
 
     void Awake() {
@@ -136,20 +153,6 @@ public class GameManager : MonoBehaviour {
                 return (int)DayManager._dayStory.variablesState["day_Complete3"];
         }
         return -1;
-    }
-    /// <summary>
-    /// Get daily task
-    /// </summary>
-    /// <returns></returns>
-    public string getTask() {
-        return dailyTask;
-    }
-    /// <summary>
-    /// Set daily task
-    /// </summary>
-    /// <param name="task"></param>
-    public void setTask(string task) {
-        dailyTask = (string) DayManager._dayStory.variablesState["task"];
     }
 
     /// <summary>

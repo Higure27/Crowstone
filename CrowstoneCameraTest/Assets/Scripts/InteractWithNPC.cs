@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Ink.Runtime;
+using UnityEngine.UI;
 
 public class InteractWithNPC : MonoBehaviour {
 
