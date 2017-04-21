@@ -19,7 +19,32 @@ VAR adelaida_ran = false
 VAR Currency = 0
 VAR heared_rumor =false
 VAR san_fran = false
+VAR currTask = ""
 
+===CheckTask===
+{
+    -day ==1 :
+        { met_pemberton_day1: 
+                    {gambler_ran:
+                        ~currTask = "Report back to Pemberton"
+                    -else:
+                        ~currTask = "Take care of John"
+                    }
+            -else:
+                ~currTask = "Go to the Sheriff's office"
+        }
+    -day == 2:
+        {met_pemberton_day2:
+            {morgan_Ran:
+                ~currTask = "Report back to Pemberton"
+             -else:
+                ~currTask = "Take care of Morgen"
+            }
+          -else: 
+            ~currTask = "Go to Sheriff"
+        }
+}
+->DONE
 
 ===Prisoner===
 =Pop_Up
