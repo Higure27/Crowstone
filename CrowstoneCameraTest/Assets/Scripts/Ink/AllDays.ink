@@ -26,7 +26,11 @@ VAR currTask = ""
     -day ==1 :
         { met_pemberton_day1: 
                     {gambler_ran:
+                        {day_Complete1:
+                            ~currTask = "Leave office"
+                        -else:    
                         ~currTask = "Report back to Pemberton"
+                        }
                     -else:
                         ~currTask = "Take care of John"
                     }
@@ -36,9 +40,27 @@ VAR currTask = ""
     -day == 2:
         {met_pemberton_day2:
             {morgan_Ran:
-                ~currTask = "Report back to Pemberton"
-             -else:
+                        {day_Complete2:
+                            ~currTask = "Leave office"
+                        -else:    
+                        ~currTask = "Report back to Pemberton"
+                        }
+                    -else:
                 ~currTask = "Take care of Morgen"
+            }
+          -else: 
+            ~currTask = "Go to the Sheriff's office"
+        }
+    -day == 3:
+        {met_pemberton_day2:
+            {adelaida_ran:
+                        {day_Complete3:
+                            ~currTask = "Leave office"
+                        -else:    
+                        ~currTask = "Report back to Pemberton"
+                        }
+                    -else:
+                ~currTask = "Take care of Adelaida"
             }
           -else: 
             ~currTask = "Go to the Sheriff's office"
