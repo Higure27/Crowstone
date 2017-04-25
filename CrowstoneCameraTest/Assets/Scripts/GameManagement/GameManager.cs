@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
         inventory = new Dictionary<string, string>();
-        currency = 100;
+        currency = 0;
         isPaused = false;
         inUI = false;
         canGlow = true;
@@ -153,7 +153,19 @@ public class GameManager : MonoBehaviour {
     /// player is in game and clicks on main menu
     /// </summary>
     public void resetGameState() {
-        //TODO: finish this function
+        inventory = new Dictionary<string, string>();
+        currency = 0;
+        isPaused = false;
+        inUI = false;
+        canGlow = true;
+        doneWithDay = false;
+        currentDay = 1;
+        elapsedTime = 0.0f;
+        lastKnownTask = null;
+        activateHUD = false;
+        firstHUDActivate = false;
+        resetLocations();
+        DayManager.dayManager = null;
     }
 
     /// <summary>

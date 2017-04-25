@@ -13,7 +13,6 @@ public class DayManager : MonoBehaviour {
     [SerializeField]
     private Transform DialogueUI;
     private NewConversationUI dialogueUI;
-    private bool dayLoaded = false;
     private int dayComplete;
     private int day = -1;
 
@@ -25,7 +24,7 @@ public class DayManager : MonoBehaviour {
         if (dayManager == null) {
             if (_inkAsset != null) {
                 _dayStory = new Story(_inkAsset.text);
-                Debug.Log("SET");
+                Debug.Log("SET1");
             }
             DontDestroyOnLoad(gameObject);
             InteractWithNPC.dialogueStarted += StartDialogue;
