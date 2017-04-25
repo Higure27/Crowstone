@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour {
     public GameObject title;
     public GameObject PressAnyKeyPanel;
     public GameObject MenuPanel;
+    public GameObject ControlsPanel;
     public float fadeSpeed = 1.0f;
 
     private bool fadingOutInProcess;
@@ -26,6 +27,7 @@ public class MenuController : MonoBehaviour {
         title.gameObject.SetActive(true);
         PressAnyKeyPanel.gameObject.SetActive(true);
         MenuPanel.gameObject.SetActive(false);
+        ControlsPanel.gameObject.SetActive(false);
 
         fadingOutInProcess = false;
         fadingInInProcess = false;
@@ -115,6 +117,63 @@ public class MenuController : MonoBehaviour {
         //sound fx
         SoundManager.Instance.playMenuClick();
         Debug.Log("Continue clicked");
+    }
+
+    public void MainMenuControlsClicked()
+    {
+        SoundManager.Instance.playMenuClick();
+
+        if (!fadingInInProcess && !fadingOutInProcess)
+        {
+            //fade out main menu screen
+            Text[] menuText = MenuPanel.GetComponentsInChildren<Text>();
+
+            foreach(Text text in menuText)
+            {
+                StartCoroutine(FadeOutText(text));
+            }
+            StartCoroutine(DeactivatePanel(MenuPanel));
+
+            //fade in controls
+            ControlsPanel.gameObject.SetActive(true);
+            Text[] controlsText = ControlsPanel.GetComponentsInChildren<Text>();
+            
+            foreach(Text text in controlsText)
+            {
+                StartCoroutine(FadeInText(text));
+            }
+        }
+    }
+
+    public void MainMenuControlsBackClicked()
+    {
+        SoundManager.Instance.playMenuClick();
+
+        if (!fadingInInProcess && !fadingOutInProcess)
+        {
+            Text[] controlsText = ControlsPanel.GetComponentsInChildren<Text>();
+
+            foreach (Text text in controlsText)
+            {
+                StartCoroutine(FadeOutText(text));
+            }
+            StartCoroutine(DeactivatePanel(ControlsPanel));
+
+            //fade in menu
+            MenuPanel.gameObject.SetActive(true);
+
+            Text[] texts = MenuPanel.GetComponentsInChildren<Text>();
+
+            foreach (Text txt in texts)
+            {
+                if (txt.name.Equals("Continue"))
+                {
+                    txt.GetComponent<Button>().interactable = false;
+                }
+                StartCoroutine(FadeInText(txt));
+            }
+
+        }
     }
 
     /// <summary>
