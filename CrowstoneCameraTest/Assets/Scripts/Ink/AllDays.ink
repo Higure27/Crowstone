@@ -90,7 +90,10 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
 *["I don’t bluff, Bob."]
     "Unlike you."
     ->DONE
-
+===Prostitute===
+Fuck you Sheriff!
++[A good day to you as well Jones]
+    ->DONE
 ===Pemberton===
 
 {
