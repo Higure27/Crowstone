@@ -47,7 +47,15 @@ VAR currTask = ""
                         ~currTask = "Report back to Pemberton"
                         }
                     -else:
-                ~currTask = "Take care of Morgen"
+                    {morgen_changed:
+                        {day_Complete2:
+                            ~currTask = "Leave office"
+                        -else:    
+                            ~currTask = "Report back to Pemberton"
+                        }
+                    -else:
+                    ~ currTask = "Take care of Morgen"
+                    }
             }
           -else: 
             ~currTask = "Go to the Sheriff's office"
