@@ -334,7 +334,7 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
 {met_Morgen: ->second_meeting|->first_meeting}
 =busy
 Can't you see I'm busy here Rawley
- +Stay out of trouble Morgen...
+ +[Stay out of trouble Morgen...]
     ->DONE
  
 =first_meeting
