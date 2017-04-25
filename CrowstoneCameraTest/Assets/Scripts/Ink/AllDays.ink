@@ -52,7 +52,7 @@ VAR currTask = ""
             ~currTask = "Go to the Sheriff's office"
         }
     -day == 3:
-        {met_pemberton_day2:
+        {met_pemberton_day3:
             {adelaida_ran:
                         {day_Complete3:
                             ~currTask = "Leave office"
@@ -337,6 +337,13 @@ What the hell do you want, Sheriff? Can't a man walk the streets without a lawma
         **[I'll be back to continue this conversation later.]
             ~met_Morgen =true
             ->DONE
+        **{wanted_Poster} [Jacob, I found this. Care to explain how your face got on this wanted poster?]
+            What?! Now, Sheriff...let's not be hasty here. I'm not lookin' to hang today....
+            ***[Then you'd better leave town, Jacob. I don't want to see you around here for a while.]
+                ~morgan_Ran =true
+                ~met_Morgen =true
+                Right, Sheriff. I got some loose ends to tie up today, then I'll get outta your hair. I swear.
+                    ->DONE
 =second_meeting
 {morgan_Ran: ->silenced_morgen}
 Back again, Sheriff? I thought I made it clear that I didn't want to talk to you.
