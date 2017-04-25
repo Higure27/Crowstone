@@ -52,7 +52,7 @@ VAR currTask = ""
             ~currTask = "Go to the Sheriff's office"
         }
     -day == 3:
-        {met_pemberton_day2:
+        {met_pemberton_day3:
             {adelaida_ran:
                         {day_Complete3:
                             ~currTask = "Leave office"
