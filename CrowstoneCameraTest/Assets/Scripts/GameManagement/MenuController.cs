@@ -53,6 +53,9 @@ public class MenuController : MonoBehaviour {
         //if we are not already fading someting in or out
         if (!fadingInInProcess && !fadingOutInProcess)
         {
+            //sound fx
+            SoundManager.Instance.playMenuClick();
+
             //fade out pressanykey screen
             Text pressKeyText = PressAnyKeyPanel.GetComponentInChildren<Text>();
             StartCoroutine(FadeOutText(pressKeyText));
@@ -81,6 +84,9 @@ public class MenuController : MonoBehaviour {
     {
         if(!fadingInInProcess && !fadingOutInProcess)
         {
+            //sound fx
+            SoundManager.Instance.playMenuStartClicked();
+
             //change menu fade speed to that of loading screen
             fadeSpeed = LevelManager.Instance.getLoadingFadeSpeed();
 
@@ -106,6 +112,8 @@ public class MenuController : MonoBehaviour {
     /// </summary>
     public void MainMenuContinue()
     {
+        //sound fx
+        SoundManager.Instance.playMenuClick();
         Debug.Log("Continue clicked");
     }
 

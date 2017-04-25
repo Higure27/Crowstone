@@ -111,6 +111,7 @@ public class UserInterface : MonoBehaviour {
             {
                 fadingOutInProcess = true;
                 StartCoroutine(undisplayPauseScreen());
+                SoundManager.Instance.playPauseOnOff();
                 GameManager.gameManager.SetGlow(true);
             }
             //if the pause screen is disabled then
@@ -119,6 +120,7 @@ public class UserInterface : MonoBehaviour {
             {
                 fadingInInProcess = true;
                 StartCoroutine(displayPauseScreen());
+                SoundManager.Instance.playPauseOnOff();
                 GameManager.gameManager.SetGlow(false);
             }
         }
@@ -133,6 +135,8 @@ public class UserInterface : MonoBehaviour {
         //then fade out the pause screen
         if(!fadingOutInProcess && !fadingInInProcess)
         {
+            SoundManager.Instance.playMenuClick();
+
             fadingOutInProcess = true;
             StartCoroutine(undisplayPauseScreen());
             GameManager.gameManager.SetGlow(true);
@@ -148,6 +152,9 @@ public class UserInterface : MonoBehaviour {
         //then reset game state and load the main menu
         if (!fadingOutInProcess && !fadingInInProcess)
         {
+            SoundManager.Instance.playMenuClick();
+
+
             fadingOutInProcess = true;
             LevelManager.Instance.startLoadSpecificScene("Start Menu");
             GameManager.gameManager.resetGameState();
@@ -159,7 +166,8 @@ public class UserInterface : MonoBehaviour {
     /// </summary>
     public void PauseScreenQuit()
     {
-        Debug.Log("got here");
+        SoundManager.Instance.playMenuClick();
+
         Application.Quit();
     }
 
@@ -199,7 +207,6 @@ public class UserInterface : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator undisplayPauseScreen()
     {
-
         //fade out screen
         fadingOutInProcess = true;
         Image background = pauseScreen.GetComponentInChildren<Image>();
