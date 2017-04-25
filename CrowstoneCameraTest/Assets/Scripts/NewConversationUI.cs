@@ -30,7 +30,13 @@ public class NewConversationUI : MonoBehaviour {
     private Text partnerDialogue;
 
     /**
-     * 
+     * The text script which gives access to the lower panel of dialogue. This is in the same place
+     * as the selfDialogueOptionsViewport so it should be blank when options appear.
+     **/
+    private Text lowerDialogue;
+
+    /**
+     * Event that sends the dialogue choice to the Day Manager
      **/
     public delegate void DialogueEvent(Choice dialogueChoice);
     public static event DialogueEvent dialogueChosen;
@@ -39,28 +45,40 @@ public class NewConversationUI : MonoBehaviour {
     void Awake () {
         selfDialogueOptionsViewport = transform.GetChild(2).GetChild(1).GetChild(0);
         partnerDialogue = transform.GetChild(1).GetComponent<Text>();
+        lowerDialogue = transform.GetChild(2).GetChild(0).GetComponentInChildren<Text>();
 	}
+
+    public void UpdateLowerDialogue(string message)
+    {
+        lowerDialogue.text = message;
+    }
+
+    public void UpdatePartnerDialogue(string dialogue)
+    {
+        partnerDialogue.text = dialogue;
+    }
 
     /**
      * Updates the dialogue state. Strings in "self" are set to the dialogue option buttons
      * and "partner" is set to the partner's dialogue
      **/
-    public void UpdateDialogue(KeyValuePair<string, List<Choice>> kvp)
+    public void UpdatePlayerDialogue(List<Choice> choices)
     {
-        partnerDialogue.text = kvp.Key;
         ClearPlayerDialogueOptions();
-        foreach (Choice dialogueOption in kvp.Value)
+        foreach (Choice dialogueOption in choices)
         {
             var b = Instantiate(dialogueButtonPrefab) as Transform;
-            b.GetComponentInChildren<Text>().text = dialogueOption.text;
+            b.GetComponentInChildren<Text>().text = "~ ";
+            b.GetComponentInChildren<Text>().text += dialogueOption.text;
             b.transform.parent = selfDialogueOptionsViewport;
             Button button = b.GetComponent<Button>();
             button.onClick.AddListener(() => dialogueChosen(dialogueOption));
         }
     }
 
-    void ClearPlayerDialogueOptions()
+    public void ClearPlayerDialogueOptions()
     {
+        lowerDialogue.text = "";
         foreach (Transform child in selfDialogueOptionsViewport)
             Destroy(child.gameObject);
     }

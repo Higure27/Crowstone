@@ -10,6 +10,10 @@ public class DayManager : MonoBehaviour {
     public static Story _dayStory;
     private static string _partner;
 
+    private float dialogueTimer = 3.0f;
+    private bool dialogueUpdater = false;
+    private List<Choice> dialogueUpdateInfo;
+
     [SerializeField]
     private Transform DialogueUI;
     private NewConversationUI dialogueUI;
@@ -41,7 +45,13 @@ public class DayManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (dialogueUpdater && (Input.GetMouseButtonDown(0) || dialogueTimer <= 0))
+        {
+            dialogueUI.UpdatePlayerDialogue(dialogueUpdateInfo);
+            dialogueUpdater = false;
+        }
+        else if (dialogueTimer >= 0 && dialogueUpdater == true)
+            dialogueTimer -= Time.deltaTime;
     }
 
     public void setDay() {
@@ -68,7 +78,8 @@ public class DayManager : MonoBehaviour {
                 Choice choice = _dayStory.currentChoices[i];
                 outputList.Add(choice);
             }
-            dialogueUI.UpdateDialogue(new KeyValuePair<string, List<Choice>>(partnerDialogue, outputList));
+            dialogueUI.UpdatePartnerDialogue(partnerDialogue);
+            dialogueUI.UpdatePlayerDialogue(outputList);
         }
         else
         {
@@ -96,7 +107,12 @@ public class DayManager : MonoBehaviour {
                 Choice choice = _dayStory.currentChoices[i];
                 outputList.Add(choice);
             }
-            dialogueUI.UpdateDialogue(new KeyValuePair<string, List<Choice>>(partnerDialogue, outputList));
+            dialogueUI.ClearPlayerDialogueOptions();
+            dialogueUI.UpdateLowerDialogue("**");
+            dialogueUI.UpdatePartnerDialogue(partnerDialogue);
+            dialogueUpdateInfo = outputList;
+            dialogueUpdater = true;
+            dialogueTimer = 3.0f;
         }
         else
         {
