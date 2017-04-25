@@ -341,6 +341,7 @@ What the hell do you want, Sheriff? Can't a man walk the streets without a lawma
             What?! Now, Sheriff...let's not be hasty here. I'm not lookin' to hang today....
             ***[Then you'd better leave town, Jacob. I don't want to see you around here for a while.]
                 ~morgan_Ran =true
+                ~met_Morgen =true
                 Right, Sheriff. I got some loose ends to tie up today, then I'll get outta your hair. I swear.
                     ->DONE
 =second_meeting
