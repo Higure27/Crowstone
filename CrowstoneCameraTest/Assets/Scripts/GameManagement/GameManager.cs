@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour {
             }
 
             else if (HUD.activeSelf) {
-                if (elapsedTime >= 3.5f)
+                if (elapsedTime >= 5f)
                     HUD.SetActive(false);
                 else if (!GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
                     int money = (int)DayManager._dayStory.variablesState["Currency"];
@@ -166,6 +166,8 @@ public class GameManager : MonoBehaviour {
         firstHUDActivate = false;
         resetLocations();
         DayManager.dayManager = null;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     /// <summary>
