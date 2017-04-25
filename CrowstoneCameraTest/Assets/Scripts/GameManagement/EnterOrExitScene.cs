@@ -42,12 +42,14 @@ public class EnterOrExitScene : MonoBehaviour {
                 DayManager._dayStory.variablesState["day"] = day;
             }
             else if (day3finished == 1) {
-                int day = 4;
-                GameManager.gameManager.setCurrentDay(day);
-                GameManager.gameManager.resetLocations();
-                LevelManager.Instance.startLoadSpecificScene("Town");
-                DayManager._dayStory.variablesState["day_Complete3"] = 0;
-                DayManager._dayStory.variablesState["day"] = day;
+                //int day = 4;
+                //GameManager.gameManager.setCurrentDay(day);
+                //GameManager.gameManager.resetLocations();
+                //LevelManager.Instance.startLoadSpecificScene("Town");
+                //DayManager._dayStory.variablesState["day_Complete3"] = 0;
+                //DayManager._dayStory.variablesState["day"] = day;
+                LevelManager.Instance.startLoadSpecificScene("Start Menu");
+                GameManager.gameManager.resetGameState();
             }
             else {
                 GameManager.gameManager.changePreviousLocation();
