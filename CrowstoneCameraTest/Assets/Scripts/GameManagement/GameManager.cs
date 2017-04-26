@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour {
         }
         else {
             if (Input.GetKeyDown(KeyCode.Space) && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {
+                Debug.Log("TRUE");
                 if (HUD.activeSelf)
                     HUD.SetActive(false);
                 else {
