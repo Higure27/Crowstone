@@ -192,6 +192,10 @@ public class LevelManager : MonoBehaviour {
                     if (day.name.Equals("Day3")) day.gameObject.SetActive(true);
                     else day.gameObject.SetActive(false);
                     break;
+                case 4:
+                    if (day.name.Equals("Day4")) day.gameObject.SetActive(true);
+                    else day.gameObject.SetActive(false);
+                    break;
                 default:
                     GameManager.gameManager.setCurrentDay(1);
                     Debug.Log("Current day was reset to " + GameManager.gameManager.getCurrentDay());
@@ -442,6 +446,9 @@ public class LevelManager : MonoBehaviour {
                 break;
             case 3:
                 dayText = "Day Three";
+                break;
+            case 4:
+                dayText = "Day Four";
                 break;
             default:
                 dayText = "No day";
