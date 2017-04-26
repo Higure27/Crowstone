@@ -319,7 +319,7 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
 + [Can I get a drink?]
     {Currency >= 50: ->get_drink|I don’t think you can afford one right now. ->talk}
 +{met_pemberton_day3}[What can you tell me about Adelaida?]
-    You're nosy, aren't you? I guess I can help you out. What do you need to know?
+    The woman who works at the bank? You're nosy, aren't you? I guess I can help you out. What do you need to know?
     ->investigate
 +[I'm good for now]
     ->DONE
