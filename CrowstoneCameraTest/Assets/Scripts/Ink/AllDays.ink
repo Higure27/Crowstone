@@ -47,7 +47,15 @@ VAR currTask = ""
                         ~currTask = "Report back to Pemberton"
                         }
                     -else:
-                ~currTask = "Take care of Morgen"
+                    {morgen_changed:
+                        {day_Complete2:
+                            ~currTask = "Leave office"
+                        -else:    
+                            ~currTask = "Report back to Pemberton"
+                        }
+                    -else:
+                    ~ currTask = "Take care of Morgen"
+                    }
             }
           -else: 
             ~currTask = "Go to the Sheriff's office"
@@ -82,7 +90,10 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
 *["I don’t bluff, Bob."]
     "Unlike you."
     ->DONE
-
+===Prostitute===
+Fuck you Sheriff!
++[A good day to you as well Jones]
+    ->DONE
 ===Pemberton===
 
 {
@@ -334,7 +345,7 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
 {met_Morgen: ->second_meeting|->first_meeting}
 =busy
 Can't you see I'm busy here Rawley
- +Stay out of trouble Morgen...
+ +[Stay out of trouble Morgen...]
     ->DONE
  
 =first_meeting
