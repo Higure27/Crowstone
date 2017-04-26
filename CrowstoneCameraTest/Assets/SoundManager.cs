@@ -142,16 +142,23 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public void changeSceneAmbience()
+    {
+        ambiencePlayer.Stop();
+    }
+
     private void OnEnable()
     {
         LevelManager.onOpeningDoor += playEnterDoor;
         PickUpItem.onItemPickedUp += playItemPickup;
+        LevelManager.onNewSceneLoaded += changeSceneAmbience;
     }
 
     private void OnDisable()
     {
         LevelManager.onOpeningDoor -= playEnterDoor;
         PickUpItem.onItemPickedUp -= playItemPickup;
+        LevelManager.onNewSceneLoaded -= changeSceneAmbience;
     }
 
     public void playEnterDoor()
