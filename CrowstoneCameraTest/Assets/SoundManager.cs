@@ -26,6 +26,18 @@ public class SoundManager : MonoBehaviour {
     public AudioClip pauseMenuOnOff;
     public float pauseOnOffVol = 1.0f;
     public float pauseOnOffPitch = 1.0f;
+    public AudioClip piano;
+    public float pianoVol = 1.0f;
+    public float pianoPitch = 1.0f;
+    public AudioClip wind;
+    public float windVol = 1.0f;
+    public float windPitch = 1.0f;
+    public AudioClip horse;
+    public float horseVol = 1.0f;
+    public float horsePitch = 1.0f;
+    public AudioClip crow;
+    public float crowVol = 1.0f;
+    public float crowPitch = 1.0f;
 
     private static SoundManager _instance;
 
@@ -103,7 +115,10 @@ public class SoundManager : MonoBehaviour {
         string scenename = LevelManager.Instance.getScenename();
         if (scenename.Equals("Town") || scenename.Equals("Start Menu"))
         {
-
+            if (!ambiencePlayer.isPlaying)
+            {
+                ambiencePlayer.PlayOneShot(wind, windVol);
+            }
         }
         else if (scenename.Equals("Jail"))
         {
@@ -111,7 +126,11 @@ public class SoundManager : MonoBehaviour {
         }
         else if (scenename.Equals("Saloon"))
         {
-
+            if (!ambiencePlayer.isPlaying)
+            {
+                ambiencePlayer.pitch = pianoPitch;
+                ambiencePlayer.PlayOneShot(piano, pianoVol);
+            }
         }
         else if (scenename.Equals("Bank"))
         {

@@ -10,6 +10,7 @@ VAR day_Complete2 = false
 VAR wanted_Poster = false
 VAR showed_Poster_Kathrine = false
 VAR met_pemberton_day2 = false
+VAR morgen_changed =false
 VAR met_Morgen = false
 VAR morgan_Ran = false
 
@@ -161,6 +162,11 @@ I trust you were successful again, Sheriff?
     **[Right. Until then.]
         ~day_Complete2 = true
         ->DONE
+*{morgen_changed}[Yes, Jacob won't be a problem anymore.]
+    Another job well done. You're proving to be quite the ally, Sheriff. I'm going to do a little more detective work on another of your citizens. Come back tomorrow and I should have more information for you.
+    **[Right. Until then.]
+        ~day_Complete2 = true
+        ->DONE
 =end_day2
 See you tomorrow Sheriff
 ->DONE
@@ -207,7 +213,7 @@ Sorry sherrif but I'm a little preoccupied at the moment.
 =coneversation
 {gambler_ran: ->gambler_silenced}
 Sheriff! What do you want?
-    +[I heard you’ve been asking a lot of questions about the new man in town. The one with the red hat. I need you to stop.]
+    +[I heard you’ve been asking a lot of questions about the new man in town. The one with the bowler hat. I need you to stop.]
             That’s none of your business.
                 **{john_is_an_idiot} [I think he’s a threat to you, John.]
                 What do you mean?
@@ -323,7 +329,8 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
  
  ===Jacob_Morgen===
  {met_pemberton_day2==false:->busy}
- 
+ {morgen_changed: ->new_man}
+ {showed_Poster_Kathrine: -> turend_leaf}
 {met_Morgen: ->second_meeting|->first_meeting}
 =busy
 Can't you see I'm busy here Rawley
@@ -332,7 +339,7 @@ Can't you see I'm busy here Rawley
  
 =first_meeting
 What the hell do you want, Sheriff? Can't a man walk the streets without a lawman riding his coat tails.
-* [I hear you've been poking your nose into business that isn't yours, Jacob.] The man in the red hat...I need you to stop talking about him.
+* [I hear you've been poking your nose into business that isn't yours, Jacob.] The man in the bowler hat...I need you to stop talking about him.
         And why should I listen to you? Who cares if it's my business or not? It's a free country, last I checked. I can talk about anybody I want to.
         **[I'll be back to continue this conversation later.]
             ~met_Morgen =true
@@ -355,10 +362,24 @@ Back again, Sheriff? I thought I made it clear that I didn't want to talk to you
         ->DONE
 +[I'll be back Morgen]
     ->DONE
-    
+
+=turend_leaf
+Me and kathrine had a talk Sheriff, I swear I am turning a new leaf.
+*[Can you promise me you will also stop looking into the man in the bowler hat?]
+    ~morgen_changed =true
+    I swear Sheriff!I'm a new man.
+    **[Glad to hear, stay out of trouble, Katherine really cares for you]
+        ->DONE
+
 =silenced_morgen
 You'll never see me again Sheriff, I swear!
-->DONE
++[Sounds good]
+    ->DONE
+
+=new_man
+I tell you Sheriff you're looking at a new man.
++[Sounds good]
+    ->DONE
 
 ===wanted_Poster===
     ~wanted_Poster = true
@@ -381,15 +402,37 @@ Well, good day to you, Sheriff. What can I do you for?
     
     
 ===Katherine_Blakely===
+
+{morgen_changed: ->changed_mind| ->talk_directly}
+
+
+=talk_directly
+{morgan_Ran: ->criminal}
+{showed_Poster_Kathrine: ->talk_to_morgen}
 Good day, Sheriff! You don't make your way out this way too often. What can I do for you?
 
 *{wanted_Poster}{met_pemberton_day2}[I understand you've been seeing Jacob Morgan]
+    ~showed_Poster_Kathrine =true
     Wh-what is this...? A wanted poster? With Jacob on it? This can't be...I thought I knew him. I need to speak to him right now. Thank you, Sheriff. ->DONE
     
 +[Nothing for now Ms. Blakley]
     ->DONE
     
+=changed_mind
+I talked to Morgen and he swore to me he will change his ways.
++[Keep him safe Ms. Blakely]
+    ->DONE
+    
+=criminal
+Morgen told me he's leaving town and he didn't even care enough to explain why *sobs*
++[These things happen Ms. Blakely]
+    ->DONE
 
+=talk_to_morgen
+Thank you again Sheriff, I'm going to talk to him right away.
++[You do that Ms. Blakely]
+->DONE
+    
 ===Adelaida===
 {adelaida_ran: ->busy|->intialize}
 =intialize
@@ -402,7 +445,7 @@ Well, hello there, Sheriff. What's a fine man like yourself doing out here in th
             ->san_fran_talk
 *{heared_rumor}[I hear you've been going around town and seducing all the men]
                 That's private! Where di you hear that?!
-                **[If you want me to keep quiet about this, I need you to do something for me. I know you've been snooping for information on the man in the red hat. I need you to keep to your own business.]
+                **[If you want me to keep quiet about this, I need you to do something for me. I know you've been snooping for information on the man in the bowler hat. I need you to keep to your own business.]
                         ~adelaida_ran = true
                         If you do, I won't ask anymore questions about that man. I swear! ->DONE
                         

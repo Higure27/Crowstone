@@ -23,15 +23,12 @@ public class EnterOrExitScene : MonoBehaviour {
         if (other.tag == "Player") {
             GameManager.gameManager.HUD.SetActive(false);
             if (day1finished == 1) {
-                //changing = true;
                 int day = 2;
                 GameManager.gameManager.setCurrentDay(day);
                 GameManager.gameManager.resetLocations();
                 LevelManager.Instance.startLoadSpecificScene("Town");
                 DayManager._dayStory.variablesState["day_Complete1"] = 0;
                 DayManager._dayStory.variablesState["day"] = day;
-                //changing = false;
-                //DayManager.dayLoaded = false;
             }
             else if (day2finished == 1) {
                 int day = 3;
