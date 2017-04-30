@@ -29,6 +29,7 @@ VAR currTask = ""
 
 VAR Ending = 0 
 VAR truth = false
+VAR talkin_about_a_revolution= false
 
 ===CheckTask===
 {
