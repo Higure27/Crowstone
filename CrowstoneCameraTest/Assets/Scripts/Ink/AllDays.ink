@@ -1,3 +1,5 @@
+
+//Day 1
 VAR found_book = false
 VAR day = 1
 VAR john_is_an_idiot = false
@@ -5,7 +7,7 @@ VAR gambler_ran = false
 VAR day_Complete1 = false
 VAR met_pemberton_day1 = false
 
-
+//Day2
 VAR day_Complete2 = false
 VAR wanted_Poster = false
 VAR showed_Poster_Kathrine = false
@@ -14,6 +16,7 @@ VAR morgen_changed =false
 VAR met_Morgen = false
 VAR morgan_Ran = false
 
+//Day3
 VAR day_Complete3 = false
 VAR met_pemberton_day3 = false
 VAR adelaida_ran = false
@@ -21,6 +24,10 @@ VAR Currency = 0
 VAR heared_rumor =false
 VAR san_fran = false
 VAR currTask = ""
+
+//Day 4
+
+VAR Ending = 0 
 
 ===CheckTask===
 {
@@ -473,6 +480,19 @@ Yes?
 =busy
 Sorry Sheriff I'm to busy planning on getting away from here as far as possible
 ->DONE
+
+
+===Gun===
+Who will you shoot?
+*[shoot the Pemberton]
+    ~Ending = 2
+    ->DONE
+*[Shoot Rickie Mortem]
+    ~Ending = 1
+    ->DONE
+*[Do nothing]
+    ~Ending = 3
+    ->DONE
 
 
 
