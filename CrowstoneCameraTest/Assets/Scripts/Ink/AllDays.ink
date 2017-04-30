@@ -28,6 +28,7 @@ VAR currTask = ""
 //Day 4
 
 VAR Ending = 0 
+VAR truth = false
 
 ===CheckTask===
 {
@@ -85,11 +86,16 @@ VAR Ending = 0
 ->DONE
 
 ===Prisoner===
-=Pop_Up
-Sheriff!
-->DONE
 
-=Conversation
+{
+    -day == 1: ->day1
+    -day == 2: ->day2
+    -day == 3: -> day3
+    -day == 4: ->day4
+}
+
+
+=day1
 Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me go now, yeah? Either way, I’m gonna be a free man soon.”
 *[You're gonna stay here for a long time]
     “You keep thinking that, Bob. I’ve got enough on you for that mine deal that will keep you in here for a long time to come. You’re lucky you’re not being hanged for your involvement.”
@@ -97,6 +103,23 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
 *["I don’t bluff, Bob."]
     "Unlike you."
     ->DONE
+    
+=day2
+->DONE
+=day3
+->DONE
+=day4
+"Ah, Sheriff. So good of you to come at last. I made it a point to ensure someone saw me. I'm glad you got the lead."
+*[Enough games, Rickie. Give me back my son.]
+    "Not so fast, Sheriff. You hear me out first. I trust you got my letter."
+        **[I did. Tell me what you want.]
+        "The Pembertons, they aren't what you think they are. Sure, they work for the government, but do you know what they do to small-time lawmen like you? They run you right over. You think you'll get the glory for capturing me? No way in hell! They'll pay you off and then they'll trash your reputation. I've seen them do it time and time again."
+            ***[How can I trust anything you say? You've been lying since the day you came to this town.]
+                "You can choose to believe me or not, Sheriff. The Pembertons will ruin your credibility one way or another. They're not in it for you, or for your kid. They're in it for them. They don't care who stands in their way. Ask him, you'll see."
+                    ->DONE
+        **[I don't want to hear anything you have to say!]
+            ->DONE
+->DONE
 ===Prostitute===
 Fuck you Sheriff!
 +[A good day to you as well Jones]
@@ -107,6 +130,7 @@ Fuck you Sheriff!
     -day == 1: ->day1
     -day == 2: ->day2
     -day == 3: -> day3
+    -day == 4: ->day4
 }
 
 =day1
@@ -217,6 +241,41 @@ Sheriff, you were successful in silencing Adelaida?
 =end_day3
 Head home and get spme rest Sheriff
 ->DONE
+
+=day4
+{truth:->Showdown| ->day4start}
+
+=day4start
+Seems to me your prisoner has escaped Sheriff
+    +[I'll get him!]
+        ->DONE
+=Showdown
+"Good work, Sheriff! You've cornered the rat. Shoot him and we can finally get this over with."
+    *[Hold on. I want some answers first. He told me you ruin sheriffs like me after they've helped you.]
+            "You really think that gangster scum has any credibility. He's been lying to you from the beginning, Sheriff. He gave you a false name, opened a fake business, and then continued to lie to you while serving time in your jail. I shouldn't have to remind you that he escaped from custody as well?"
+                **[You're right.]
+                    ->DONE
+                **[I don't know . . . ]
+                    "Sheriff, he's dangerous. We've been trying to capture him for over a decade. He's wanted for kidnapping and murder. He's already done one of those things today. This needs to end."
+                        ***[Then how do you explain this? *hand over newspaper clipping*]
+                            "You think we're the same government agency that sheriff is talking about in that newspaper article?"
+                                ****[It sure seems highly suspect, Pemberton.]
+                                        "Sheriff, that man was obviously sick in the head. We're not here to discuss him. We're here to end a criminal's rampage."
+                                            *****[I suppose you're right. We have to end this.]
+                                                ->DONE
+                                ****[Well, maybe. I know the article doesn't mention you by name, but I'm sure you have ways of covering that up.]
+                                        "Sheriff, you need to weigh what's more important here. Do you care about what some crazy man claimed to the media, or do you care about doing your job and being hailed a hero for helping to capture a notorious criminal?"
+                                            *****[I need to think about this.]
+                                                    ->DONE
+                                ****[Well, maybe you're not.]
+                                        "He could have easily fabricated this and left it for you to find, Sheriff. He's manipulating you. He needs to be taken care of."
+                                            *****[I don't know . . .]
+                                                    ->DONE
+                        ***[You're right, it does need to end. ]
+                            ->DONE
+                        
+    *[You don't need to ask me twice. I just want my kid back.]
+        ->DONE
 
 ===Book===
     ~found_book = true 
@@ -493,6 +552,11 @@ Who will you shoot?
 *[Do nothing]
     ~Ending = 3
     ->DONE
+===Paperclip===
+~truth = true
+"Local Sheriff Removed From Office Following Fanatic Claims About Supposed Secret Government Agency: Deemed Insane."
+    *["Secret government agency? Could it possibly be the Pembertons? I'll worry about that later. I have to keep looking for Mortem. I should keep asking around town."]
+        ->DONE
 
 
 
