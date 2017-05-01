@@ -14,7 +14,9 @@ public class MenuController : MonoBehaviour {
     public GameObject title;
     public GameObject PressAnyKeyPanel;
     public GameObject MenuPanel;
+    public GameObject OptionsPanel;
     public GameObject ControlsPanel;
+    public GameObject SoundPanel;
     public float fadeSpeed = 1.0f;
 
     private bool fadingOutInProcess;
@@ -28,6 +30,8 @@ public class MenuController : MonoBehaviour {
         PressAnyKeyPanel.gameObject.SetActive(true);
         MenuPanel.gameObject.SetActive(false);
         ControlsPanel.gameObject.SetActive(false);
+        OptionsPanel.gameObject.SetActive(false);
+        SoundPanel.gameObject.SetActive(false);
 
         fadingOutInProcess = false;
         fadingInInProcess = false;
@@ -59,23 +63,10 @@ public class MenuController : MonoBehaviour {
             SoundManager.Instance.playMenuClick();
 
             //fade out pressanykey screen
-            Text pressKeyText = PressAnyKeyPanel.GetComponentInChildren<Text>();
-            StartCoroutine(FadeOutText(pressKeyText));
-            StartCoroutine(DeactivatePanel(PressAnyKeyPanel));
+            StartCoroutine(FadeOutPanel(PressAnyKeyPanel));
 
             //fade in menu
-            MenuPanel.gameObject.SetActive(true);
-
-            Text[] texts = MenuPanel.GetComponentsInChildren<Text>();
-
-            foreach (Text txt in texts)
-            {
-                if (txt.name.Equals("Continue"))
-                {
-                    txt.GetComponent<Button>().interactable = false;
-                }
-                StartCoroutine(FadeInText(txt));
-            }
+            StartCoroutine(FadeInPanel(MenuPanel));
         }
     }
 
@@ -93,14 +84,7 @@ public class MenuController : MonoBehaviour {
             fadeSpeed = LevelManager.Instance.getLoadingFadeSpeed();
 
             //fade out menu and title
-            Text titleText = title.GetComponent<Text>();
-            StartCoroutine(FadeOutText(titleText));
-
-            Text[] menuTexts = MenuPanel.GetComponentsInChildren<Text>();
-            foreach (Text txt in menuTexts)
-            {
-                StartCoroutine(FadeOutText(txt));
-            }
+            StartCoroutine(FadeOutPanel(MenuPanel));
 
             //set current day and start loading the scene
             GameManager.gameManager.setCurrentDay(1);
@@ -108,71 +92,80 @@ public class MenuController : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// handles the transition from main menu->continue
-    /// no save game functionality yet
-    /// </summary>
-    public void MainMenuContinue()
+    public void MainMenuOptionsClicked()
     {
-        //sound fx
-        SoundManager.Instance.playMenuClick();
-        Debug.Log("Continue clicked");
-    }
-
-    public void MainMenuControlsClicked()
-    {
-        SoundManager.Instance.playMenuClick();
 
         if (!fadingInInProcess && !fadingOutInProcess)
         {
-            //fade out main menu screen
-            Text[] menuText = MenuPanel.GetComponentsInChildren<Text>();
+            SoundManager.Instance.playMenuClick();
 
-            foreach(Text text in menuText)
-            {
-                StartCoroutine(FadeOutText(text));
-            }
-            StartCoroutine(DeactivatePanel(MenuPanel));
+            //fade out main menu screen
+            StartCoroutine(FadeOutPanel(MenuPanel));
+
+            //fade in options
+            StartCoroutine(FadeInPanel(OptionsPanel));
 
             //fade in controls
-            ControlsPanel.gameObject.SetActive(true);
-            Text[] controlsText = ControlsPanel.GetComponentsInChildren<Text>();
-            
-            foreach(Text text in controlsText)
+            StartCoroutine(FadeInPanel(ControlsPanel));
+        }
+    }
+
+    public void MainMenuOptionsBackClicked()
+    {
+        if (!fadingInInProcess && !fadingOutInProcess)
+        {
+            SoundManager.Instance.playMenuClick();
+
+            //fade out controls or sound if applicable
+            if (ControlsPanel.gameObject.activeSelf == true)
             {
-                StartCoroutine(FadeInText(text));
+                StartCoroutine(FadeOutPanel(ControlsPanel));
+
+            }
+            else if(SoundPanel.gameObject.activeSelf == true)
+            {
+                StartCoroutine(FadeOutPanel(SoundPanel));
+            }
+
+            //fade out options
+            StartCoroutine(FadeOutPanel(OptionsPanel));
+
+            //fade in menu
+            StartCoroutine(FadeInPanel(MenuPanel));
+        }
+    }
+
+    public void OptionsMenuControlsClicked()
+    {
+        if(!fadingInInProcess || !fadingOutInProcess)
+        {
+            if(ControlsPanel.gameObject.activeSelf == false)
+            {
+                SoundManager.Instance.playMenuClick();
+
+                //fade out sound
+                StartCoroutine(FadeOutPanel(SoundPanel));
+
+                //fade in controls
+                StartCoroutine(FadeInPanel(ControlsPanel));
             }
         }
     }
 
-    public void MainMenuControlsBackClicked()
+    public void OptionsMenuSoundClicked()
     {
-        SoundManager.Instance.playMenuClick();
-
-        if (!fadingInInProcess && !fadingOutInProcess)
+        if (!fadingInInProcess || !fadingOutInProcess)
         {
-            Text[] controlsText = ControlsPanel.GetComponentsInChildren<Text>();
-
-            foreach (Text text in controlsText)
+            if(SoundPanel.gameObject.activeSelf == false)
             {
-                StartCoroutine(FadeOutText(text));
+                SoundManager.Instance.playMenuClick();
+
+                //fade out controls
+                StartCoroutine(FadeOutPanel(ControlsPanel));
+
+                //fade in sound
+                StartCoroutine(FadeInPanel(SoundPanel));
             }
-            StartCoroutine(DeactivatePanel(ControlsPanel));
-
-            //fade in menu
-            MenuPanel.gameObject.SetActive(true);
-
-            Text[] texts = MenuPanel.GetComponentsInChildren<Text>();
-
-            foreach (Text txt in texts)
-            {
-                if (txt.name.Equals("Continue"))
-                {
-                    txt.GetComponent<Button>().interactable = false;
-                }
-                StartCoroutine(FadeInText(txt));
-            }
-
         }
     }
 
@@ -183,113 +176,42 @@ public class MenuController : MonoBehaviour {
     {
         if(!fadingInInProcess && !fadingOutInProcess)
         {
+            SoundManager.Instance.playMenuClick();
+
             Application.Quit();
 
         }
     }
 
-    /// <summary>
-    /// changes the alpha value over time on the font of the given text from
-    /// whatever value it was until it reaches 0
-    /// </summary>
-    /// <param name="text">Text</param>
-    /// <returns></returns>
-    IEnumerator FadeOutText(Text text)
+    IEnumerator FadeOutPanel(GameObject panel)
     {
         fadingOutInProcess = true;
-
-        float alpha = text.color.a;
-        while (text.color.a > 0)
+        CanvasGroup canvasGrp = panel.GetComponent<CanvasGroup>();
+        while(canvasGrp.alpha < 0)
         {
-            alpha -= Time.deltaTime * fadeSpeed;
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+            canvasGrp.alpha -= Time.deltaTime * fadeSpeed;
             yield return null;
         }
 
         fadingOutInProcess = false;
-
-        yield return null;
-    }
-
-    /// <summary>
-    /// changes the alpha value over time of the given text from 0 to 1
-    /// </summary>
-    /// <param name="text"></param>
-    /// <returns></returns>
-    IEnumerator FadeInText(Text text)
-    {
-        fadingInInProcess = true;
-
-        float alpha = 0.0f;
-        while (alpha < 1)
-        {
-
-            alpha += Time.deltaTime * fadeSpeed;
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
-            yield return null;
-        }
-
-        fadingInInProcess = false;
-        yield return null;
-    }
-
-    /// <summary>
-    /// changes the alpha value of the given image over time
-    /// from whatever it was until it reaches 0
-    /// </summary>
-    /// <param name="image"></param>
-    /// <returns></returns>
-    IEnumerator FadeOutImage(Image image)
-    {
-        fadingOutInProcess = true;
-
-        float alpha = image.color.a;
-        while (image.color.a > 0)
-        {
-            alpha -= Time.deltaTime * fadeSpeed;
-            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
-            yield return null;
-        }
-
-        fadingOutInProcess = false;
-
-        yield return null;
-    }
-
-    /// <summary>
-    /// changes the alpha value of the given image over time
-    /// from 0 to 1
-    /// </summary>
-    /// <param name="image"></param>
-    /// <returns></returns>
-    IEnumerator FadeInImage(Image image)
-    {
-        fadingInInProcess = true;
-
-        float alpha = 0.0f;
-        while (alpha < 1)
-        {
-            alpha += Time.deltaTime * fadeSpeed;
-            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
-            yield return null;
-        }
-
-        fadingInInProcess = false;
-
-        yield return null;
-    }
-
-    /// <summary>
-    /// is called after a fade out is called.
-    /// after allowing for enough time for the panel to fade 
-    /// out it then deactivates it
-    /// </summary>
-    /// <param name="panel"></param>
-    /// <returns></returns>
-    IEnumerator DeactivatePanel(GameObject panel)
-    {
-        yield return new WaitForSeconds(1.0f / fadeSpeed);
-
         panel.gameObject.SetActive(false);
+
+        yield return null;
+    }
+
+    IEnumerator FadeInPanel(GameObject panel)
+    {
+        fadingInInProcess = true;
+
+        CanvasGroup canvasGrp = panel.GetComponent<CanvasGroup>();
+        canvasGrp.alpha = 0.0f;
+        panel.gameObject.SetActive(true);
+        while(canvasGrp.alpha < 1)
+        {
+            canvasGrp.alpha += Time.deltaTime * fadeSpeed;
+            yield return null;
+        }
+        fadingInInProcess = false;
+        yield return null;
     }
 }
