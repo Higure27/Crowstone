@@ -212,7 +212,7 @@ public class LevelManager : MonoBehaviour {
     public void startLoadSpecificScene(string name)
     {
         sceneToLoad = name;
-        loadScene = true;
+        loadScene = true;   
     }
 
     /// <summary>

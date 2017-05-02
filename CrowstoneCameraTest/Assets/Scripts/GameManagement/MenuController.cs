@@ -85,6 +85,7 @@ public class MenuController : MonoBehaviour {
 
             //fade out menu and title
             StartCoroutine(FadeOutPanel(MenuPanel));
+            StartCoroutine(FadeOutPanel(title));
 
             //set current day and start loading the scene
             GameManager.gameManager.setCurrentDay(1);
