@@ -187,7 +187,7 @@ public class MenuController : MonoBehaviour {
     {
         fadingOutInProcess = true;
         CanvasGroup canvasGrp = panel.GetComponent<CanvasGroup>();
-        while(canvasGrp.alpha < 0)
+        while(canvasGrp.alpha > 0)
         {
             canvasGrp.alpha -= Time.deltaTime * fadeSpeed;
             yield return null;

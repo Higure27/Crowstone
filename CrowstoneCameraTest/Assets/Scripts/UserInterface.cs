@@ -12,7 +12,6 @@ using UnityEngine.UI;
 public class UserInterface : MonoBehaviour {
 
     public float displayTime = 2.0f;
-    public float textFadeSpeed = 0.8f;
     public GameObject gameUI;
     public GameObject pauseScreen;
     public Text sceneNameText;
@@ -109,7 +108,6 @@ public class UserInterface : MonoBehaviour {
             // then fade it out
             if (pauseScreen.gameObject.activeSelf)
             {
-                fadingOutInProcess = true;
                 StartCoroutine(undisplayPauseScreen());
                 SoundManager.Instance.playPauseOnOff();
                 GameManager.gameManager.SetGlow(true);
@@ -118,7 +116,6 @@ public class UserInterface : MonoBehaviour {
             //start fading it in
             else
             {
-                fadingInInProcess = true;
                 StartCoroutine(displayPauseScreen());
                 SoundManager.Instance.playPauseOnOff();
                 GameManager.gameManager.SetGlow(false);
@@ -135,10 +132,10 @@ public class UserInterface : MonoBehaviour {
         //then fade out the pause screen
         if(!fadingOutInProcess && !fadingInInProcess)
         {
-            SoundManager.Instance.playMenuClick();
+            SoundManager.Instance.playPauseOnOff();
 
-            fadingOutInProcess = true;
             StartCoroutine(undisplayPauseScreen());
+
             GameManager.gameManager.SetGlow(true);
         }
     }
@@ -153,7 +150,6 @@ public class UserInterface : MonoBehaviour {
         if (!fadingOutInProcess && !fadingInInProcess)
         {
             SoundManager.Instance.playMenuClick();
-
 
             fadingOutInProcess = true;
             LevelManager.Instance.startLoadSpecificScene("Start Menu");
@@ -182,16 +178,7 @@ public class UserInterface : MonoBehaviour {
         GameManager.gameManager.flipPause();
 
         //fade in screen
-        pauseScreen.gameObject.SetActive(true);
-        fadingInInProcess = true;
-        Image background = pauseScreen.GetComponentInChildren<Image>();
-        Text[] texts = pauseScreen.GetComponentsInChildren<Text>();
-
-        StartCoroutine(FadeInImage(background));
-        foreach(Text txt in texts)
-        {
-            StartCoroutine(FadeInText(txt, pauseScreenFadeSpeed));
-        }
+        StartCoroutine(FadeInPanel(pauseScreen, pauseScreenFadeSpeed));
 
         //stop movement of player
         player.GetComponentInChildren<FirstPersonController>().enabled = false;
@@ -208,18 +195,7 @@ public class UserInterface : MonoBehaviour {
     private IEnumerator undisplayPauseScreen()
     {
         //fade out screen
-        fadingOutInProcess = true;
-        Image background = pauseScreen.GetComponentInChildren<Image>();
-        Text[] texts = pauseScreen.GetComponentsInChildren<Text>();
-
-        StartCoroutine(FadeOutImage(background));
-        foreach (Text txt in texts)
-        {
-            StartCoroutine(FadeOutText(txt, pauseScreenFadeSpeed));
-        }
-
-        //deactivate panel
-        StartCoroutine(DeactivatePanel(pauseScreen));
+        StartCoroutine(FadeOutPanel(pauseScreen, pauseScreenFadeSpeed));
 
         if (GameManager.gameManager.getInUI() == false) {
             //restart movement of player and camera
@@ -266,113 +242,36 @@ public class UserInterface : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// changes the alpha value of text over time with the given speed
-    /// from what its current value to 0
-    /// </summary>
-    /// <param name="text"></param>
-    /// <param name="speed"></param>
-    /// <returns></returns>
-    IEnumerator FadeOutText(Text text, float speed)
+    IEnumerator FadeOutPanel(GameObject panel, float fadeSpeed)
     {
         fadingOutInProcess = true;
-
-        float alpha = text.color.a;
-        while (text.color.a > 0)
+        CanvasGroup canvasGrp = panel.GetComponent<CanvasGroup>();
+        while (canvasGrp.alpha > 0)
         {
-            alpha -= Time.deltaTime * speed;
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+            canvasGrp.alpha -= Time.deltaTime * fadeSpeed;
             yield return null;
         }
 
         fadingOutInProcess = false;
-
-        yield return null;
-    }
-
-
-    /// <summary>
-    /// changes the alpha value of the given text over time
-    /// from 0 to 1
-    /// </summary>
-    /// <param name="text"></param>
-    /// <param name="speed"></param>
-    /// <returns></returns>
-    IEnumerator FadeInText(Text text, float speed)
-    {
-        fadingInInProcess = true;
-
-        float alpha = 0.0f;
-        while (alpha < 1)
-        {
-
-            alpha += Time.deltaTime * speed;
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
-            yield return null;
-        }
-
-        fadingInInProcess = false;
-        yield return null;
-    }
-
-    /// <summary>
-    /// changes the current alpha value of the given image over time
-    /// to zero
-    /// </summary>
-    /// <param name="image"></param>
-    /// <returns></returns>
-    IEnumerator FadeOutImage(Image image)
-    {
-        fadingOutInProcess = true;
-
-        float alpha = image.color.a;
-        while (image.color.a > 0)
-        {
-            alpha -= Time.deltaTime * pauseScreenFadeSpeed;
-            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
-            yield return null;
-        }
-
-        fadingOutInProcess = false;
-
-        yield return null;
-    }
-
-    /// <summary>
-    /// changes the alpha value of the given image over time
-    /// from 0 to 1
-    /// </summary>
-    /// <param name="image"></param>
-    /// <returns></returns>
-    IEnumerator FadeInImage(Image image)
-    {
-        fadingInInProcess = true;
-
-        float alpha = 0.0f;
-        while (alpha < pausePanelAlpha)
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
-            alpha += Time.deltaTime * pauseScreenFadeSpeed;
-
-            yield return null;
-        }
-
-        fadingInInProcess = false;
-
-        yield return null;
-    }
-
-    /// <summary>
-    /// gives enough time for panel to fade out
-    /// then deactivates it
-    /// </summary>
-    /// <param name="panel"></param>
-    /// <returns></returns>
-    IEnumerator DeactivatePanel(GameObject panel)
-    {
-        yield return new WaitForSeconds(1.0f / pauseScreenFadeSpeed);
-
         panel.gameObject.SetActive(false);
+
+        yield return null;
+    }
+
+    IEnumerator FadeInPanel(GameObject panel, float fadeSpeed)
+    {
+        fadingInInProcess = true;
+
+        CanvasGroup canvasGrp = panel.GetComponent<CanvasGroup>();
+        canvasGrp.alpha = 0.0f;
+        panel.gameObject.SetActive(true);
+        while (canvasGrp.alpha < 1)
+        {
+            canvasGrp.alpha += Time.deltaTime * fadeSpeed;
+            yield return null;
+        }
+        fadingInInProcess = false;
+        yield return null;
     }
 
     /// <summary>
