@@ -45,8 +45,7 @@ public class EnterOrExitScene : MonoBehaviour {
                 LevelManager.Instance.startLoadSpecificScene("Town");
                 DayManager._dayStory.variablesState["day_Complete3"] = 0;
                 DayManager._dayStory.variablesState["day"] = day;
-                //LevelManager.Instance.startLoadSpecificScene("Start Menu (NEW)");
-                //GameManager.gameManager.resetGameState();
+                
             }
             else {
                 GameManager.gameManager.changePreviousLocation();

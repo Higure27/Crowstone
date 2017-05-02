@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\AddGlow.cs" />
     <Compile Include="Assets\Scripts\ButtonLayoutHelper.cs" />
     <Compile Include="Assets\Scripts\ChangeDay.cs" />
+    <Compile Include="Assets\Scripts\CheckInkVar.cs" />
     <Compile Include="Assets\Scripts\ClickToMove.cs" />
     <Compile Include="Assets\Scripts\Conversation.cs" />
     <Compile Include="Assets\Scripts\ConversationUI.cs" />

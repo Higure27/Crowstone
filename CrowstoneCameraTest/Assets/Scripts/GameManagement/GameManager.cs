@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
     void Update() {
         elapsedTime += Time.deltaTime;
         if (SceneManager.GetActiveScene().name.Equals("Start Menu")) {
-
+            HUD.SetActive(false);
         }
         else {
             if (Input.GetKeyDown(KeyCode.Space) && !GameManager.gameManager.getPause() && !GameManager.gameManager.getInUI()) {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Ink.Runtime;
 
 public class DayManager : MonoBehaviour {
@@ -117,6 +118,14 @@ public class DayManager : MonoBehaviour {
         else
         {
             dialogueUI.EndDialogue(partnerDialogue);
+            if (DayManager._dayStory != null) {
+                if (GameManager.gameManager.getCurrentDay() == 4) {
+                    if ((int)DayManager._dayStory.variablesState["Ending"] != 0) {
+                        LevelManager.Instance.startLoadSpecificScene("Endings");
+                    }
+                }
+            }
+            
         }     
     }
 
