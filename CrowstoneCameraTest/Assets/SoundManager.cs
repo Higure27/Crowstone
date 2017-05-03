@@ -40,6 +40,8 @@ public class SoundManager : MonoBehaviour {
     public float crowVol = 1.0f;
     public float crowPitch = 1.0f;
     public Slider mainSlider;
+    public int townAmbDelay = 5;
+    private bool determining;
 
     private static SoundManager _instance;
 
@@ -49,6 +51,7 @@ public class SoundManager : MonoBehaviour {
     private AudioSource movementPlayer;
     private AudioSource ambiencePlayer;
     private float defaultPitch = 1.0f;
+    private bool playHorse;
 
     public static SoundManager Instance { get { return _instance; } }
 
@@ -79,6 +82,9 @@ public class SoundManager : MonoBehaviour {
 
         }
 
+        playHorse = false;
+
+        StartCoroutine(determineAnimalSound());
     }
 
     // Update is called once per frame
@@ -128,6 +134,15 @@ public class SoundManager : MonoBehaviour {
             if (!ambiencePlayer.isPlaying)
             {
                 ambiencePlayer.PlayOneShot(wind, windVol*globalSoundVolume);
+            }
+
+            if (!fxPlayer.isPlaying)
+            {
+                if (!determining)
+                {
+                    StartCoroutine(determineAnimalSound());
+
+                }
             }
         }
         else if (scenename.Equals("Jail"))
@@ -263,6 +278,44 @@ public class SoundManager : MonoBehaviour {
         else
         {
             Debug.LogError("item pick up sound not set");
+        }
+    }
+
+    IEnumerator determineAnimalSound()
+    {
+        determining = true;
+
+        if (playHorse)
+        {
+            yield return new WaitForSeconds(townAmbDelay);
+            PlayHorse();
+
+            playHorse = !playHorse;
+        }
+        else
+        {
+            yield return new WaitForSeconds(townAmbDelay);
+            PlayCrow();
+
+            playHorse = !playHorse;
+        }
+        determining = false;
+        yield return null;
+    }
+
+    public void PlayHorse()
+    {
+        if(horse != null)
+        {
+            fxPlayer.PlayOneShot(horse, horseVol * globalSoundVolume);
+        }
+    }
+
+    public void PlayCrow()
+    {
+        if(crow != null)
+        {
+            fxPlayer.PlayOneShot(crow, crowVol * globalSoundVolume);
         }
     }
 }
