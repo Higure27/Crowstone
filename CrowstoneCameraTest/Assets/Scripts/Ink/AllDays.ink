@@ -293,6 +293,7 @@ Head home and get spme rest Sheriff
 {truth:->Showdown| ->day4start}
 
 =day4start
+~met_pemberton_day4 = true
 Seems to me your prisoner has escaped Sheriff
     +[I'll get him!]
         ->DONE
