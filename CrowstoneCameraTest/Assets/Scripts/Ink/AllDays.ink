@@ -33,6 +33,7 @@ VAR truth = false
 VAR met_pemberton_day4 = false
 VAR found_newsclip = false
 VAR talked_with_wife = false
+VAR talked_with_bartender4 = false
 
 
 ===CheckTask===
@@ -377,6 +378,7 @@ I'm going to avoid that man like the plague!
     -day == 1: ->day1
     -day == 2: ->day2
     -day == 3: -> day3
+    -day == 4: ->day4
 }
 =day1
 Hey, Sheriff. What can I do for you?”
@@ -445,12 +447,55 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
     Only that she's desperate to get out of town. Something about moving to San Francisco and marrying a rich man. Don't know how she's going to do it if she keeps bouncing around the men here. None of them are taking her there, that's for sure. You know, I think I saw her giving things to several of the men in town. I'll bet it's love tokens or something. If that's true, she's cheating on all her suitors, the harlot! ->investigate
 +[I think that's enough for now]
     ->DONE
-    
-=get_drink 
+
+=get_drink
  ~Currency = Currency - 50
  Don't over due it Sheriff.
  Anything else I can do for you?
  ->talk
+
+
+=day4
+{talked_with_wife: ->question4|->intial4}
+
+=intial4
+{talked_with_bartender4: I hope everything is alright Sherrif, is there anything I can do for you?|What can I do for ya Sherrif?}
+->talk4
+=talk4
++ [Can I get a drink?]
+    {Currency >= 50: ->get_drink4|I don’t think you can afford one right now. ->intial4}
++[I'm good for now]
+    ->DONE
+
+=get_drink4
+ ~Currency = Currency - 50
+ Don't over due it Sheriff.
+ Anything else I can do for you?
+ ->talk4
+
+=question4
+~talked_with_bartender4 = true
+"Sheriff! I heard the screams from your house! Is your wife okay?"
+*[She's fine, but I need to know if you have any information on the blacksmith.]
+    "The blacksmith? What's this all about, Sheriff?"
+        **[He escaped from jail and I have to find him. Please, do you have any information?]
+            "He escaped?! Oh no! Well, I did see someone moving around in your office this morning, Sheriff. I thought it was you, but now that I think about it, the shadow in the window was a little shorter than you."
+                    ***[Is there anything else you can tell me?]
+                            "I'm afraid that's it, Sheriff."
+                                ****[All right. Thank you for your help. Maybe I'll go back to my office and see if I can find anything else there that might tell me where he is.]
+                                        ->DONE
+        **[I don't have time to answer questions right now! I need to know if you saw him or have any information!]
+            "Sheriff, there's no need to get all uptight with me. I've been nothing but a friend to you and right now you're acting just plain crazy!"
+                    ***{Currency>=75}[You have eyes and ears on this town. Maybe some money will help you share that information? (Give $75)]
+                                        "I don't know what kind of man you take me for, Sheriff. I can't be bought like some folk in this town, and it won't smooth over the fact that you seem to think you can talk to me in such a manner."
+                                                ****[Fine, I'll just go talk to someone else.]
+                                                        ->DONE
+                                                ****[Look, I'm sorry. I'm under a lot of stress and I need this information. Don't take the money, but, please, tell me if you know anything. It's important.]
+                                                        "All right, Sheriff. I suppose every man deserves an off-day. Just make sure it doesn't happen again. I did see a person in your office earlier, moving around. I thought it had been you, but looking back, it probably wasn't. The fella was shorter than you, I think. Maybe he was looking for something.
+                                                                *****[Thank you. I'll follow up on that. Maybe I can find something in my office that will help me.]
+                                                                        ->DONE
+                    ***[Never mind, I'll go talk to someone else.]
+                            ->DONE
  
  ===Jacob_Morgen===
  {met_pemberton_day2==false:->busy}
