@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour {
 
@@ -38,8 +39,11 @@ public class SoundManager : MonoBehaviour {
     public AudioClip crow;
     public float crowVol = 1.0f;
     public float crowPitch = 1.0f;
+    public Slider mainSlider;
 
     private static SoundManager _instance;
+
+    private float globalSoundVolume = 1.0f;
 
     private AudioSource fxPlayer;
     private AudioSource movementPlayer;
@@ -69,12 +73,18 @@ public class SoundManager : MonoBehaviour {
         fxPlayer = sources[0];
         movementPlayer = sources[1];
         ambiencePlayer = sources[2];
+        if(mainSlider != null)
+        {
+            mainSlider.onValueChanged.AddListener(delegate { updateGlobalSound(); });
+
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //walking and running
         if (!LevelManager.Instance.getScenename().Equals("Start Menu"))
         {
@@ -117,7 +127,7 @@ public class SoundManager : MonoBehaviour {
         {
             if (!ambiencePlayer.isPlaying)
             {
-                ambiencePlayer.PlayOneShot(wind, windVol);
+                ambiencePlayer.PlayOneShot(wind, windVol*globalSoundVolume);
             }
         }
         else if (scenename.Equals("Jail"))
@@ -129,7 +139,7 @@ public class SoundManager : MonoBehaviour {
             if (!ambiencePlayer.isPlaying)
             {
                 ambiencePlayer.pitch = pianoPitch;
-                ambiencePlayer.PlayOneShot(piano, pianoVol);
+                ambiencePlayer.PlayOneShot(piano, pianoVol * globalSoundVolume);
             }
         }
         else if (scenename.Equals("Bank"))
@@ -166,7 +176,7 @@ public class SoundManager : MonoBehaviour {
         if(enterDoor != null)
         {
             fxPlayer.pitch = doorPitch;
-            fxPlayer.PlayOneShot(enterDoor, doorVolume);
+            fxPlayer.PlayOneShot(enterDoor, doorVolume * globalSoundVolume);
         }
         else
         {
@@ -179,7 +189,7 @@ public class SoundManager : MonoBehaviour {
         if(menuClick != null)
         {
             fxPlayer.pitch = menuClickPitch;
-            fxPlayer.PlayOneShot(menuClick, menuStartClickedVol);
+            fxPlayer.PlayOneShot(menuClick, menuStartClickedVol * globalSoundVolume);
         }
     }
 
@@ -188,7 +198,7 @@ public class SoundManager : MonoBehaviour {
         if(menuStartClicked != null)
         {
             fxPlayer.pitch = menuStartClickedPitched;
-            fxPlayer.PlayOneShot(menuStartClicked, menuStartClickedVol);
+            fxPlayer.PlayOneShot(menuStartClicked, menuStartClickedVol * globalSoundVolume);
         }
     }
 
@@ -199,7 +209,7 @@ public class SoundManager : MonoBehaviour {
             if (movementPlayer.isPlaying) return;
 
             movementPlayer.pitch = walkingPitch;
-            movementPlayer.PlayOneShot(walking, walkingVolume);
+            movementPlayer.PlayOneShot(walking, walkingVolume * globalSoundVolume);
 
         }
         else
@@ -215,7 +225,7 @@ public class SoundManager : MonoBehaviour {
             if (movementPlayer.isPlaying) return;
 
             movementPlayer.pitch = RunningPitch;
-            movementPlayer.PlayOneShot(running, runningVolume);
+            movementPlayer.PlayOneShot(running, runningVolume * globalSoundVolume);
 
         }
         else
@@ -224,12 +234,21 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public void updateGlobalSound()
+    {
+        if(mainSlider != null)
+        {
+            globalSoundVolume = mainSlider.value;
+
+        }
+    }
+
     public void playPauseOnOff()
     {
         if(pauseMenuOnOff != null)
         {
             fxPlayer.pitch = pauseOnOffPitch;
-            fxPlayer.PlayOneShot(pauseMenuOnOff, pauseOnOffVol);
+            fxPlayer.PlayOneShot(pauseMenuOnOff, pauseOnOffVol * globalSoundVolume);
         }
     }
 
@@ -238,7 +257,7 @@ public class SoundManager : MonoBehaviour {
         if(itemPickup != null)
         {
             fxPlayer.pitch = itemPickupPitch;
-            fxPlayer.PlayOneShot(itemPickup, itemPickupVolume);
+            fxPlayer.PlayOneShot(itemPickup, itemPickupVolume * globalSoundVolume);
 
         }
         else
