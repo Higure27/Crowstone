@@ -136,14 +136,16 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
             ->DONE
 ->DONE
 ===Prostitute===
-{day == 4: ->check|->regular}
+{day == 4: ->check1|->regular}
 
 =regular
 "You know who to come to Sheriff if you're looking for a good time"
 +[I think I'm good, stay out of trouble Jones]
     "Can't make any promises Sheriff"
         ->DONE
-=check
+=check1
+{talked_with_wife:->check2|->regular}
+=check2
 {truth: ->after|->Final_Clue}
 =Final_Clue
 "Well, hey there, Sheriff. You're lookin' mighty fine today. Can I just say you look dashing in leather?"
