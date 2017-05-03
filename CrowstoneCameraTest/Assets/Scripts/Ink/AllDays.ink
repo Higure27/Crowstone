@@ -1,4 +1,5 @@
 
+VAR currTask = ""
 //Day 1
 VAR found_book = false
 VAR day = 1
@@ -23,13 +24,16 @@ VAR adelaida_ran = false
 VAR Currency = 0
 VAR heared_rumor =false
 VAR san_fran = false
-VAR currTask = ""
+
 
 //Day 4
 
 VAR Ending = 0 
 VAR truth = false
-VAR talkin_about_a_revolution= false
+VAR met_pemberton_day4 = false
+VAR found_newsclip = false
+VAR talked_with_wife = false
+
 
 ===CheckTask===
 {
@@ -83,6 +87,16 @@ VAR talkin_about_a_revolution= false
           -else: 
             ~currTask = "Go to the Sheriff's office"
         }
+    -day == 4:
+        {met_pemberton_day4:
+            {truth:
+                ~currTask = "Go back to the office and make a choice"
+            -else:
+                ~currTask = "Find the blacksmith"
+            }
+        -else:
+            ~currTask = "Go to the Sheriff's office"
+        }
 }
 ->DONE
 
@@ -122,8 +136,38 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
             ->DONE
 ->DONE
 ===Prostitute===
-Fuck you Sheriff!
-+[A good day to you as well Jones]
+{day == 4: ->check|->regular}
+
+=regular
+"You know who to come to Sheriff if you're looking for a good time"
++[I think I'm good, stay out of trouble Jones]
+    "Can't make any promises Sheriff"
+        ->DONE
+=check
+{truth: ->after|->Final_Clue}
+=Final_Clue
+"Well, hey there, Sheriff. You're lookin' mighty fine today. Can I just say you look dashing in leather?"
+    *[I don't have time for this right now.]
+        "Now, hold on there, Sheriff. Rein in those bad boy horses of yours. I hear you've been asking around town for information on the blacksmith."
+                **[You have anything on him I should know?]
+                    "But of COURSE I do, Sweetie Pie! What, you think I just wanted to pull you aside to have a word? Well, maybe if it were a PRIVATE word . . . "
+                            ***[Uh . . . sure. You were saying something about information . . . ?]
+                                    "Oh! That's right, silly me! I just get so distracted by your manly features that I plum forget what I'm trying to say!"
+                                            ****[Well, what ARE you trying to say? What do you have for me?]
+                                                ->Final_Clue2
+=Final_Clue2
+"Baby, I got EVERYTHING you need. All you gotta to do is ask!"
+*[The information, then?]
+    "Well, between you, me, and the tree, I saw that blacksmith fellow make his way over to your office just now. He had your baby with him, and I must say, he is NOT what I would have considered to be the fatherly type. You sure do have a strange taste in nannies, Sheriff."
+            **[He's at my office? Right now?]
+                "You betcha, Sheriff."
+                    ***[I have to go! Thank you!]
+                            ~truth =true
+                            Anytime, Sheriff!
+                            ->DONE
+=after
+"Be sure to come back once this is all over" 
++[it'll be fine]
     ->DONE
 ===Pemberton===
 
@@ -264,7 +308,7 @@ Seems to me your prisoner has escaped Sheriff
                                         "Sheriff, that man was obviously sick in the head. We're not here to discuss him. We're here to end a criminal's rampage."
                                             *****[I suppose you're right. We have to end this.]
                                                 ->DONE
-                                ****[Well, maybe. I know the article doesn't mention you by name, but I'm sure you have ways of covering that up.]
+                                ****{found_newsclip}[Well, maybe. I know the article doesn't mention you by name, but I'm sure you have ways of covering that up.]
                                         "Sheriff, you need to weigh what's more important here. Do you care about what some crazy man claimed to the media, or do you care about doing your job and being hailed a hero for helping to capture a notorious criminal?"
                                             *****[I need to think about this.]
                                                     ->DONE
@@ -541,7 +585,29 @@ Yes?
 Sorry Sheriff I'm to busy planning on getting away from here as far as possible
 ->DONE
 
+===Abigail===
+{met_pemberton_day4: ->check|->See_Off}
 
+=check
+{talked_with_wife: ->save_son|->Son_kiddnaped}
+
+=save_son
+"Find him Sam"
+    +[I will]
+        ->DONE
+=Son_kiddnaped
+~talked_with_wife = true
+"Sam! The Baby is gone!
+*[What?!]
+    "I went outside to hang out some clothes and he was gone, it's all my fault"
+        **[It's going to be ok Abey I'll handle this]
+            "Find him Sam please!"
+                ->DONE
+=See_Off
+"Have a great day at work my sexy Sheriff"
++[Love you dear]
+    "Love you too hon'"
+        ->DONE
 ===Gun===
 Who will you shoot?
 *[shoot the Pemberton]
@@ -554,7 +620,7 @@ Who will you shoot?
     ~Ending = 3
     ->DONE
 ===Paperclip===
-~truth = true
+~found_newsclip = true
 "Local Sheriff Removed From Office Following Fanatic Claims About Supposed Secret Government Agency: Deemed Insane."
     *["Secret government agency? Could it possibly be the Pembertons? I'll worry about that later. I have to keep looking for Mortem. I should keep asking around town."]
         ->DONE
