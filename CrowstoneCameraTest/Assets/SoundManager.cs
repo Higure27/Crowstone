@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
     public AudioClip enterDoor;
     public float doorVolume = 1.0f;
@@ -39,6 +40,10 @@ public class SoundManager : MonoBehaviour {
     public AudioClip crow;
     public float crowVol = 1.0f;
     public float crowPitch = 1.0f;
+    public AudioClip schoolAmb;
+    public float schoolVol = 1.0f;
+    public AudioClip bankAmb;
+    public float bankVol = 1.0f;
     public Slider mainSlider;
     public int townAmbDelay = 5;
     private bool determining;
@@ -50,6 +55,7 @@ public class SoundManager : MonoBehaviour {
     private AudioSource fxPlayer;
     private AudioSource movementPlayer;
     private AudioSource ambiencePlayer;
+    private AudioSource ambPlayer2;
     private float defaultPitch = 1.0f;
     private bool playHorse;
 
@@ -76,7 +82,8 @@ public class SoundManager : MonoBehaviour {
         fxPlayer = sources[0];
         movementPlayer = sources[1];
         ambiencePlayer = sources[2];
-        if(mainSlider != null)
+        ambPlayer2 = sources[3];
+        if (mainSlider != null)
         {
             mainSlider.onValueChanged.AddListener(delegate { updateGlobalSound(); });
 
@@ -90,6 +97,7 @@ public class SoundManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("ambience is playing: " + ambiencePlayer.isPlaying);
 
         //walking and running
         if (!LevelManager.Instance.getScenename().Equals("Start Menu"))
@@ -133,10 +141,14 @@ public class SoundManager : MonoBehaviour {
         {
             if (!ambiencePlayer.isPlaying)
             {
-                ambiencePlayer.PlayOneShot(wind, windVol*globalSoundVolume);
+                if (wind != null)
+                {
+                    ambiencePlayer.PlayOneShot(wind, windVol * globalSoundVolume);
+
+                }
             }
 
-            if (!fxPlayer.isPlaying)
+            if (!ambPlayer2.isPlaying)
             {
                 if (!determining)
                 {
@@ -153,23 +165,44 @@ public class SoundManager : MonoBehaviour {
         {
             if (!ambiencePlayer.isPlaying)
             {
-                ambiencePlayer.pitch = pianoPitch;
-                ambiencePlayer.PlayOneShot(piano, pianoVol * globalSoundVolume);
+                if (piano != null)
+                {
+                    ambiencePlayer.pitch = pianoPitch;
+                    ambiencePlayer.PlayOneShot(piano, pianoVol * globalSoundVolume);
+                }
+
             }
         }
-        else if (scenename.Equals("Bank"))
+        else if (scenename.Equals("BankInterior"))
         {
-
+            if (!ambiencePlayer.isPlaying)
+            {
+                PlayBankAmb();
+            }
         }
-        else if (scenename.Equals("School"))
+        else if (scenename.Equals("SchoolInterior"))
         {
-
+            if (!ambiencePlayer.isPlaying)
+            {
+                PlaySchoolAmb();
+            }
         }
     }
 
     public void changeSceneAmbience()
     {
-        ambiencePlayer.Stop();
+        if(ambiencePlayer != null)
+        {
+            ambiencePlayer.Stop();
+
+        }
+        if (ambPlayer2 != null)
+        {
+            StopAllCoroutines();
+            ambPlayer2.Stop();
+
+
+        }
     }
 
     private void OnEnable()
@@ -188,7 +221,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playEnterDoor()
     {
-        if(enterDoor != null)
+        if (enterDoor != null)
         {
             fxPlayer.pitch = doorPitch;
             fxPlayer.PlayOneShot(enterDoor, doorVolume * globalSoundVolume);
@@ -201,7 +234,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playMenuClick()
     {
-        if(menuClick != null)
+        if (menuClick != null)
         {
             fxPlayer.pitch = menuClickPitch;
             fxPlayer.PlayOneShot(menuClick, menuStartClickedVol * globalSoundVolume);
@@ -210,7 +243,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playMenuStartClicked()
     {
-        if(menuStartClicked != null)
+        if (menuStartClicked != null)
         {
             fxPlayer.pitch = menuStartClickedPitched;
             fxPlayer.PlayOneShot(menuStartClicked, menuStartClickedVol * globalSoundVolume);
@@ -219,7 +252,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playWalking()
     {
-        if(walking != null)
+        if (walking != null)
         {
             if (movementPlayer.isPlaying) return;
 
@@ -235,7 +268,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playRunning()
     {
-        if(running != null)
+        if (running != null)
         {
             if (movementPlayer.isPlaying) return;
 
@@ -251,7 +284,7 @@ public class SoundManager : MonoBehaviour {
 
     public void updateGlobalSound()
     {
-        if(mainSlider != null)
+        if (mainSlider != null)
         {
             globalSoundVolume = mainSlider.value;
 
@@ -260,7 +293,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playPauseOnOff()
     {
-        if(pauseMenuOnOff != null)
+        if (pauseMenuOnOff != null)
         {
             fxPlayer.pitch = pauseOnOffPitch;
             fxPlayer.PlayOneShot(pauseMenuOnOff, pauseOnOffVol * globalSoundVolume);
@@ -269,7 +302,7 @@ public class SoundManager : MonoBehaviour {
 
     public void playItemPickup()
     {
-        if(itemPickup != null)
+        if (itemPickup != null)
         {
             fxPlayer.pitch = itemPickupPitch;
             fxPlayer.PlayOneShot(itemPickup, itemPickupVolume * globalSoundVolume);
@@ -305,17 +338,34 @@ public class SoundManager : MonoBehaviour {
 
     public void PlayHorse()
     {
-        if(horse != null)
+        if (horse != null)
         {
-            fxPlayer.PlayOneShot(horse, horseVol * globalSoundVolume);
+            ambPlayer2.PlayOneShot(horse, horseVol * globalSoundVolume);
         }
     }
 
     public void PlayCrow()
     {
-        if(crow != null)
+        if (crow != null)
         {
-            fxPlayer.PlayOneShot(crow, crowVol * globalSoundVolume);
+            ambPlayer2.PlayOneShot(crow, crowVol * globalSoundVolume);
+        }
+    }
+
+    public void PlaySchoolAmb()
+    {
+        if (schoolAmb != null)
+        {
+            ambiencePlayer.PlayOneShot(schoolAmb, schoolVol * globalSoundVolume);
+        }
+    }
+
+    public void PlayBankAmb()
+    {
+        if (bankAmb != null)
+        {
+            ambiencePlayer.PlayOneShot(bankAmb, bankVol * globalSoundVolume);
         }
     }
 }
+
