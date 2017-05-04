@@ -147,6 +147,7 @@
     <Compile Include="Assets\Scripts\InteractWithNPC.cs" />
     <Compile Include="Assets\Scripts\InvertMainCamera.cs" />
     <Compile Include="Assets\Scripts\Journal.cs" />
+    <Compile Include="Assets\Scripts\MenuButtons3D.cs" />
     <Compile Include="Assets\Scripts\NPC\RotateObjectToPlayer.cs" />
     <Compile Include="Assets\Scripts\NewConversationUI.cs" />
     <Compile Include="Assets\Scripts\ObjectsByDayManager.cs" />
