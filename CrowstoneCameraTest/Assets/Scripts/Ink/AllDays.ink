@@ -7,6 +7,7 @@ VAR john_is_an_idiot = false
 VAR gambler_ran = false
 VAR day_Complete1 = false
 VAR met_pemberton_day1 = false
+VAR talked_with_bob =false
 
 //Day2
 VAR day_Complete2 = false
@@ -106,25 +107,26 @@ VAR talked_with_bartender4 = false
 
 {
     -day == 1: ->day1
-    -day == 2: ->day2
-    -day == 3: -> day3
+    -day == 2: ->day1
+    -day == 3: -> day1
     -day == 4: ->day4
 }
 
 
 =day1
+{talked_with_bob:->second_time|->first_time}
+=first_time
 Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me go now, yeah? Either way, I’m gonna be a free man soon.”
-*[You're gonna stay here for a long time]
-    “You keep thinking that, Bob. I’ve got enough on you for that mine deal that will keep you in here for a long time to come. You’re lucky you’re not being hanged for your involvement.”
--"Bah! Yer jist bluffin’....”
-*["I don’t bluff, Bob."]
-    "Unlike you."
-    ->DONE
+*[You keep thinking that, Bob. I’ve got enough on you for that mine deal that will keep you in here for a long time to come. You’re lucky you’re not being hanged for your involvement.]
+        ~talked_with_bob = true
+     "Bah! Yer jist bluffin’....”
+    **[I don’t bluff, Bob, Unlike you.]
+        ->DONE
     
-=day2
-->DONE
-=day3
-->DONE
+=second_time
+"I'm going to get out of here Sherrif"
++[No you're not Bob]
+    ->DONE
 =day4
 "Ah, Sheriff. So good of you to come at last. I made it a point to ensure someone saw me. I'm glad you got the lead."
 *[Enough games, Rickie. Give me back my son.]
@@ -166,7 +168,7 @@ Come on, Sheriff. You know you don’ got nuthin’ on me. Might as well let me 
             **[He's at my office? Right now?]
                 "You betcha, Sheriff."
                     ***[I have to go! Thank you!]
-                            ~truth =true
+                            ~truth = true
                             Anytime, Sheriff!
                             ->DONE
 =after
@@ -306,9 +308,9 @@ Head home and get spme rest Sheriff
         ->DONE
 
 =day4_before
-~met_pemberton_day4 = true
 "Seems to me your prisoner has escaped Sheriff"
     *[I have noticed]
+        ~met_pemberton_day4 = true
         "This could be quite troublesome..."
             **[Is he the man you've been looking for?]
                 “Yes Sheriff, very perceptive. He was hiding under all of our noses this whole time. He’s no ordinary prisoner. He’s a wanted fugitive and a ruthless gangster: Rickie Mortem. Did he leave you anything? A letter? Anything to help us locate him?”
@@ -486,8 +488,7 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
 {talked_with_wife: ->question4|->intial4}
 
 =intial4
-{talked_with_bartender4: I hope everything is alright Sherrif, is there anything I can do for you?|What can I do for ya Sherrif?}
-->talk4
+What can I do for ya Sherrif?->talk4
 =talk4
 + [Can I get a drink?]
     {Currency >= 50: ->get_drink4|I don’t think you can afford one right now. ->intial4}
@@ -501,9 +502,11 @@ Sheriff, I trust you're not here to arrest anyone. What can I do for you?->talk
  ->talk4
 
 =question4
-~talked_with_bartender4 = true
+{talked_with_bartender4:->intial4|->investigate4}
+=investigate4
 "Sheriff! I heard the screams from your house! Is your wife okay?"
 *[She's fine, but I need to know if you have any information on the blacksmith.]
+    ~talked_with_bartender4 = true
     "The blacksmith? What's this all about, Sheriff?"
         **[He escaped from jail and I have to find him. Please, do you have any information?]
             "He escaped?! Oh no! Well, I did see someone moving around in your office this morning, Sheriff. I thought it was you, but now that I think about it, the shadow in the window was a little shorter than you."
@@ -671,9 +674,9 @@ Sorry Sheriff I'm to busy planning on getting away from here as far as possible
     +[I will]
         ->DONE
 =Son_kiddnaped
-~talked_with_wife = true
 "Sam! The Baby is gone!
 *[What?!]
+    ~talked_with_wife = true
     "I went outside to hang out some clothes and he was gone, it's all my fault"
         **[It's going to be ok Abey I'll handle this]
             "Find him Sam please!"
