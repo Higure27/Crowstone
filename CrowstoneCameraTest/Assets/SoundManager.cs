@@ -44,7 +44,7 @@ public class SoundManager : MonoBehaviour
     public float schoolVol = 1.0f;
     public AudioClip bankAmb;
     public float bankVol = 1.0f;
-    public Slider mainSlider;
+    private Slider mainSlider;
     public int townAmbDelay = 5;
     private bool determining;
 
@@ -83,21 +83,25 @@ public class SoundManager : MonoBehaviour
         movementPlayer = sources[1];
         ambiencePlayer = sources[2];
         ambPlayer2 = sources[3];
-        if (mainSlider != null)
-        {
-            mainSlider.onValueChanged.AddListener(delegate { updateGlobalSound(); });
-
-        }
 
         playHorse = false;
 
         StartCoroutine(determineAnimalSound());
     }
 
+    public void SetSlider(Slider slider)
+    {
+        mainSlider = slider;
+        if(mainSlider != null)
+        {
+            mainSlider.onValueChanged.AddListener(delegate { updateGlobalSound(); });
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("global vol: " + globalSoundVolume);
         //walking and running
         if (!LevelManager.Instance.getScenename().Equals("Start Menu"))
         {

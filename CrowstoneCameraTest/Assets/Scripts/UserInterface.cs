@@ -15,6 +15,11 @@ public class UserInterface : MonoBehaviour {
     public GameObject gameUI;
     public GameObject pauseScreen;
     public Text sceneNameText;
+    public GameObject menu;
+    public GameObject options;
+    public GameObject controls;
+    public GameObject audio;
+    private float fadeSpeed = 1.5f;
     public float pauseScreenFadeSpeed = 0.8f;
 
     private bool fadingOutInProcess;
@@ -38,6 +43,11 @@ public class UserInterface : MonoBehaviour {
             pauseScreen.gameObject.SetActive(false);
             pausePanelAlpha = pauseScreen.GetComponentInChildren<Image>().color.a;
         }
+
+        menu.gameObject.SetActive(true);
+        audio.gameObject.SetActive(false);
+        controls.gameObject.SetActive(false);
+        options.gameObject.SetActive(false);
 
         player = GameObject.FindGameObjectWithTag("Player");
         cursorActive = false;
@@ -140,6 +150,59 @@ public class UserInterface : MonoBehaviour {
         }
     }
 
+    public void mainToOptions()
+    {
+        if(!fadingInInProcess && !fadingOutInProcess)
+        {
+            SoundManager.Instance.playMenuClick();
+            StartCoroutine(FadeOutPanel(menu));
+
+            StartCoroutine(FadeInPanel(options));
+            StartCoroutine(FadeInPanel(controls));
+        }
+    }
+
+    public void optionsToMain()
+    {
+        if (!fadingInInProcess && !fadingOutInProcess)
+        {
+            SoundManager.Instance.playMenuClick();
+
+            StartCoroutine(FadeOutPanel(options));
+            StartCoroutine(FadeOutPanel(controls));
+            StartCoroutine(FadeOutPanel(audio));
+
+            StartCoroutine(FadeInPanel(menu));
+        }
+    }
+
+    public void showControls()
+    {
+        if (!fadingInInProcess && !fadingOutInProcess)
+        {
+            if (controls.gameObject.active == true) return;
+
+            SoundManager.Instance.playMenuClick();
+            StartCoroutine(FadeOutPanel(audio));
+
+            StartCoroutine(FadeInPanel(controls));
+        }
+    }
+
+    public void showAudio()
+    {
+        if (!fadingInInProcess && !fadingOutInProcess)
+        {
+            if (audio.gameObject.active == true) return;
+
+            SoundManager.Instance.playMenuClick();
+            StartCoroutine(FadeOutPanel(controls));
+
+            StartCoroutine(FadeInPanel(audio));
+            SoundManager.Instance.SetSlider(audio.GetComponentInChildren<Slider>());
+        }
+    }
+
     /// <summary>
     /// is called when player clicks "Main menu" on the pause screen
     /// </summary>
@@ -178,7 +241,7 @@ public class UserInterface : MonoBehaviour {
         GameManager.gameManager.flipPause();
 
         //fade in screen
-        StartCoroutine(FadeInPanel(pauseScreen, pauseScreenFadeSpeed));
+        StartCoroutine(FadeInPanel(pauseScreen));
 
         //stop movement of player
         player.GetComponentInChildren<FirstPersonController>().enabled = false;
@@ -195,7 +258,7 @@ public class UserInterface : MonoBehaviour {
     private IEnumerator undisplayPauseScreen()
     {
         //fade out screen
-        StartCoroutine(FadeOutPanel(pauseScreen, pauseScreenFadeSpeed));
+        StartCoroutine(FadeOutPanel(pauseScreen));
 
         if (GameManager.gameManager.getInUI() == false) {
             //restart movement of player and camera
@@ -242,7 +305,7 @@ public class UserInterface : MonoBehaviour {
 
     }
 
-    IEnumerator FadeOutPanel(GameObject panel, float fadeSpeed)
+    IEnumerator FadeOutPanel(GameObject panel)
     {
         fadingOutInProcess = true;
         CanvasGroup canvasGrp = panel.GetComponent<CanvasGroup>();
@@ -258,7 +321,7 @@ public class UserInterface : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator FadeInPanel(GameObject panel, float fadeSpeed)
+    IEnumerator FadeInPanel(GameObject panel)
     {
         fadingInInProcess = true;
 
