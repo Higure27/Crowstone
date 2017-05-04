@@ -31,6 +31,7 @@ VAR san_fran = false
 VAR Ending = 0 
 VAR truth = false
 VAR met_pemberton_day4 = false
+VAR found_letter = false
 VAR found_newsclip = false
 VAR talked_with_wife = false
 VAR talked_with_bartender4 = false
@@ -294,9 +295,35 @@ Head home and get spme rest Sheriff
 {truth:->Showdown| ->day4start}
 
 =day4start
+{met_pemberton_day4:->day4_after|->day4_before}
+
+=day4_after
+"Hurry and find him Sheriff, before he harms anyone"
++[I will!]
+    ->DONE
+*{talked_with_wife}[He has my son!]
+    "So now you should really try and find him"
+        ->DONE
+
+=day4_before
 ~met_pemberton_day4 = true
-Seems to me your prisoner has escaped Sheriff
-    +[I'll get him!]
+"Seems to me your prisoner has escaped Sheriff"
+    *[I have noticed]
+        "This could be quite troublesome..."
+            **[Is he the man you've been looking for?]
+                “Yes Sheriff, very perceptive. He was hiding under all of our noses this whole time. He’s no ordinary prisoner. He’s a wanted fugitive and a ruthless gangster: Rickie Mortem. Did he leave you anything? A letter? Anything to help us locate him?”
+                        ***[Nothing that I could find]
+                                ~Currency = Currency + 200
+                                Nothing? That’s not like him. He loves to gloat. Well, you need to help us catch him. He’s too dangerous to just leave running rampant in the streets. You should start asking around town to see if anyone saw him. It might lead us to him. Here’s $200 that you can use however you’d like to get any information. There’s more where that came from if you help us catch the son of a bitch.”
+                                    ****[Right!]
+                                            ->DONE
+                        ***{found_letter}["yes, here you go (give letter)]
+                                            “You were good to give this to me. Yes . . . hmm. It seems he wants to try and defraud us. His depravity knows no bounds. Make no mistake, Sheriff, this man is a threat to society and to those you hold dear. He’ll try anything to convince you that he’s not the kind of man my agency knows him to be. Don’t let him fool you -- he cannot be trusted.”
+                                                    ****[I have to find him before he hurts someone. Tell me what I have to do to get him .]
+                                                            ~Currency = Currency +200
+                                                                “You should start searching for clues. Ask around town and find out if anyone saw Rickie. One of them likely witnessed something. Here’s $300 that you can use however you’d like to get that information. There’s more where that came from if you help us catch the son of a bitch.”
+                                                                        *****[Right!]
+                                                                                ->DONE
         ->DONE
 =Showdown
 "Good work, Sheriff! You've cornered the rat. Shoot him and we can finally get this over with."
