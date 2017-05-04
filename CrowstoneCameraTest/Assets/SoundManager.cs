@@ -97,7 +97,6 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("ambience is playing: " + ambiencePlayer.isPlaying);
 
         //walking and running
         if (!LevelManager.Instance.getScenename().Equals("Start Menu"))
